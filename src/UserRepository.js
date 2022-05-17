@@ -7,6 +7,7 @@ class UserRepository {
         allUserData.find((wholeUser) => {
             wholeUser.id === allUserData.id
             console.log(wholeUser.id)
+            return wholeUser
         })
         
         // const user = new User();
