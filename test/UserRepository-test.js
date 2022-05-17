@@ -68,8 +68,8 @@ describe('User Repository', () => {
       ]
     };
     userRepository1 = new UserRepository(testUserData);
-    user3 = new User(testSingleUser)
-  })
+    user3 = new User(testSingleUser);
+  });
 
   it('should be a function', () => {
     expect(UserRepository).to.be.a('function');
@@ -87,6 +87,11 @@ describe('User Repository', () => {
   it('should be able to create a new user instance', () => {
     expect(user3).to.be.an.instanceof(User);
     expect(userRepository1.getUserDataBasedOnId(3)).to.deep.equal(user3);
+  });
+
+  it('should be able to calculate average step goal of all users', () => {
+    expect(userRepository1.getAveStepGoalOfAllUsers()).to.equal(6667);
+    expect(userRepository1.getAveStepGoalOfAllUsers()).to.be.a('number');
   });
 
 });
