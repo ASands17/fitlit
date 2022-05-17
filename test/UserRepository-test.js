@@ -1,11 +1,12 @@
 import { expect } from 'chai';
 import UserRepository from '../src/UserRepository';
-
+import User from '../src/User';
 
 
 describe('User Repository', () => {
   let testUserData;
   let userRepository1;
+  let user;
 
   beforeEach(() => {
     testUserData = [
@@ -63,6 +64,13 @@ describe('User Repository', () => {
     expect(userRepository1).to.be.an.instanceof(UserRepository);
   }); 
 
+  it('should be able to get user data based on id', function () {
+    expect(userRepository1.data).to.equal(testUserData);
+    expect(userRepository1.getUserDataBasedOnId(testUserData)).to.equal(testUserData.id);
+  });
+
+
+  
 
 
 });

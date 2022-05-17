@@ -4,13 +4,13 @@ class UserRepository {
         //allUserData is an array
     }
     getUserDataBasedOnId(allUserData) {
-        // allUserData.find((userId) => userId === allUserData.id {
-        //     console.log(userId)
-        // })
-        // const user = new User()
+        allUserData.find((wholeUser) => {
+            wholeUser.id === allUserData.id
+            console.log(wholeUser.id)
+        })
+        
+        // const user = new User();
         //make instance of user that finds user based on id property
-        //.find()
-        //allUserData.id
     }
     getAveStepGoalOfAllUsers() {
         //this.data.reduce()
