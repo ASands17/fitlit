@@ -6,7 +6,8 @@ import User from '../src/User';
 describe('User Repository', () => {
   let testUserData;
   let userRepository1;
-  let user;
+  let user3;
+  let testSingleUser;
 
   beforeEach(() => {
     testUserData = [
@@ -52,25 +53,40 @@ describe('User Repository', () => {
         ]
       }
     ];
+    testSingleUser = {
+      "id": 3,
+      "name": "Herminia Witting",
+      "address": "85823 Bosco Fork, East Oscarstad MI 85126-5660",
+      "email": "Elwin.Tromp@yahoo.com",
+      "strideLength": 4.4,
+      "dailyStepGoal": 5000,
+      "friends": [
+        19,
+        11,
+        42,
+        33
+      ]
+    };
     userRepository1 = new UserRepository(testUserData);
+    user3 = new User(testSingleUser)
   })
-  
-  it('should be a function', function () {
+
+  it('should be a function', () => {
     expect(UserRepository).to.be.a('function');
   });
 
   it('should be an instance of UserRepository', () => {
-    expect(testUserData).to.be.an('array');  
+    expect(testUserData).to.be.an('array');
     expect(userRepository1).to.be.an.instanceof(UserRepository);
-  }); 
-
-  it('should be able to get user data based on id', function () {
-    expect(userRepository1.data).to.equal(testUserData);
-    expect(userRepository1.getUserDataBasedOnId(testUserData)).to.equal(testUserData.id);
   });
 
+  it('should be able to take in user data', () => {
+    expect(userRepository1.data).to.equal(testUserData);
+  });
 
-  
-
+  it('should be able to create a new user instance', () => {
+    expect(user3).to.be.an.instanceof(User);
+    expect(userRepository1.getUserDataBasedOnId(3)).to.deep.equal(user3);
+  });
 
 });

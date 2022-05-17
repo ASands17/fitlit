@@ -1,15 +1,15 @@
 class User {
     constructor(userDataObject) {
-        this.userId = userDataObject.id;
-        this.userName = userDataObject.name;
-        this.userAddress = userDataObject.address;
-        this.userEmail = userDataObject.email;
-        this.userStrideLength = userDataObject.strideLength;
-        this.userDailyStepGoal = userDataObject.dailyStepGoal;
-        this.userFriends = userDataObject.friends;
+        this.id = userDataObject.id;
+        this.name = userDataObject.name;
+        this.address = userDataObject.address;
+        this.email = userDataObject.email;
+        this.strideLength = userDataObject.strideLength;
+        this.dailyStepGoal = userDataObject.dailyStepGoal;
+        this.friends = userDataObject.friends;
     }
     returnUserFirstName() {
-        return this.userName.split(" ")[0];
+        return this.name.split(" ")[0];
     }
 }
 
