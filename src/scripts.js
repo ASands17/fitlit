@@ -22,6 +22,11 @@ console.log(allUserDataCard)
 
 // FUNCTIONS
 
+function getUserName() {
+  getRandomUserId()
+}
+// display user name
+
 function getRandomUserId(userData) {
   return userData[Math.floor(Math.random()*userData.length)].id
 };
@@ -31,6 +36,12 @@ function getRandomUserId(userData) {
 // from the API.
 // var UR = new UserRepository(data)
 // UR.getUserDataBasedOnId(id)
+
+// make an instance of userRepo as a global variable
+// in a new fn, invoke
+// 1. getRandomUserId(userData)
+// 2. userRepo.getUserDataBasedOnId(#)
+// 3. innerText += user.name
 
 // An example of how you tell webpack to use a JS file
 
