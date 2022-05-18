@@ -55,6 +55,7 @@ function displayIdCardInfo(newUser) {
 function displayStepsInfo(newUser) {
   yourStepGoal.innerText += ` ${newUser.dailyStepGoal}`
   let aveStepGoal = globalUserRepository.getAveStepGoalOfAllUsers();
+  averageUsersStepGoal.innerText += ` ${aveStepGoal}`
   console.log('58', aveStepGoal)
 }
 
