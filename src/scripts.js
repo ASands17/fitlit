@@ -22,6 +22,8 @@ var emailText = document.querySelector('#email');
 var strideLengthText = document.querySelector('#strideLength');
 var dailyStepGoalText = document.querySelector('#dailyStepGoal');
 var friendsText = document.querySelector('#friends');
+var yourStepGoal = document.querySelector('#yourStepGoal');
+var averageUsersStepGoal = document.querySelector('#averageUsersStepGoal');
 
 
 // EVENT LISTENERS
@@ -33,7 +35,9 @@ function getUserName() {
   let newUser = globalUserRepository.getUserDataBasedOnId(newId);
   let newUserFirstName = newUser.returnUserFirstName();
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
-  displayIdCardInfo(newUser)
+  displayIdCardInfo(newUser);
+  displayStepsInfo(newUser);
+
   console.log(newUser.name)
   console.log(newUserFirstName)
 }
@@ -46,6 +50,12 @@ function displayIdCardInfo(newUser) {
   strideLengthText.innerText += ` ${newUser.strideLength}`;
   dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
   friendsText.innerText += ` ${newUser.friends}`;
+}
+
+function displayStepsInfo(newUser) {
+  yourStepGoal.innerText += ` ${newUser.dailyStepGoal}`
+  let aveStepGoal = globalUserRepository.getAveStepGoalOfAllUsers();
+  console.log('58', aveStepGoal)
 }
 
 function getRandomUserId(userData) {
