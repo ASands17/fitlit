@@ -11,13 +11,21 @@ import './images/turing-logo.png'
 console.log('This is the JavaScript entry file - your code begins here.');
 
 // GLOBAL VARIABLES
-let globalUserRepository = new UserRepository(userData)
+let globalUserRepository = new UserRepository(userData);
 
 // QUERY SELECTORS
-var welcomeText = document.querySelector('#welcomeText')
+var welcomeText = document.querySelector('#welcomeText');
+var idText = document.querySelector('#id');
+var nameText = document.querySelector('#name');
+var addressText = document.querySelector('#address');
+var emailText = document.querySelector('#email');
+var strideLengthText = document.querySelector('#strideLength');
+var dailyStepGoalText = document.querySelector('#dailyStepGoal');
+var friendsText = document.querySelector('#friends');
+
 
 // EVENT LISTENERS
-window.addEventListener('load', getUserName)
+window.addEventListener('load', getUserName);
 
 // FUNCTIONS
 function getUserName() {
@@ -25,11 +33,20 @@ function getUserName() {
   let newUser = globalUserRepository.getUserDataBasedOnId(newId);
   let newUserFirstName = newUser.returnUserFirstName();
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
-
+  displayIdCardInfo(newUser)
   console.log(newUser.name)
   console.log(newUserFirstName)
 }
-// display user name
+
+function displayIdCardInfo(newUser) {
+  idText.innerText += ` ${newUser.id}`;
+  nameText.innerText += ` ${newUser.name}`;
+  addressText.innerText += ` ${newUser.address}`;
+  emailText.innerText += ` ${newUser.email}`;
+  strideLengthText.innerText += ` ${newUser.strideLength}`;
+  dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
+  friendsText.innerText += ` ${newUser.friends}`;
+}
 
 function getRandomUserId(userData) {
   return userData[Math.floor(Math.random()*userData.length)].id
