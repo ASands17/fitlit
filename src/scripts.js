@@ -10,20 +10,24 @@ import './images/turing-logo.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
-// function getRandomElement(array) {
-//   return array[Math.floor(Math.random()*array.length)]
-// };
+// GLOBAL VARIABLES
+let globalUserRepository = new UserRepository(userData)
+
 // QUERY SELECTORS
 var allUserDataCard = document.querySelector('#userData');
-console.log(allUserDataCard)
+var welcomeText = document.querySelector('#welcomeText')
 
 // EVENT LISTENERS
-// window.addEventListener('load', )
+window.addEventListener('load', getUserName)
 
 // FUNCTIONS
-
 function getUserName() {
-  getRandomUserId()
+  let newId = getRandomUserId(userData);
+  let newUser = globalUserRepository.getUserDataBasedOnId(newId);
+  let newUserFirstName = newUser.returnUserFirstName();
+  welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
+  console.log(newUser.name)
+  console.log(newUserFirstName)
 }
 // display user name
 
