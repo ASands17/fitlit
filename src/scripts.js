@@ -14,7 +14,6 @@ console.log('This is the JavaScript entry file - your code begins here.');
 let globalUserRepository = new UserRepository(userData)
 
 // QUERY SELECTORS
-var allUserDataCard = document.querySelector('#userData');
 var welcomeText = document.querySelector('#welcomeText')
 
 // EVENT LISTENERS
@@ -26,6 +25,7 @@ function getUserName() {
   let newUser = globalUserRepository.getUserDataBasedOnId(newId);
   let newUserFirstName = newUser.returnUserFirstName();
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
+
   console.log(newUser.name)
   console.log(newUserFirstName)
 }
@@ -46,6 +46,9 @@ function getRandomUserId(userData) {
 // 1. getRandomUserId(userData)
 // 2. userRepo.getUserDataBasedOnId(#)
 // 3. innerText += user.name
+
+// id:
+// name:
 
 // An example of how you tell webpack to use a JS file
 
