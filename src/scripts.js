@@ -22,7 +22,7 @@ console.log(allUserDataCard)
 
 // FUNCTIONS
 
-function getRandomUser(userData) {
+function getRandomUserId(userData) {
   return userData[Math.floor(Math.random()*userData.length)].id
 };
 
