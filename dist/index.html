@@ -2,27 +2,30 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Fitlit</title>
+    <title>FitLit</title>
   </head>
-
   <body>
     <main>
-      <section class="info-card" id="infoCard">
-        <h1 class="welcome-text" id="welcomeText"> Welcome, name! </h1>
-      </section>
-
-      <section class="steps-card">
-        <h2>Steps</h2>
-      </section>
-
-      <section class="hydration-card">
-        <h2>Hydration</h2>
-      </section>
-
-      <section class="sleep-card">
-        <h2>Sleep</h2>
-      </section>
-
+      <div class="left-side"">
+        <section class="info-card">
+          <h1 class="welcome-text">Welcome, name!</h1>
+        </section>
+      </div>
+      <div class="right-and-bottom">
+        <div class="right-side">
+          <section class="steps-card">
+            <h2>Steps</h2>
+          </section>
+          <section class="hydration-card">
+            <h3>Hydration</h3>
+          </section>
+        </div>
+        <div class="bottom-side">
+          <section class="sleep-card">
+            <h4>Sleep</h4>
+          </section>
+        </div>
+      </div>
     </main>
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
