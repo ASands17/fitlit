@@ -25,7 +25,6 @@ var friendsText = document.querySelector('#friends');
 var yourStepGoal = document.querySelector('#yourStepGoal');
 var averageUsersStepGoal = document.querySelector('#averageUsersStepGoal');
 
-
 // EVENT LISTENERS
 window.addEventListener('load', getUserName);
 
@@ -37,9 +36,6 @@ function getUserName() {
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
   displayIdCardInfo(newUser);
   displayStepsInfo(newUser);
-
-  console.log(newUser.name)
-  console.log(newUserFirstName)
 }
 
 function displayIdCardInfo(newUser) {
@@ -53,33 +49,15 @@ function displayIdCardInfo(newUser) {
 }
 
 function displayStepsInfo(newUser) {
-  yourStepGoal.innerText += ` ${newUser.dailyStepGoal}`
+  yourStepGoal.innerText += ` ${newUser.dailyStepGoal}`;
   let aveStepGoal = globalUserRepository.getAveStepGoalOfAllUsers();
-  averageUsersStepGoal.innerText += ` ${aveStepGoal}`
-  console.log('58', aveStepGoal)
+  averageUsersStepGoal.innerText += ` ${aveStepGoal}`;
 }
 
 function getRandomUserId(userData) {
-  return userData[Math.floor(Math.random()*userData.length)].id
-};
-
-// in this file, before we run getRandomUser(), we're going to
-// create a new instance of UserRepository, using the Data
-// from the API.
-// var UR = new UserRepository(data)
-// UR.getUserDataBasedOnId(id)
-
-// make an instance of userRepo as a global variable
-// in a new fn, invoke
-// 1. getRandomUserId(userData)
-// 2. userRepo.getUserDataBasedOnId(#)
-// 3. innerText += user.name
-
-// id:
-// name:
+  return userData[Math.floor(Math.random()*userData.length)].id;
+}
 
 // An example of how you tell webpack to use a JS file
-
 import userData from './data/users';
-
 import UserRepository from './UserRepository';

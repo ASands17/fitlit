@@ -12,7 +12,6 @@ class UserRepository {
       }
     });
     const user = new User(singleUser);
-    console.log(user)
     return user;
   }
 
