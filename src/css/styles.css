@@ -1,5 +1,75 @@
+* {
+  border: 2px red solid;
+}
+
 body, html {
-  background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-  background-repeat: no-repeat;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
+  /* display: flex; */
+  margin: 0;
+  border: 0;
+  padding: 0;
+  /* overflow: hidden; */
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2, h3, h4 {
+  font-size: 40px;
+}
+
+main {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  display: flex;
+  /* flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch; */
+}
+
+.info-card, .steps-card, .sleep-card, .hydration-card {
+  text-align: center;
+}
+
+.left-side {
+  width: 40%;
+  height: 100vh;
+}
+
+.right-side {
+  width: 100%;
+  height: 50%;
+  display: flex;
+}
+
+.bottom-side {
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  display: flex;
+}
+
+.right-and-bottom {
+  width: 60%;
+}
+
+
+.steps-card {
+  width: 40%;
+  margin: 40px;
+  text-align: center;
+}
+
+.hydration-card {
+  width: 60%;
+  margin: 40px;
+}
+
+.sleep-card {
+  width: 100%;
 }

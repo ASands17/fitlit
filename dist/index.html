@@ -2,12 +2,40 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Fitlit</title>
+    <title>FitLit</title>
   </head>
   <body>
-    <h1>Activity Tracker</h1>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
-
+    <main>
+      <div class="left-side">
+        <section class="info-card">
+          <h1 class="welcome-text" id="welcomeText">Welcome, name!</h1>
+          <p class="user-data" id="id">ID:</p>
+          <p class="user-data" id="name">Name:</p>
+          <p class="user-data" id="address">Address:</p>
+          <p class="user-data" id="email">E-mail:</p>
+          <p class="user-data" id="strideLength">Stride Length:</p>
+          <p class="user-data" id="dailyStepGoal">Daily Step Goal:</p>
+          <p class="user-data" id="friends">Friends:</p>
+        </section>
+      </div>
+      <div class="right-and-bottom">
+        <div class="right-side">
+          <section class="steps-card">
+            <h2>Steps</h2>
+            <p class="step-data" id="yourStepGoal">Your Step Goal:</p>
+            <p class="step-data" id="averageUsersStepGoal">Average Users Step Goal:</p>
+          </section>
+          <section class="hydration-card">
+            <h3>Hydration</h3>
+          </section>
+        </div>
+        <div class="bottom-side">
+          <section class="sleep-card">
+            <h4>Sleep</h4>
+          </section>
+        </div>
+      </div>
+    </main>
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
   </body>
