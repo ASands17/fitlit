@@ -23,10 +23,15 @@ console.log(allUserDataCard)
 // FUNCTIONS
 
 function getRandomUser(userData) {
-  return userData[Math.floor(Math.random()*userData.length)]
+  return userData[Math.floor(Math.random()*userData.length)].id
 };
 
-//
+// in this file, before we run getRandomUser(), we're going to
+// create a new instance of UserRepository, using the Data
+// from the API.
+// var UR = new UserRepository(data)
+// UR.getUserDataBasedOnId(id)
+
 // An example of how you tell webpack to use a JS file
 
 import userData from './data/users';
