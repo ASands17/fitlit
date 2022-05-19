@@ -19,7 +19,7 @@ function getAllData() {
     })
     .then((users) => {
       // console.log(users)
-      userData = users.userData;
+      globalUserData = users.userData;
       globalUserRepository = new UserRepository(users.userData);
       // console.log(users.userData)
       getUserName();
@@ -31,7 +31,7 @@ function getAllData() {
 
 // GLOBAL VARIABLES
 let globalUserRepository;
-let userData;
+let globalUserData;
 
 // QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
@@ -50,7 +50,7 @@ window.addEventListener('load', getAllData);
 
 // FUNCTIONS
 function getUserName() {
-  let newId = getRandomUserId(userData);
+  let newId = getRandomUserId(globalUserData);
   let newUser = globalUserRepository.getUserDataBasedOnId(newId);
   let newUserFirstName = newUser.returnUserFirstName();
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
@@ -74,8 +74,8 @@ function displayStepsInfo(newUser) {
   averageUsersStepGoal.innerText += ` ${aveStepGoal}`;
 }
 
-function getRandomUserId(userData) {
-  return userData[Math.floor(Math.random()*userData.length)].id;
+function getRandomUserId(anyUserData) {
+  return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }
 
 // An example of how you tell webpack to use a JS file
