@@ -10,6 +10,61 @@ import './images/turing-logo.png'
 
 console.log('This is the JavaScript entry file - your code begins here.');
 
+//API FETCH
+
+// function getAllData() {
+//   var myData = fetch("https://fitlit-api.herokuapp.com/api/v1/users")
+//   .then(response => response.json())
+//   .then(data => data.userData))
+//   return myData;
+// }
+
+// function getAllData() {
+//   return fetch("https://fitlit-api.herokuapp.com/api/v1/users")
+//   .then(response => return response.json())
+//   .then(data => return data.userData)
+// }
+
+function getAllData() {
+    return fetch('https://fitlit-api.herokuapp.com/api/v1/users')
+        .then((response) => {
+            return response.json().then((data) => {
+                console.log('data', data);
+                return data.userData;
+            }).catch((err) => {
+                console.log(err);
+            })
+        });
+}
+
+
+
+console.log(getAllData())
+
+// var myData = fetch("https://fitlit-api.herokuapp.com/api/v1/users")
+// .then(response => response.json())
+// .then(data => console.log('data log', data))
+
+
+//Ideas on how to get fetch request in fn
+//We could have the fn inside of the myData var/ fetch call
+//We could have fn contain fetch call
+
+
+// var myNewData= fetch("https://opentdb.com/api.php?amount=1&category=27&type=multiple")
+// .then (response => response.json())
+// .then (data => {
+// const triviaQuestion = data.results[0].question;
+// console. log (triviaQuestion);
+// // Add my triviaQuestion to the DOM
+// addToDom(triviaQuestion):
+// }). catch (error => {
+// console. log (error);
+// // Display on the DOM saying something broke. Try again
+// later,
+// })
+
+
 // GLOBAL VARIABLES
 let globalUserRepository = new UserRepository(userData);
 
