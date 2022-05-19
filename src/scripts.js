@@ -13,17 +13,19 @@ import './images/turing-logo.png'
 //API FETCH
 function getAllData() {
   return fetch('https://fitlit-api.herokuapp.com/api/v1/users')
-    .then((response) => response.json())
-    .then((data) => data.userData)
-    .then((users) => {
-      userData = users;
-      globalUserRepository = new UserRepository(users);
+    .then((response) => {
+    // console.log(response)
+      return response.json();
     })
-    .then(() => {
+    .then((users) => {
+      // console.log(users)
+      userData = users.userData;
+      globalUserRepository = new UserRepository(users.userData);
+      // console.log(users.userData)
       getUserName();
     })
     .catch((err) => {
-        console.log(err);
+      console.log("error by CIA", err);
     })
 }
 
