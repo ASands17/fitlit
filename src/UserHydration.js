@@ -15,7 +15,7 @@
 
 //hydration repo instance will hold all of data
 //hydration repo for individual user?
-
+//iterator method on dataset
 
 // hydrationData = [{id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}]
 //                         6/15/21                |        6/16/21               |     6/17/21
@@ -26,9 +26,11 @@ class UserHydration {
     this.date = hydrationDataObject.date;
     this.numOunces = hydrationDataObject.numOunces;
   }
+
   obtainOuncesForOneSpecificDay() {
 
   }
+  
   obtainOuncesPerDayOverAWeek() {
 
   }
