@@ -61,6 +61,10 @@ describe('User Hydration', () => {
     expect(userHydration.obtainOuncesForMostRecentDay())
   })
 
+  it('should obtain ounces for most recent week', () => {
+    expect(userHydration.obtainOuncesPerDayOverAWeek())
+  })
+
   it.skip('should be an instance of HydrationRepository', () => {
     //expect(testUserData).to.be.an('array');
     expect(hydrationRepository).to.be.an.instanceof(HydrationRepository);

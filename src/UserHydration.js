@@ -57,37 +57,70 @@ class UserHydration {
       }
       return user
     });
-    console.log(mostRecentDayData.numOunces);
+    // console.log(mostRecentDayData.numOunces);
     return mostRecentDayData.numOunces;
-
-
-
-
-
-
-    //Input: whole userHydration data userObj (all data for user)
-
-    //reduce
-
-      //change dates to #s
-
-      // find object w/ highest # for date and return the obj
-
-      //return numOz from that object
-
-
-    //Output: oz for day
-
-
-
-    //we need to use ID to get user 1
-    //go into hydration data for user to pull oz for 1 day
-    //how will this display on dom?? Dropdown of date? Calendar??
-      //need dynamic code so it takes in last date available
-
   }
 
   obtainOuncesPerDayOverAWeek() {
+    let hydro1 = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "numOunces": 31
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/16",
+        "numOunces": 68
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/17",
+        "numOunces": 92
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/18",
+        "numOunces": 40
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/19",
+        "numOunces": 50
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/20",
+        "numOunces": 45
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/21",
+        "numOunces": 20
+      },
+    ];
+
+    let parsedDates = hydro1.map(user => {
+      user.date = Date.parse([user.date]);
+      return user;
+    });
+
+    let weeklyOunces = parsedDates.sort((a, b) => {
+      return a.date - b.date;
+    });
+    // console.log(weeklyOunces)
+
+    const slicedArray = weeklyOunces.slice(0, 7);
+
+    var actualOunces = slicedArray.map(dayObj => {
+      return dayObj.numOunces;
+    });
+
+    // console.log(actualOunces)
+    
+    //Add 10 more dates for round 2 of testing #rigorousAF
+
+
 
   }
 }
