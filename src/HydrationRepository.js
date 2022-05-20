@@ -6,7 +6,7 @@ class HydrationRepository {
   }
 
 // hydrationData = [{id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}]
-//                         6/15/19                |        6/16/19               |     6/17/19
+//                         2019/06/15                |        2019/06/16               |     2019/06/17
 
   obtainHydrationDataBasedOnId(id) {
     let hydro = this.data.filter((waterData) => {
