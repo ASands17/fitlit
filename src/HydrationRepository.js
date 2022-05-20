@@ -13,25 +13,20 @@ class HydrationRepository {
       // console.log("id", waterData.userID);
       return waterData.userID === id;
     })
-    // console.log("hydro", hydro);
+    // console.log("hydro", hydro);'
+    this.obtainAveOuncesConsumedPerDay(hydro);
     return hydro;
   }
 
-  obtainAveOuncesConsumedPerDay() {
-    
+  obtainAveOuncesConsumedPerDay(waterData) {
+    let totalOunces = waterData.reduce((acc, cur) => {
+      acc += cur.numOunces;
+      return acc;
+    }, 0)
+    let aveOunces = totalOunces / waterData.length;
+    // console.log("aveOunces", aveOunces)
+    return Number(aveOunces.toFixed(2));
   }
-
 }
 
 export default HydrationRepository;
-
-
-
-    // //returns single user's dataset for hydration for entire year
-    // const singlePerson = this.data.find(wholePersonObject => {
-    //   if (wholePersonObject.userID === id) {
-    //     return wholePersonObject;
-    //   }
-    // });
-    // const userHydrationData = new UserHydration(singlePerson);
-    // return newUserHydration;
