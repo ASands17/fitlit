@@ -98,6 +98,41 @@ class UserHydration {
         "date": "2019/06/21",
         "numOunces": 20
       },
+      {
+        "userID": 1,
+        "date": "2019/06/22",
+        "numOunces": 66
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/23",
+        "numOunces": 22
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/24",
+        "numOunces": 77
+      },
+      {
+        "userID": 1,
+        "date": "2019/07/25",
+        "numOunces": 44
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/26",
+        "numOunces": 55
+      },
+      {
+        "userID": 1,
+        "date": "2019/07/27",
+        "numOunces": 11
+      },
+      {
+        "userID": 1,
+        "date": "2019/07/28",
+        "numOunces": 20
+      },
     ];
 
     let parsedDates = hydro1.map(user => {
@@ -106,22 +141,17 @@ class UserHydration {
     });
 
     let weeklyOunces = parsedDates.sort((a, b) => {
-      return a.date - b.date;
+      return b.date - a.date;
     });
     // console.log(weeklyOunces)
 
     const slicedArray = weeklyOunces.slice(0, 7);
-
+    // console.log(slicedArray)
     var actualOunces = slicedArray.map(dayObj => {
       return dayObj.numOunces;
     });
 
     // console.log(actualOunces)
-    
-    //Add 10 more dates for round 2 of testing #rigorousAF
-
-
-
   }
 }
 
