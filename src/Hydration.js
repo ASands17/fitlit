@@ -1,30 +1,31 @@
-// hydrationData = [{id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}]
-//                         6/15/21                |        6/16/21               |     6/17/21
 
-// userID
-// date
-// numOunces
-
-//per userID
-// the average fluid ounces consumed per day for all time
-
-// how many fluid ounces they consumed for a specific day (identified by a date)
-
-// how many fluid ounces of water consumed each day
-//over the course of a week (7 days) - return the amount for each day
-
-//hydration repo instance will hold all of data
-//hydration repo for individual user?
-//iterator method on dataset
+class Hydration {
+  constructor(hydrationData, id) {
+    this.data = hydrationData;
+    this.id = id;
+  }
 
 // hydrationData = [{id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}]
-//                         6/15/21                |        6/16/21               |     6/17/21
-//per userID
-class UserHydration {
-  constructor(hydrationDataObject) {
-    this.userID = hydrationDataObject.userID;
-    this.date = hydrationDataObject.date;
-    this.numOunces = hydrationDataObject.numOunces;
+//                         2019/06/15                |        2019/06/16               |     2019/06/17
+
+  obtainHydrationDataBasedOnId(id) {
+    let hydro = this.data.filter((waterData) => {
+      // console.log("id", waterData.userID);
+      return waterData.userID === id;
+    })
+    // console.log("hydro", hydro);'
+    this.obtainAveOuncesConsumedPerDay(hydro);
+    return hydro;
+  }
+
+  obtainAveOuncesConsumedPerDay(waterData) {
+    let totalOunces = waterData.reduce((acc, cur) => {
+      acc += cur.numOunces;
+      return acc;
+    }, 0)
+    let aveOunces = totalOunces / waterData.length;
+    // console.log("aveOunces", aveOunces)
+    return Number(aveOunces.toFixed(2));
   }
 
   obtainOuncesForMostRecentDay() {
@@ -57,7 +58,7 @@ class UserHydration {
       }
       return user
     });
-    // console.log(mostRecentDayData.numOunces);
+    console.log(mostRecentDayData.numOunces);
     return mostRecentDayData.numOunces;
   }
 
@@ -143,16 +144,17 @@ class UserHydration {
     let weeklyOunces = parsedDates.sort((a, b) => {
       return b.date - a.date;
     });
-    // console.log(weeklyOunces)
+    console.log(weeklyOunces)
 
     const slicedArray = weeklyOunces.slice(0, 7);
-    // console.log(slicedArray)
+    console.log(slicedArray)
     var actualOunces = slicedArray.map(dayObj => {
       return dayObj.numOunces;
     });
 
-    // console.log(actualOunces)
+    console.log(actualOunces)
   }
 }
 
-export default UserHydration;
+
+export default Hydration;
