@@ -20,8 +20,12 @@ class Sleep{
     //parameter for date?
     //Might need id
   }
-  obtainSleepDataBasedOnId() {
 
+  acquireSleepDataBasedOnId(id) {
+    let sleepData = this.data.filter((snooze) => {
+      return snooze.userID === id;
+    });
+    return sleepData;
   }
 
   acquireAvgHoursSleptPerDay() {

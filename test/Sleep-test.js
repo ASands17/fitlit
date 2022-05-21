@@ -30,6 +30,24 @@ describe('Sleep', () => {
         "hoursSlept": 8.4,
         "sleepQuality": 1.2
       },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/16",
+        "hoursSlept": 7.5,
+        "sleepQuality": 3.5
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/17",
+        "hoursSlept": 8.4,
+        "sleepQuality": 1.2
+      },
     ];
     sleep = new Sleep(testUserData);
     //re-evaluate parameter depending on class structure
@@ -49,7 +67,7 @@ describe('Sleep', () => {
   });
 
   it('should be able to obtain sleep data based on id', () => {
-    expect(sleep.obtainSleepDataBasedOnId(1)).to.deep.equal(
+    expect(sleep.acquireSleepDataBasedOnId(1)).to.deep.equal(
       [
         {
           "userID": 1,
@@ -71,7 +89,7 @@ describe('Sleep', () => {
         },
       ]);
 
-      expect(sleep.obtainSleepDataBasedOnId(2)).to.deep.equal(
+      expect(sleep.acquireSleepDataBasedOnId(2)).to.deep.equal(
         [
           {
             "userID": 2,
@@ -93,7 +111,7 @@ describe('Sleep', () => {
           },
         ]);
 
-    expect(sleep.obtainSleepDataBasedOnId()).to.be.an('array');
+    expect(sleep.acquireSleepDataBasedOnId()).to.be.an('array');
   });
 
   //Examples of possible test structures from hydration
