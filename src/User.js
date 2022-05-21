@@ -8,6 +8,7 @@ class User {
     this.dailyStepGoal = userDataObject.dailyStepGoal;
     this.friends = userDataObject.friends;
     // this.hydrationData = hydrationData
+    //
   }
 
   returnUserFirstName() {

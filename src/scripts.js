@@ -11,7 +11,7 @@ import './images/turing-logo.png'
 // console.log('This is the JavaScript entry file - your code begins here.');
 
 //API FETCH
-function getAllData() {
+function getAllUserData() {
   return fetch('https://fitlit-api.herokuapp.com/api/v1/users')
     .then((response) => {
     // console.log(response)
@@ -29,9 +29,31 @@ function getAllData() {
     })
 }
 
+function getAllHydrationData() {
+  return fetch('https://fitlit-api.herokuapp.com/api/v1/hydration')
+    .then((response) => {
+    console.log(response)
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data)
+      globalHydrationData = data.hydrationData;
+      console.log(globalHydrationData)
+      globalHydration = new Hydration(data.hydrationData);
+      console.log(data.hydrationData)
+    //   getUserName();
+    // invoke some function to show on DOM
+    })
+    .catch((err) => {
+      console.log("error by CIA", err);
+    })
+}
+
 // GLOBAL VARIABLES
 let globalUserRepository;
 let globalUserData;
+let globalHydrationData;
+let globalHydration;
 
 // QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
@@ -46,7 +68,10 @@ var yourStepGoal = document.querySelector('#yourStepGoal');
 var averageUsersStepGoal = document.querySelector('#averageUsersStepGoal');
 
 // EVENT LISTENERS
-window.addEventListener('load', getAllData);
+window.addEventListener('load', function() {
+  getAllUserData()
+  getAllHydrationData()
+});
 
 // FUNCTIONS
 function getUserName() {
@@ -81,3 +106,4 @@ function getRandomUserId(anyUserData) {
 // An example of how you tell webpack to use a JS file
 // import userData from './data/users';
 import UserRepository from './UserRepository';
+import Hydration from './Hydration';

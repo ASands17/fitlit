@@ -1,3 +1,4 @@
+import hydrationData from './data/fake-hydration'
 
 class Hydration {
   constructor(hydrationData, id) {
@@ -9,13 +10,16 @@ class Hydration {
 //                         2019/06/15                |        2019/06/16               |     2019/06/17
 
   obtainHydrationDataBasedOnId(id) {
-    let hydro = this.data.filter((waterData) => {
+    let waterData = this.data.filter((hydro) => {
       // console.log("id", waterData.userID);
-      return waterData.userID === id;
+      return hydro.userID === id;
     })
+    console.log('waterData', waterData)
     // console.log("hydro", hydro);'
-    this.obtainAveOuncesConsumedPerDay(hydro);
-    return hydro;
+    // this.obtainAveOuncesConsumedPerDay(waterData);
+    // this.obtainOuncesForMostRecentDay(waterData);
+    // this.obtainOuncesPerDayOverAWeek(waterData);
+    return waterData;
   }
 
   obtainAveOuncesConsumedPerDay(waterData) {
@@ -28,26 +32,8 @@ class Hydration {
     return Number(aveOunces.toFixed(2));
   }
 
-  obtainOuncesForMostRecentDay() {
-    let hydro = [
-      {
-        "userID": 1,
-        "date": "2019/06/15",
-        "numOunces": 31
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/16",
-        "numOunces": 68
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/17",
-        "numOunces": 92
-      },
-    ];
-
-    let parsedDates = hydro.map(user => {
+  obtainOuncesForMostRecentDay(waterData) {
+    let parsedDates = waterData.map(user => {
       user.date = Date.parse([user.date])
       return user
     });
@@ -58,85 +44,13 @@ class Hydration {
       }
       return user
     });
-    console.log(mostRecentDayData.numOunces);
+    console.log('numOZ', mostRecentDayData.numOunces);
     return mostRecentDayData.numOunces;
   }
 
-  obtainOuncesPerDayOverAWeek() {
-    let hydro1 = [
-      {
-        "userID": 1,
-        "date": "2019/06/15",
-        "numOunces": 31
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/16",
-        "numOunces": 68
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/17",
-        "numOunces": 92
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/18",
-        "numOunces": 40
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/19",
-        "numOunces": 50
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/20",
-        "numOunces": 45
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/21",
-        "numOunces": 20
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/22",
-        "numOunces": 66
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/23",
-        "numOunces": 22
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/24",
-        "numOunces": 77
-      },
-      {
-        "userID": 1,
-        "date": "2019/07/25",
-        "numOunces": 44
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/26",
-        "numOunces": 55
-      },
-      {
-        "userID": 1,
-        "date": "2019/07/27",
-        "numOunces": 11
-      },
-      {
-        "userID": 1,
-        "date": "2019/07/28",
-        "numOunces": 20
-      },
-    ];
-
-    let parsedDates = hydro1.map(user => {
+  obtainOuncesPerDayOverAWeek(waterData) {
+    console.log('fn', waterData)
+    let parsedDates = waterData.map(user => {
       user.date = Date.parse([user.date]);
       return user;
     });
@@ -151,8 +65,8 @@ class Hydration {
     var actualOunces = slicedArray.map(dayObj => {
       return dayObj.numOunces;
     });
-
-    console.log(actualOunces)
+    console.log('finalOZ', actualOunces)
+    return actualOunces;
   }
 }
 

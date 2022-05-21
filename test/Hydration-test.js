@@ -107,10 +107,13 @@ describe('Hydration', () => {
   });
 
   it('should obtain ounces for most recent day', () => {
+
     expect(hydration.obtainOuncesForMostRecentDay())
   })
 
   it('should obtain ounces for most recent week', () => {
+
+
     expect(hydration.obtainOuncesPerDayOverAWeek())
   })
 
