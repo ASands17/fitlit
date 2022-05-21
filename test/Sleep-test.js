@@ -1,13 +1,13 @@
 import { expect } from 'chai';
-import Hydration from '../src/Hydration';
+import Sleep from '../src/Sleep';
 
 //before beforeEach
 //dummydata
 //set up variables
 
 
-describe('Hydration', () => {
-  let hydration;
+describe('Sleep', () => {
+  let sleep;
   let testUserData;
 
   beforeEach(() => {
@@ -15,173 +15,90 @@ describe('Hydration', () => {
       {
         "userID": 1,
         "date": "2019/06/15",
-        "numOunces": 31
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
       },
       {
         "userID": 1,
         "date": "2019/06/16",
-        "numOunces": 68
+        "hoursSlept": 7.5,
+        "sleepQuality": 3.5
       },
       {
         "userID": 1,
         "date": "2019/06/17",
-        "numOunces": 92
+        "hoursSlept": 8.4,
+        "sleepQuality": 1.2
       },
-      {
-        "userID": 1,
-        "date": "2019/06/18",
-        "numOunces": 45
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/19",
-        "numOunces": 33
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/20",
-        "numOunces": 89
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/21",
-        "numOunces": 63
-      },
-      {
-        "userID": 2,
-        "date": "2020/06/15",
-        "numOunces": 45
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/16",
-        "numOunces": 55
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/17",
-        "numOunces": 67
-      },
-      {
-        "userID": 2,
-        "date": "2019/07/18",
-        "numOunces": 47
-      },
-      {
-        "userID": 2,
-        "date": "2019/08/19",
-        "numOunces": 21
-      },
-      {
-        "userID": 2,
-        "date": "2019/09/20",
-        "numOunces": 29
-      },
-      {
-        "userID": 2,
-        "date": "2019/10/21",
-        "numOunces": 14
-      }
     ];
-    hydration = new Hydration(testUserData);
+    sleep = new Sleep(testUserData);
+    //re-evaluate parameter depending on class structure
   });
 
   it('should be a function', () => {
-    expect(Hydration).to.be.a('function');
+    expect(Sleep).to.be.a('function');
   });
 
-  it('should be an instance of Hydration', () => {
+  it('should be an instance of Sleep', () => {
     expect(testUserData).to.be.an('array');
-    expect(hydration).to.be.an.instanceof(Hydration);
+    expect(sleep).to.be.an.instanceof(Sleep);
   });
 
-  it('should be able to take in user hydration data', () => {
-    expect(hydration.data).to.equal(testUserData);
+  it('should be able to take in user sleep data', () => {
+    expect(sleep.data).to.equal(testUserData);
   });
 
-  it('should be able to obtain hydration data based on id', () => {
-    expect(hydration.obtainHydrationDataBasedOnId(1)).to.deep.equal(
+  it('should be able to obtain sleep data based on id', () => {
+    expect(sleep.obtainSleepDataBasedOnId(1)).to.deep.equal(
       [
         {
           "userID": 1,
           "date": "2019/06/15",
-          "numOunces": 31
+          "hoursSlept": 6.1,
+          "sleepQuality": 2.2
         },
         {
           "userID": 1,
           "date": "2019/06/16",
-          "numOunces": 68
+          "hoursSlept": 7.5,
+          "sleepQuality": 3.5
         },
         {
           "userID": 1,
           "date": "2019/06/17",
-          "numOunces": 92
-        },
-        {
-          "userID": 1,
-          "date": "2019/06/18",
-          "numOunces": 45
-        },
-        {
-          "userID": 1,
-          "date": "2019/06/19",
-          "numOunces": 33
-        },
-        {
-          "userID": 1,
-          "date": "2019/06/20",
-          "numOunces": 89
-        },
-        {
-          "userID": 1,
-          "date": "2019/06/21",
-          "numOunces": 63
+          "hoursSlept": 8.4,
+          "sleepQuality": 1.2
         },
       ]);
 
-      expect(hydration.obtainHydrationDataBasedOnId(2)).to.deep.equal(
+      expect(sleep.obtainSleepDataBasedOnId(2)).to.deep.equal(
         [
           {
             "userID": 2,
-            "date": "2020/06/15",
-            "numOunces": 45
+            "date": "2019/06/15",
+            "hoursSlept": 6.1,
+            "sleepQuality": 2.2
           },
           {
             "userID": 2,
             "date": "2019/06/16",
-            "numOunces": 55
+            "hoursSlept": 7.5,
+            "sleepQuality": 3.5
           },
           {
             "userID": 2,
             "date": "2019/06/17",
-            "numOunces": 67
-          },
-          {
-            "userID": 2,
-            "date": "2019/07/18",
-            "numOunces": 47
-          },
-          {
-            "userID": 2,
-            "date": "2019/08/19",
-            "numOunces": 21
-          },
-          {
-            "userID": 2,
-            "date": "2019/09/20",
-            "numOunces": 29
-          },
-          {
-            "userID": 2,
-            "date": "2019/10/21",
-            "numOunces": 14
+            "hoursSlept": 8.4,
+            "sleepQuality": 1.2
           },
         ]);
 
-    expect(hydration.obtainHydrationDataBasedOnId()).to.be.an('array');
+    expect(sleep.obtainSleepDataBasedOnId()).to.be.an('array');
   });
 
-  it('should be able to obtain average daily ounces consumed', () => {
+  //Examples of possible test structures from hydration
+
+  it.skip('should be able to obtain average daily ounces consumed', () => {
     let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
 
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.be.a('number');
@@ -193,7 +110,7 @@ describe('Hydration', () => {
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.equal(39.71);
   });
 
-  it('should obtain ounces for most recent day', () => {
+  it.skip('should obtain ounces for most recent day', () => {
     let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
     let ounces1 = hydration.obtainOuncesForMostRecentDay(waterData1);
 
@@ -205,7 +122,7 @@ describe('Hydration', () => {
     expect(ounces2).to.equal(45);
   })
 
-  it('should obtain ounces for most recent week', () => {
+  it.skip('should obtain ounces for most recent week', () => {
     let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
     let ounces1 = hydration.obtainOuncesPerDayOverAWeek(waterData1);
 

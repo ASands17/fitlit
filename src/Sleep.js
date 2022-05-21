@@ -14,10 +14,14 @@
 // }
 
 class Sleep{
-  constructor(sleepData, id){
+  constructor(sleepData) {
     this.data = sleepData;
-    this.id = id;
+    // this.id = id;
     //parameter for date?
+    //Might need id
+  }
+  obtainSleepDataBasedOnId() {
+
   }
 
   acquireAvgHoursSleptPerDay() {
