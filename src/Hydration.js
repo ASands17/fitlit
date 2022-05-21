@@ -1,13 +1,8 @@
-import hydrationData from './data/fake-hydration'
-
 class Hydration {
   constructor(hydrationData, id) {
     this.data = hydrationData;
     this.id = id;
   }
-
-// hydrationData = [{id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}, {id1}, {id2}, {id3},...{id50}]
-//                         2019/06/15                |        2019/06/16               |     2019/06/17
 
   obtainHydrationDataBasedOnId(id) {
     let waterData = this.data.filter((hydro) => {
@@ -16,16 +11,13 @@ class Hydration {
     })
     console.log('waterData', waterData)
     // console.log("hydro", hydro);'
-    // this.obtainAveOuncesConsumedPerDay(waterData);
-    // this.obtainOuncesForMostRecentDay(waterData);
-    // this.obtainOuncesPerDayOverAWeek(waterData);
     return waterData;
   }
 
   obtainAveOuncesConsumedPerDay(waterData) {
-    let totalOunces = waterData.reduce((acc, cur) => {
-      acc += cur.numOunces;
-      return acc;
+    let totalOunces = waterData.reduce((total, day) => {
+      total += day.numOunces;
+      return total;
     }, 0)
     let aveOunces = totalOunces / waterData.length;
     // console.log("aveOunces", aveOunces)
@@ -34,41 +26,40 @@ class Hydration {
 
   obtainOuncesForMostRecentDay(waterData) {
     let parsedDates = waterData.map(user => {
-      user.date = Date.parse([user.date])
-      return user
+      user.date = Date.parse([user.date]);
+      return user;
     });
 
-    let mostRecentDayData = parsedDates.reduce((highest, user) => {
-      if (highest.date > user.date) {
-        return highest
+    let mostRecentDayData = parsedDates.reduce((highestNum, user) => {
+      if (highestNum.date > user.date) {
+        return highestNum;
       }
-      return user
+      return user;
     });
-    console.log('numOZ', mostRecentDayData.numOunces);
+    // console.log('numOZ', mostRecentDayData.numOunces);
     return mostRecentDayData.numOunces;
   }
 
   obtainOuncesPerDayOverAWeek(waterData) {
-    console.log('fn', waterData)
+    // console.log('fn', waterData)
     let parsedDates = waterData.map(user => {
       user.date = Date.parse([user.date]);
       return user;
     });
 
-    let weeklyOunces = parsedDates.sort((a, b) => {
-      return b.date - a.date;
+    let weeklyOunces = parsedDates.sort((firstDate, secondDate) => {
+      return secondDate.date - firstDate.date;
     });
-    console.log(weeklyOunces)
+    // console.log(weeklyOunces)
 
     const slicedArray = weeklyOunces.slice(0, 7);
-    console.log(slicedArray)
+    // console.log(slicedArray)
     var actualOunces = slicedArray.map(dayObj => {
       return dayObj.numOunces;
     });
-    console.log('finalOZ', actualOunces)
+    // console.log('finalOZ', actualOunces)
     return actualOunces;
   }
 }
-
 
 export default Hydration;
