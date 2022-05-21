@@ -45,38 +45,38 @@ describe('Hydration', () => {
       },
       {
         "userID": 2,
-        "date": "2019/06/15",
-        "numOunces": 31
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/16",
-        "numOunces": 68
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/17",
-        "numOunces": 92
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/18",
+        "date": "2020/06/15",
         "numOunces": 45
       },
       {
         "userID": 2,
-        "date": "2019/06/19",
-        "numOunces": 33
+        "date": "2019/06/16",
+        "numOunces": 55
       },
       {
         "userID": 2,
-        "date": "2019/06/20",
-        "numOunces": 89
+        "date": "2019/06/17",
+        "numOunces": 67
       },
       {
         "userID": 2,
-        "date": "2019/06/21",
-        "numOunces": 63
+        "date": "2019/07/18",
+        "numOunces": 47
+      },
+      {
+        "userID": 2,
+        "date": "2019/08/19",
+        "numOunces": 21
+      },
+      {
+        "userID": 2,
+        "date": "2019/09/20",
+        "numOunces": 29
+      },
+      {
+        "userID": 2,
+        "date": "2019/10/21",
+        "numOunces": 14
       }
     ];
     hydration = new Hydration(testUserData);
@@ -139,41 +139,41 @@ describe('Hydration', () => {
         [
           {
             "userID": 2,
-            "date": "2019/06/15",
-            "numOunces": 31
-          },
-          {
-            "userID": 2,
-            "date": "2019/06/16",
-            "numOunces": 68
-          },
-          {
-            "userID": 2,
-            "date": "2019/06/17",
-            "numOunces": 92
-          },
-          {
-            "userID": 2,
-            "date": "2019/06/18",
+            "date": "2020/06/15",
             "numOunces": 45
           },
           {
             "userID": 2,
-            "date": "2019/06/19",
-            "numOunces": 33
+            "date": "2019/06/16",
+            "numOunces": 55
           },
           {
             "userID": 2,
-            "date": "2019/06/20",
-            "numOunces": 89
+            "date": "2019/06/17",
+            "numOunces": 67
           },
           {
             "userID": 2,
-            "date": "2019/06/21",
-            "numOunces": 63
+            "date": "2019/07/18",
+            "numOunces": 47
+          },
+          {
+            "userID": 2,
+            "date": "2019/08/19",
+            "numOunces": 21
+          },
+          {
+            "userID": 2,
+            "date": "2019/09/20",
+            "numOunces": 29
+          },
+          {
+            "userID": 2,
+            "date": "2019/10/21",
+            "numOunces": 14
           },
         ]);
-  
+
     expect(hydration.obtainHydrationDataBasedOnId()).to.be.an('array');
   });
 
@@ -186,7 +186,7 @@ describe('Hydration', () => {
     let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
 
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.be.a('number');
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.equal(60.14);
+    expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.equal(39.71);
   });
 
   it('should obtain ounces for most recent day', () => {
@@ -198,7 +198,7 @@ describe('Hydration', () => {
     let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
     let ounces2 = hydration.obtainOuncesForMostRecentDay(waterData2);
 
-    expect(ounces2).to.equal(63);
+    expect(ounces2).to.equal(45);
   })
 
   it('should obtain ounces for most recent week', () => {
@@ -210,7 +210,7 @@ describe('Hydration', () => {
     let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
     let ounces2 = hydration.obtainOuncesPerDayOverAWeek(waterData2);
 
-    expect(ounces2).to.deep.equal([31,68,92,45,33,89,63]);
+    expect(ounces2).to.deep.equal([55,67,47,21,29,14,45]);
   })
 
 });
