@@ -48,11 +48,11 @@ class Hydration {
     });
 
     let weeklyOunces = parsedDates.sort((firstDate, secondDate) => {
-      return secondDate.date - firstDate.date;
+      return firstDate.date - secondDate.date;
     });
     // console.log(weeklyOunces)
 
-    const slicedArray = weeklyOunces.slice(0, 7);
+    const slicedArray = weeklyOunces.slice(-7);
     // console.log(slicedArray)
     var actualOunces = slicedArray.map(dayObj => {
       return dayObj.numOunces;

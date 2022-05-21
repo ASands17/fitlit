@@ -24,6 +24,26 @@ describe('Hydration', () => {
         "numOunces": 92
       },
       {
+        "userID": 1,
+        "date": "2019/06/18",
+        "numOunces": 45
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/19",
+        "numOunces": 33
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/20",
+        "numOunces": 89
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/21",
+        "numOunces": 63
+      },
+      {
         "userID": 2,
         "date": "2019/06/15",
         "numOunces": 50
@@ -72,7 +92,27 @@ describe('Hydration', () => {
           "userID": 1,
           "date": "2019/06/17",
           "numOunces": 92
-        }
+        },
+        {
+          "userID": 1,
+          "date": "2019/06/18",
+          "numOunces": 45
+        },
+        {
+          "userID": 1,
+          "date": "2019/06/19",
+          "numOunces": 33
+        },
+        {
+          "userID": 1,
+          "date": "2019/06/20",
+          "numOunces": 89
+        },
+        {
+          "userID": 1,
+          "date": "2019/06/21",
+          "numOunces": 63
+        },
       ]);
     expect(hydration.obtainHydrationDataBasedOnId(2)).to.deep.equal([
       {
@@ -98,7 +138,7 @@ describe('Hydration', () => {
     let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
 
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.be.a('number');
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.equal(63.67);
+    expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.equal(60.14);
 
     let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
 
@@ -107,14 +147,17 @@ describe('Hydration', () => {
   });
 
   it('should obtain ounces for most recent day', () => {
+    let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
+    let ounces = hydration.obtainOuncesForMostRecentDay(waterData1);
 
-    expect(hydration.obtainOuncesForMostRecentDay())
+    expect(ounces).to.equal(63);
   })
 
   it('should obtain ounces for most recent week', () => {
+    let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
+    let ounces = hydration.obtainOuncesPerDayOverAWeek(waterData1);
 
-
-    expect(hydration.obtainOuncesPerDayOverAWeek())
+    expect(ounces).to.deep.equal([31,68,92,45,33,89,63]);
   })
 
 });
