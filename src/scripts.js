@@ -11,46 +11,38 @@ import './images/turing-logo.png'
 // console.log('This is the JavaScript entry file - your code begins here.');
 
 //API FETCH
-function getAllUserData() {
-  return fetch('https://fitlit-api.herokuapp.com/api/v1/users')
-    .then((response) => {
-    // console.log(response)
-      return response.json();
-    })
-    .then((users) => {
+function getAllUserData(data) {
       // console.log(users)
-      globalUserData = users.userData;
-      globalUserRepository = new UserRepository(users.userData);
+      globalUserData = data;
+      globalUserRepository = new UserRepository(data);
       // console.log(users.userData)
       getUserName();
-    })
-    .catch((err) => {
-      console.log("error by CIA", err);
-    })
+
 }
 
-function getAllHydrationData() {
-  return fetch('https://fitlit-api.herokuapp.com/api/v1/hydration')
-    .then((response) => {
-    console.log(response)
-      return response.json();
-    })
-    .then((data) => {
-      // console.log(data)
-      globalHydrationData = data.hydrationData;
-      // console.log(globalHydrationData)
-      globalHydration = new Hydration(data.hydrationData);
-      // console.log(data.hydrationData)
-    //   getUserName();
-    // invoke some function to show on DOM
-    })
-    .catch((err) => {
-      console.log("error by CIA", err);
-    })
+function getAllHydrationData(data) {
+
+  globalHydrationData = data;
+  // console.log(globalHydrationData)
+  globalHydration = new Hydration(data);
 }
 
 function getAllData() {
-  Promise.all([getAllUserData(), getAllHydrationData()]).then(value => console.log(value))
+
+  let foo = ['https://fitlit-api.herokuapp.com/api/v1/users', 'https://fitlit-api.herokuapp.com/api/v1/hydration',
+  'https://fitlit-api.herokuapp.com/api/v1/activity', 'https://fitlit-api.herokuapp.com/api/v1/sleep'];
+  let fooArr = foo.map((url) => {
+    return fetch(url).then(res => res.json());
+  });
+
+
+
+  Promise.all(fooArr).then((value) => {
+    console.log(value);
+    getAllHydrationData(value[1].hydrationData);
+    getAllUserData(value[0].userData);
+    console.log(value[2])
+  });
 
 }
 
@@ -59,7 +51,7 @@ let globalUserRepository;
 let globalUserData;
 let globalHydrationData;
 let globalHydration;
-console.log(globalHydration)
+
 
 // QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
@@ -94,7 +86,6 @@ function getUserName() {
 }
 function displayHydrationInfo(newUser) {
   let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
-  console.log(hydrationId)
   let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
   todaysHydration.innerText += `${hydrationDaily}`
@@ -117,8 +108,8 @@ function displayStepsInfo(newUser) {
   averageUsersStepGoal.innerText += ` ${aveStepGoal}`;
 }
 
-function getRandomUserId(anyUserData) {
-  return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
+function getRandomUserId(anyUserDataArr) {
+  return anyUserDataArr[Math.floor(Math.random() * anyUserDataArr.length)].id;
 }
 
 // An example of how you tell webpack to use a JS file
