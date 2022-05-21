@@ -36,11 +36,11 @@ function getAllHydrationData() {
       return response.json();
     })
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       globalHydrationData = data.hydrationData;
-      console.log(globalHydrationData)
+      // console.log(globalHydrationData)
       globalHydration = new Hydration(data.hydrationData);
-      console.log(data.hydrationData)
+      // console.log(data.hydrationData)
     //   getUserName();
     // invoke some function to show on DOM
     })
@@ -49,11 +49,17 @@ function getAllHydrationData() {
     })
 }
 
+function getAllData() {
+  Promise.all([getAllUserData(), getAllHydrationData()]).then(value => console.log(value))
+
+}
+
 // GLOBAL VARIABLES
 let globalUserRepository;
 let globalUserData;
 let globalHydrationData;
 let globalHydration;
+console.log(globalHydration)
 
 // QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
@@ -66,11 +72,14 @@ var dailyStepGoalText = document.querySelector('#dailyStepGoal');
 var friendsText = document.querySelector('#friends');
 var yourStepGoal = document.querySelector('#yourStepGoal');
 var averageUsersStepGoal = document.querySelector('#averageUsersStepGoal');
+var todaysHydration = document.querySelector('#todaysHydration');
+var weeklyHydration = document.querySelector('#weeklyHydration');
 
 // EVENT LISTENERS
 window.addEventListener('load', function() {
-  getAllUserData()
-  getAllHydrationData()
+  // getAllUserData()
+  // getAllHydrationData()
+  getAllData()
 });
 
 // FUNCTIONS
@@ -81,6 +90,15 @@ function getUserName() {
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
   displayIdCardInfo(newUser);
   displayStepsInfo(newUser);
+  displayHydrationInfo(newUser)
+}
+function displayHydrationInfo(newUser) {
+  let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
+  console.log(hydrationId)
+  let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
+  let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
+  todaysHydration.innerText += `${hydrationDaily}`
+  weeklyHydration.innerText += `${hydrationWeekly}`
 }
 
 function displayIdCardInfo(newUser) {
