@@ -32,7 +32,9 @@ function getAllData() {
   let foo = ['https://fitlit-api.herokuapp.com/api/v1/users', 'https://fitlit-api.herokuapp.com/api/v1/hydration',
   'https://fitlit-api.herokuapp.com/api/v1/activity', 'https://fitlit-api.herokuapp.com/api/v1/sleep'];
   let fooArr = foo.map((url) => {
-    return fetch(url).then(res => res.json());
+    return fetch(url)
+    .then(res => res.json())
+    .catch(error => console.log("fetch call error", error))
   });
 
 

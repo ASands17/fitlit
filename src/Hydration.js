@@ -9,7 +9,7 @@ class Hydration {
       // console.log("id", waterData.userID);
       return hydro.userID === id;
     })
-    console.log('waterData', waterData)
+    // console.log('waterData', waterData)
     // console.log("hydro", hydro);'
     return waterData;
   }
