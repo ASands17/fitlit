@@ -1,6 +1,10 @@
 import { expect } from 'chai';
 import Hydration from '../src/Hydration';
 
+//before beforeEach
+//dummydata
+//set up variables
+
 
 describe('Hydration', () => {
   let hydration;
