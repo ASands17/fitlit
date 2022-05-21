@@ -7,8 +7,6 @@ class User {
     this.strideLength = userDataObject.strideLength;
     this.dailyStepGoal = userDataObject.dailyStepGoal;
     this.friends = userDataObject.friends;
-    // this.hydrationData = hydrationData
-    //
   }
 
   returnUserFirstName() {

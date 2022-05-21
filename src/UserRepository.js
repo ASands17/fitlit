@@ -6,11 +6,9 @@ class UserRepository {
   }
 
   getUserDataBasedOnId(id) {
-    const singleUser = this.data.find(wholeUser => {
-      if (wholeUser.id === id) {
-        return wholeUser;
-      }
-    });
+    const singleUser = this.data.find(wholeUser =>
+      wholeUser.id === id
+    );
     const user = new User(singleUser);
     return user;
   }
