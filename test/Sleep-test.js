@@ -116,16 +116,42 @@ describe('Sleep', () => {
 
   //Examples of possible test structures from hydration
 
-  it.skip('should be able to obtain average daily ounces consumed', () => {
-    let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
+  it('should be able to obtain average hours of sleep over all time', () => {
+    let sleepData1 = sleep.acquireSleepDataBasedOnId(1);
 
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.be.a('number');
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.equal(60.14);
+    expect(sleep.acquireAvgHoursSleptForAllData(sleepData1)).to.be.a('number');
+    expect(sleep.acquireAvgHoursSleptForAllData(sleepData1)).to.equal(7.33);
 
-    let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
+    let sleepData2 = sleep.acquireSleepDataBasedOnId(2);
 
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.be.a('number');
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.equal(39.71);
+    expect(sleep.acquireAvgHoursSleptForAllData(sleepData2)).to.be.a('number');
+    expect(sleep.acquireAvgHoursSleptForAllData(sleepData2)).to.equal(7.33);
+  });
+
+  it('should be able to obtain average sleep quality over all time', () => {
+    let sleepData1 = sleep.acquireSleepDataBasedOnId(1);
+
+    expect(sleep.acquireAvgSleepQualityForAllData(sleepData1)).to.be.a('number');
+    expect(sleep.acquireAvgSleepQualityForAllData(sleepData1)).to.equal(2.30);
+
+    let sleepData2 = sleep.acquireSleepDataBasedOnId(2);
+
+    expect(sleep.acquireAvgSleepQualityForAllData(sleepData2)).to.be.a('number');
+    expect(sleep.acquireAvgSleepQualityForAllData(sleepData2)).to.equal(2.30);
+  });
+
+  it('should be able to acquire hours slept for a specific date for a specific user', () => {
+    let sleepData1 = sleep.acquireSleepDataBasedOnId(1);
+    let userDates1 = sleep.acquireAllUserDates(sleepData1);
+
+    expect(sleep.acquireHoursSleptForASpecificDay("2019/06/15")).to.be.a('number');
+    expect(sleep.acquireHoursSleptForASpecificDay("2019/06/15")).to.equal(6.1);
+
+    let sleepData2 = sleep.acquireSleepDataBasedOnId(2);
+    let userDates2 = sleep.acquireAllUserDates(sleepData2);
+
+    expect(sleep.acquireHoursSleptForASpecificDay("2019/06/16")).to.be.a('number');
+    expect(sleep.acquireHoursSleptForASpecificDay("2019/06/16")).to.equal(7.5);
   });
 
   it.skip('should obtain ounces for most recent day', () => {

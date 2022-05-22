@@ -1,14 +1,14 @@
 class Hydration {
-  constructor(hydrationData, id) {
+  constructor(hydrationData) {
     this.data = hydrationData;
-    this.id = id;
+    // this.id = id;
   }
 
   obtainHydrationDataBasedOnId(id) {
     let waterData = this.data.filter((hydro) => {
       // console.log("id", waterData.userID);
       return hydro.userID === id;
-    })
+    });
     // console.log('waterData', waterData)
     // console.log("hydro", hydro);'
     return waterData;
@@ -18,7 +18,7 @@ class Hydration {
     let totalOunces = waterData.reduce((total, day) => {
       total += day.numOunces;
       return total;
-    }, 0)
+    }, 0);
     let aveOunces = totalOunces / waterData.length;
     // console.log("aveOunces", aveOunces)
     return Number(aveOunces.toFixed(2));

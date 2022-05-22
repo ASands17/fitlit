@@ -1,5 +1,4 @@
-// For a user (identified by their userID), the average number of hours slept per day
-// For a user, their average sleep quality per day over all time
+
 // For a user, how many hours they slept for a specific day (identified by a date)
 // For a user, their sleep quality for a specific day (identified by a date)
 // For a user, how many hours slept each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
@@ -28,17 +27,59 @@ class Sleep{
     return sleepData;
   }
 
-  acquireAvgHoursSleptPerDay() {
-
+  acquireAvgHoursSleptForAllData(sleepData) {
+   let totalHours = sleepData.reduce((total, day) => {
+     total += day.hoursSlept;
+     return total;
+   }, 0);
+   let aveHours = totalHours / sleepData.length;
+   return Number(aveHours.toFixed(2));
   }
 
-  acquireAvgSleepQualitForAllData() {
-
+  acquireAvgSleepQualityForAllData(sleepData) {
+    let totalQuality = sleepData.reduce((total, day) => {
+      total += day.sleepQuality;
+      return total;
+    }, 0);
+    let aveQuality = totalQuality / sleepData.length;
+    return Number(aveQuality.toFixed(2));
   }
 
-  acquireHoursSleptForASpecificDay() {
-  //takes in specific date to pull data
+  acquireAllUserDates(sleepDataForUser) {
+    let sleepDatesForUser = sleepDataForUser.map(obj => {
+      return obj.date;
+    });
+    // console.log('52', sleepDatesForUser)
+    return sleepDatesForUser;
+  }
 
+  acquireHoursSleptForASpecificDay(date) {
+    var data = [
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/16",
+        "hoursSlept": 7.5,
+        "sleepQuality": 3.5
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/17",
+        "hoursSlept": 8.4,
+        "sleepQuality": 1.2
+      },
+    ]
+    let sleepData = data.filter((snooze) => {
+      return snooze.date === date;
+    });
+    // console.log('81', sleepData)
+    // console.log('61', sleepData[0].hoursSlept)
+    return sleepData[0].hoursSlept;
   }
 
   acquireSleepQualityForASpecificDay() {
@@ -54,7 +95,7 @@ class Sleep{
   }
 
   acquireAvgSleepQualityAllUsers() {
-
+  // per all users for all days
   }
 
 }
