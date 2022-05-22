@@ -103,72 +103,92 @@ class Sleep{
 
 
   acquireHoursSleptEachDayForAWeek(date) {
-// For a user, how many hours slept each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
-  //parse date to get Number
-  //sort numbers from most recent to least recent date
-  //pass in date as param??
-  //indexOF-- date-- return index of the date
-    //indexOf-- index
-  //slice-- index of date that was input and then go out 6 more spaces
-  //return value of slice
-  var data = [
-    {
-      "userID": 2,
-      "date": "2019/06/15",
-      "hoursSlept": 6.1,
-      "sleepQuality": 2.2
-    },
-    {
-      "userID": 2,
-      "date": "2019/06/16",
-      "hoursSlept": 7.5,
-      "sleepQuality": 3.5
-    },
-    {
-      "userID": 2,
-      "date": "2019/06/17",
-      "hoursSlept": 8.4,
-      "sleepQuality": 1.2
-    },
-  ]
+    var data = [
+      {
+        "userID": 1,
+        "date": "2019/06/13",
+        "hoursSlept": 7.5,
+        "sleepQuality": 3.5
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/14",
+        "hoursSlept": 8.4,
+        "sleepQuality": 1.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "hoursSlept": 6.2,
+        "sleepQuality": 2.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/16",
+        "hoursSlept": 6.3,
+        "sleepQuality": 3.5
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/17",
+        "hoursSlept": 6.4,
+        "sleepQuality": 1.2
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/18",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/19",
+        "hoursSlept": 7.5,
+        "sleepQuality": 3.5
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/20",
+        "hoursSlept": 8.3,
+        "sleepQuality": 1.2
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/21",
+        "hoursSlept": 8.4,
+        "sleepQuality": 1.2
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/22",
+        "hoursSlept": 8.5,
+        "sleepQuality": 1.2
+      }
+    ]
 
-  let parsedDates = data.map(user => {
-    user.date = Date.parse([user.date]);
-    console.log("user", user);
-    return user;
-  });
+    let parsedDates = data.map(user => {
+      user.date = Date.parse([user.date]);
+      return user;
+    });
 
-  let newDate = Date.parse(date);
+    let newDate = Date.parse(date);
+    let endDate = newDate + 604000000;
 
-  let weeklyHours = parsedDates.sort((firstDate, secondDate) => {
-    return firstDate.date - secondDate.date;
-  });
-  // console.log(weeklyOunces)
+    let weeklyHours = parsedDates.sort((firstDate, secondDate) => {
+      return firstDate.date - secondDate.date;
+    });
 
-  let dateIndex = data.indexOf(newDate);
-  console.log("date index", dateIndex);
-  console.log("data", data)
-  console.log("date", newDate)
+    let daily = weeklyHours.filter(user => {
+      if (user.date >= newDate && user.date <= endDate) {
+        return user;
+      }
+    });
 
-
-  const slicedArray = weeklyHours.slice(dateIndex, [dateIndex + 6]);
-  // console.log(slicedArray)
-
-  console.log("150", slicedArray);
-
- return slicedArray;
-
-
-
-
-
-
-  // var actualOunces = slicedArray.map(dayObj => {
-  //   return dayObj.numOunces;
-  // });
-  // // console.log('finalOZ', actualOunces)
-  // return actualOunces;
-
+    let hoursSlept = daily.map(obj => {
+      return obj.hoursSlept;
+    });
+    console.log('final hours', hoursSlept)
+    // console.log('daily', daily)
   }
 
   acquireSleepQualityEachDayForAWeek() {
