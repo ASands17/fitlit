@@ -2,9 +2,6 @@
 class Sleep{
   constructor(sleepData) {
     this.data = sleepData;
-    // this.id = id;
-    //parameter for date?
-    //Might need id
   }
 
   acquireSleepDataBasedOnId(id) {
@@ -14,7 +11,7 @@ class Sleep{
     return sleepData;
   }
 
-  acquireAvgHoursSleptForAllData(sleepData) {
+  acquireAvgHoursSleptPerDay(sleepData) {
    let totalHours = sleepData.reduce((total, day) => {
      total += day.hoursSlept;
      return total;
@@ -23,7 +20,7 @@ class Sleep{
    return Number(aveHours.toFixed(2));
   }
 
-  acquireAvgSleepQualityForAllData(sleepData) {
+  acquireAvgSleepQualityPerDay(sleepData) {
     let totalQuality = sleepData.reduce((total, day) => {
       total += day.sleepQuality;
       return total;
@@ -32,35 +29,7 @@ class Sleep{
     return Number(aveQuality.toFixed(2));
   }
 
-  acquireAllUserDates(sleepDataForUser) {
-    let sleepDatesForUser = sleepDataForUser.map(obj => {
-      return obj.date;
-    });
-    // console.log('52', sleepDatesForUser)
-    return sleepDatesForUser;
-  }
-
-  acquireHoursSleptForASpecificDay(date) {
-    var data = [
-      {
-        "userID": 2,
-        "date": "2019/06/15",
-        "hoursSlept": 6.1,
-        "sleepQuality": 2.2
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/16",
-        "hoursSlept": 7.5,
-        "sleepQuality": 3.5
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/17",
-        "hoursSlept": 8.4,
-        "sleepQuality": 1.2
-      },
-    ]
+  acquireHoursSleptForASpecificDay(data, date) {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
@@ -69,145 +38,67 @@ class Sleep{
     return sleepData[0].hoursSlept;
   }
 
-  acquireSleepQualityForASpecificDay(date) {
-  //also takes in date
-  // For a user, their sleep quality for a specific day (identified by a date)
-  var data = [
-    {
-      "userID": 2,
-      "date": "2019/06/15",
-      "hoursSlept": 6.1,
-      "sleepQuality": 2.2
-    },
-    {
-      "userID": 2,
-      "date": "2019/06/16",
-      "hoursSlept": 7.5,
-      "sleepQuality": 3.5
-    },
-    {
-      "userID": 2,
-      "date": "2019/06/17",
-      "hoursSlept": 8.4,
-      "sleepQuality": 1.2
-    },
-  ]
-  let sleepData = data.filter((snooze) => {
-    return snooze.date === date;
-  });
-  // console.log('81', sleepData)
-  // console.log('61', sleepData[0].sleepQuality)
-  return sleepData[0].sleepQuality;
+  acquireSleepQualityForASpecificDay(data, date) {
+    let sleepData = data.filter((snooze) => {
+      return snooze.date === date;
+    });
+    // console.log('81', sleepData)
+    // console.log('61', sleepData[0].sleepQuality)
+    return sleepData[0].sleepQuality;
   }
 
-
-
-  acquireHoursSleptEachDayForAWeek(date) {
-    var data = [
-      {
-        "userID": 1,
-        "date": "2019/06/13",
-        "hoursSlept": 7.5,
-        "sleepQuality": 3.5
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/14",
-        "hoursSlept": 8.4,
-        "sleepQuality": 1.2
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/15",
-        "hoursSlept": 6.2,
-        "sleepQuality": 2.2
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/16",
-        "hoursSlept": 6.3,
-        "sleepQuality": 3.5
-      },
-      {
-        "userID": 2,
-        "date": "2019/06/17",
-        "hoursSlept": 6.4,
-        "sleepQuality": 1.2
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/18",
-        "hoursSlept": 6.1,
-        "sleepQuality": 2.2
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/19",
-        "hoursSlept": 7.5,
-        "sleepQuality": 3.5
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/20",
-        "hoursSlept": 8.3,
-        "sleepQuality": 1.2
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/21",
-        "hoursSlept": 8.4,
-        "sleepQuality": 1.2
-      },
-      {
-        "userID": 1,
-        "date": "2019/06/22",
-        "hoursSlept": 8.5,
-        "sleepQuality": 1.2
-      }
-    ]
-
-    let parsedDates = data.map(user => {
-      user.date = Date.parse([user.date]);
-      return user;
+  acquireHoursSleptEachDayForAWeek(data, date) {
+    let allDates = data.map(obj => obj.date);
+    let dateIndex = allDates.indexOf(date);
+    // console.log('dateIndex', dateIndex)
+    let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
+    // console.log('68', wholeWeek)
+    // console.log('week', wholeWeek)
+    let final = wholeWeek.map(day => {
+      return {[day.date]: day.hoursSlept}
     });
-
-    let newDate = Date.parse(date);
-    let endDate = newDate + 604000000;
-
-    let weeklyHours = parsedDates.sort((firstDate, secondDate) => {
-      return firstDate.date - secondDate.date;
-    });
-
-    let daily = weeklyHours.filter(user => {
-      if (user.date >= newDate && user.date <= endDate) {
-        return user;
-      }
-    });
-
-    let hoursSlept = daily.map(obj => {
-      return obj.hoursSlept;
-    });
-    console.log('final hours', hoursSlept)
-    // console.log('daily', daily)
+    // console.log('hoursleptfinal', final)
+    return final;
   }
 
-  acquireSleepQualityEachDayForAWeek() {
-// For a user, their sleep quality each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
+  acquireSleepQualityEachDayForAWeek(data, date) {
+    let allDates = data.map(obj => obj.date);
+    let dateIndex = allDates.indexOf(date);
+    let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
+    // console.log('week', wholeWeek)
+    let final = wholeWeek.map(day => {
+      return {[day.date]: day.sleepQuality}
+    });
+    // console.log('sleepqualfinal', final)
+    return final;
   }
 
   acquireAvgSleepQualityAllUsers() {
-  // per all users for all days
-  // For all users, the average sleep quality
-
+    let totalSleepQuality = this.data.reduce((totalQuality, currentUser) => {
+      totalQuality += currentUser.sleepQuality;
+      return totalQuality;
+    }, 0);
+    let averageSleepQuality = totalSleepQuality / this.data.length;
+    return Number(averageSleepQuality.toFixed(2));
   }
 
+  acquireUserAvgSleepQuality(data) {
+    let totalSleepQuality = data.reduce((totalQuality, currentUser) => {
+      totalQuality += currentUser.sleepQuality;
+      return totalQuality;
+    }, 0);
+    let averageSleepQuality = totalSleepQuality / data.length;
+    return Number(averageSleepQuality.toFixed(2));
+  }
+
+  acquireUserAvgSleepHours(data) {
+    let totalSleepHours = data.reduce((totalHours, currentUser) => {
+      totalHours += currentUser.hoursSlept;
+      return totalHours;
+    }, 0);
+    let averageSleepHours = totalSleepHours / data.length;
+    return Number(averageSleepHours.toFixed(2));
+  }
 }
-
-
-
-
-
-
-
 
 export default Sleep;
