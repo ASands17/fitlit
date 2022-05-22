@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import Hydration from '../src/Hydration';
 
-
 describe('Hydration', () => {
   let hydration;
   let testUserData;
+  let waterData1, waterData2;
 
   beforeEach(() => {
     testUserData = [
@@ -80,6 +80,8 @@ describe('Hydration', () => {
       }
     ];
     hydration = new Hydration(testUserData);
+    waterData1 = hydration.obtainHydrationDataBasedOnId(1);
+    waterData2 = hydration.obtainHydrationDataBasedOnId(2);
   });
 
   it('should be a function', () => {
@@ -134,83 +136,74 @@ describe('Hydration', () => {
           "numOunces": 63
         },
       ]);
-
-      expect(hydration.obtainHydrationDataBasedOnId(2)).to.deep.equal(
-        [
-          {
-            "userID": 2,
-            "date": "2020/06/15",
-            "numOunces": 45
-          },
-          {
-            "userID": 2,
-            "date": "2019/06/16",
-            "numOunces": 55
-          },
-          {
-            "userID": 2,
-            "date": "2019/06/17",
-            "numOunces": 67
-          },
-          {
-            "userID": 2,
-            "date": "2019/07/18",
-            "numOunces": 47
-          },
-          {
-            "userID": 2,
-            "date": "2019/08/19",
-            "numOunces": 21
-          },
-          {
-            "userID": 2,
-            "date": "2019/09/20",
-            "numOunces": 29
-          },
-          {
-            "userID": 2,
-            "date": "2019/10/21",
-            "numOunces": 14
-          },
-        ]);
+  
+    expect(hydration.obtainHydrationDataBasedOnId(2)).to.deep.equal(
+      [
+        {
+          "userID": 2,
+          "date": "2020/06/15",
+          "numOunces": 45
+        },
+        {
+          "userID": 2,
+          "date": "2019/06/16",
+          "numOunces": 55
+        },
+        {
+          "userID": 2,
+          "date": "2019/06/17",
+          "numOunces": 67
+        },
+        {
+          "userID": 2,
+          "date": "2019/07/18",
+          "numOunces": 47
+        },
+        {
+          "userID": 2,
+          "date": "2019/08/19",
+          "numOunces": 21
+        },
+        {
+          "userID": 2,
+          "date": "2019/09/20",
+          "numOunces": 29
+        },
+        {
+          "userID": 2,
+          "date": "2019/10/21",
+          "numOunces": 14
+        },
+      ]);
 
     expect(hydration.obtainHydrationDataBasedOnId()).to.be.an('array');
   });
 
   it('should be able to obtain average daily ounces consumed', () => {
-    let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
-
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.be.a('number');
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.equal(60.14);
-
-    let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
 
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.be.a('number');
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.equal(39.71);
   });
 
   it('should obtain ounces for most recent day', () => {
-    let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
     let ounces1 = hydration.obtainOuncesForMostRecentDay(waterData1);
 
     expect(ounces1).to.equal(63);
 
-    let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
     let ounces2 = hydration.obtainOuncesForMostRecentDay(waterData2);
 
     expect(ounces2).to.equal(45);
   })
 
   it('should obtain ounces for most recent week', () => {
-    let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
     let ounces1 = hydration.obtainOuncesPerDayOverAWeek(waterData1);
 
     expect(ounces1).to.deep.equal([31,68,92,45,33,89,63]);
 
-    let waterData2 = hydration.obtainHydrationDataBasedOnId(2);
     let ounces2 = hydration.obtainOuncesPerDayOverAWeek(waterData2);
 
     expect(ounces2).to.deep.equal([55,67,47,21,29,14,45]);
   })
-
 });
