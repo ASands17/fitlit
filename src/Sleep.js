@@ -96,12 +96,79 @@ class Sleep{
     return snooze.date === date;
   });
   // console.log('81', sleepData)
-  console.log('61', sleepData[0].sleepQuality)
+  // console.log('61', sleepData[0].sleepQuality)
   return sleepData[0].sleepQuality;
   }
 
-  acquireHoursSleptEachDayForAWeek() {
+
+
+  acquireHoursSleptEachDayForAWeek(date) {
 // For a user, how many hours slept each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
+  //parse date to get Number
+  //sort numbers from most recent to least recent date
+  //pass in date as param??
+  //indexOF-- date-- return index of the date
+    //indexOf-- index
+  //slice-- index of date that was input and then go out 6 more spaces
+  //return value of slice
+  var data = [
+    {
+      "userID": 2,
+      "date": "2019/06/15",
+      "hoursSlept": 6.1,
+      "sleepQuality": 2.2
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/16",
+      "hoursSlept": 7.5,
+      "sleepQuality": 3.5
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/17",
+      "hoursSlept": 8.4,
+      "sleepQuality": 1.2
+    },
+  ]
+
+  let parsedDates = data.map(user => {
+    user.date = Date.parse([user.date]);
+    console.log("user", user);
+    return user;
+  });
+
+  let newDate = Date.parse(date);
+
+  let weeklyHours = parsedDates.sort((firstDate, secondDate) => {
+    return firstDate.date - secondDate.date;
+  });
+  // console.log(weeklyOunces)
+
+  let dateIndex = data.indexOf(newDate);
+  console.log("date index", dateIndex);
+  console.log("data", data)
+  console.log("date", newDate)
+
+
+  const slicedArray = weeklyHours.slice(dateIndex, [dateIndex + 6]);
+  // console.log(slicedArray)
+
+  console.log("150", slicedArray);
+
+ return slicedArray;
+
+
+
+
+
+
+  // var actualOunces = slicedArray.map(dayObj => {
+  //   return dayObj.numOunces;
+  // });
+  // // console.log('finalOZ', actualOunces)
+  // return actualOunces;
+
   }
 
   acquireSleepQualityEachDayForAWeek() {

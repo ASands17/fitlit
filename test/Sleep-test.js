@@ -107,6 +107,8 @@ describe('Sleep', () => {
         ]);
 
     expect(sleep.acquireSleepDataBasedOnId()).to.be.an('array');
+
+    sleep.acquireHoursSleptEachDayForAWeek("2019/06/15");
   });
 
   //Examples of possible test structures from hydration
@@ -186,5 +188,7 @@ describe('Sleep', () => {
 
     expect(ounces2).to.deep.equal([55,67,47,21,29,14,45]);
   })
+
+
 
 });
