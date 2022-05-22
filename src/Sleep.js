@@ -1,14 +1,3 @@
-// For a user, their sleep quality for a specific day (identified by a date)
-// For a user, how many hours slept each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
-// For a user, their sleep quality each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
-// For all users, the average sleep quality
-
-// {
-// "userID": 1,
-// "date": "2019/06/15",
-// "hoursSlept": 6.1,
-// "sleepQuality": 2.2
-// }
 
 class Sleep{
   constructor(sleepData) {
@@ -80,20 +69,49 @@ class Sleep{
     return sleepData[0].hoursSlept;
   }
 
-  acquireSleepQualityForASpecificDay() {
+  acquireSleepQualityForASpecificDay(date) {
   //also takes in date
+  // For a user, their sleep quality for a specific day (identified by a date)
+  var data = [
+    {
+      "userID": 2,
+      "date": "2019/06/15",
+      "hoursSlept": 6.1,
+      "sleepQuality": 2.2
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/16",
+      "hoursSlept": 7.5,
+      "sleepQuality": 3.5
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/17",
+      "hoursSlept": 8.4,
+      "sleepQuality": 1.2
+    },
+  ]
+  let sleepData = data.filter((snooze) => {
+    return snooze.date === date;
+  });
+  // console.log('81', sleepData)
+  console.log('61', sleepData[0].sleepQuality)
+  return sleepData[0].sleepQuality;
   }
 
   acquireHoursSleptEachDayForAWeek() {
-
+// For a user, how many hours slept each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
   }
 
   acquireSleepQualityEachDayForAWeek() {
-
+// For a user, their sleep quality each day over the course of a given week (7 days) - you should be able to calculate this for any week, not just the latest week
   }
 
   acquireAvgSleepQualityAllUsers() {
   // per all users for all days
+  // For all users, the average sleep quality
+
   }
 
 }

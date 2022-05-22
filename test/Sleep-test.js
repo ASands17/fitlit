@@ -61,7 +61,7 @@ describe('Sleep', () => {
     expect(sleep.data).to.equal(testUserData);
   });
 
-  it('should be able to obtain sleep data based on id', () => {
+  it('should be able to acquire sleep data based on id', () => {
     expect(sleep.acquireSleepDataBasedOnId(1)).to.deep.equal(
       [
         {
@@ -111,7 +111,7 @@ describe('Sleep', () => {
 
   //Examples of possible test structures from hydration
 
-  it('should be able to obtain average hours of sleep over all time', () => {
+  it('should be able to acquire average hours of sleep over all time', () => {
     let sleepData1 = sleep.acquireSleepDataBasedOnId(1);
 
     expect(sleep.acquireAvgHoursSleptForAllData(sleepData1)).to.be.a('number');
@@ -123,7 +123,7 @@ describe('Sleep', () => {
     expect(sleep.acquireAvgHoursSleptForAllData(sleepData2)).to.equal(7.33);
   });
 
-  it('should be able to obtain average sleep quality over all time', () => {
+  it('should be able to acquire average sleep quality over all time', () => {
     let sleepData1 = sleep.acquireSleepDataBasedOnId(1);
 
     expect(sleep.acquireAvgSleepQualityForAllData(sleepData1)).to.be.a('number');
@@ -149,7 +149,21 @@ describe('Sleep', () => {
     expect(sleep.acquireHoursSleptForASpecificDay("2019/06/16")).to.equal(7.5);
   });
 
-  it.skip('should obtain ounces for most recent day', () => {
+  it('should be able to acquire sleep quality for a specific date for a specific user', () => {
+    let sleepData1 = sleep.acquireSleepDataBasedOnId(1);
+    let userDates1 = sleep.acquireAllUserDates(sleepData1);
+
+    expect(sleep.acquireSleepQualityForASpecificDay("2019/06/15")).to.be.a('number');
+    expect(sleep.acquireSleepQualityForASpecificDay("2019/06/15")).to.equal(2.2);
+
+    let sleepData2 = sleep.acquireSleepDataBasedOnId(2);
+    let userDates2 = sleep.acquireAllUserDates(sleepData2);
+
+    expect(sleep.acquireSleepQualityForASpecificDay("2019/06/16")).to.be.a('number');
+    expect(sleep.acquireSleepQualityForASpecificDay("2019/06/16")).to.equal(3.5);
+  });
+
+  it.skip('should acquire ounces for most recent day', () => {
     let waterData1 = hydration.obtainHydrationDataBasedOnId(1);
     let ounces1 = hydration.obtainOuncesForMostRecentDay(waterData1);
 
