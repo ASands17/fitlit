@@ -2,6 +2,7 @@
 // An example of how you tell webpack to use a JS file
 import UserRepository from './UserRepository';
 import Hydration from './Hydration';
+import Sleep from './Sleep';
 // An example of how you tell webpack to use a CSS file
 import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
@@ -12,6 +13,8 @@ let globalUserRepository;
 let globalUserData;
 let globalHydrationData;
 let globalHydration;
+let globalSleepData;
+let globalSleep;
 
 //QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
@@ -26,6 +29,12 @@ var yourStepGoal = document.querySelector('#yourStepGoal');
 var averageUsersStepGoal = document.querySelector('#averageUsersStepGoal');
 var todaysHydration = document.querySelector('#todaysHydration');
 var weeklyHydration = document.querySelector('#weeklyHydration');
+var averageHours = document.querySelector('#averageHours');
+var averageQuality = document.querySelector('#averageQuality');
+var todaysHours = document.querySelector('#todaysHours');
+var todaysQuality = document.querySelector('#todaysQuality');
+var lastWeeksHours = document.querySelector('#lastWeeksHours');
+var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
 
 //EVENT LISTENERS
 window.addEventListener('load', fetchAllData);
@@ -45,10 +54,16 @@ function getAllHydrationData(data) {
   getUserName();
 }
 
+function getAllSleepData(data) {
+  globalSleepData = data;
+  // console.log(globalSleepData);
+  globalSleep = new Sleep(data);
+}
+
 function fetchAllData() {
   let apis = ['https://fitlit-api.herokuapp.com/api/v1/users', 'https://fitlit-api.herokuapp.com/api/v1/hydration',
   'https://fitlit-api.herokuapp.com/api/v1/activity', 'https://fitlit-api.herokuapp.com/api/v1/sleep'];
-  
+
   let endpoints = apis.map((url) => {
     return fetch(url)
     .then(res => res.json())
@@ -59,9 +74,11 @@ function fetchAllData() {
     // console.log(value);
     getAllUserData(value[0].userData);
     getAllHydrationData(value[1].hydrationData);
-    // console.log(value[2])
+    getAllSleepData(value[3].sleepData);
+    // console.log(value[3]);
   });
 }
+
 
 //FUNCTIONS
 function getUserName() {

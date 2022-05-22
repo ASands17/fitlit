@@ -1,7 +1,6 @@
 class Hydration {
   constructor(hydrationData) {
     this.data = hydrationData;
-    // this.id = id;
   }
 
   obtainHydrationDataBasedOnId(id) {
@@ -61,7 +60,5 @@ class Hydration {
     return actualOunces;
   }
 }
-
-
 
 export default Hydration;
