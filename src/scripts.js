@@ -89,13 +89,50 @@ function getUserName() {
   displayIdCardInfo(newUser);
   displayStepsInfo(newUser);
   displayHydrationInfo(newUser);
+  displaySleepInfo(newUser);
+}
+
+
+
+function getTodaysDate() {
+
+}
+
+function unparse() {
+  let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
+  var date = new Date(hydrationDaily.date);
+  console.log(date)
+  var year = date.getFullYear();
+  var month = ("0" + (date.getMonth() + 1)).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
+
+  console.log(`${year}/${month}/${day}`); // 2011-05-09
+}
+
+unparse();
+
+//get unparsed date from unparse() -- in scope of hydration
+//
+//return a full obj with unparsed date
+
+function displaySleepInfo(newUser) {
+  // todaysHours.innerText += "hello"
+  console.log(newUser)
+  let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
+  let averageHoursDom = globalSleep.acquireAvgHoursSleptPerDay(sleepId);
+  let averageQualityDom = globalSleep.acquireAvgSleepQualityPerDay(sleepId);
+  let todaysHoursDom = globalSleep.acquireHoursSleptForASpecificDay(sleepId, date);
+  //capture dates currently being displayed on page load (most recent date)
+  // date must be non-parsed
+  //then we can plug it in to 101 and other fns
 }
 
 function displayHydrationInfo(newUser) {
   let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
   let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
+  console.log(hydrationDaily)
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
-  todaysHydration.innerText += ` ${hydrationDaily}`;
+  todaysHydration.innerText += ` ${hydrationDaily.numOunces}`;
   weeklyHydration.innerText += ` ${hydrationWeekly}`;
 }
 

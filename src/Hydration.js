@@ -36,7 +36,7 @@ class Hydration {
       return user;
     });
     // console.log('numOZ', mostRecentDayData.numOunces);
-    return mostRecentDayData.numOunces;
+    return mostRecentDayData;
   }
 
   obtainOuncesPerDayOverAWeek(waterData) {
