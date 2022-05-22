@@ -1,11 +1,6 @@
 import { expect } from 'chai';
 import Sleep from '../src/Sleep';
 
-//before beforeEach
-//dummydata
-//set up variables
-
-
 describe('Sleep', () => {
   let sleep;
   let testUserData;
