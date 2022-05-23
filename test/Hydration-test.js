@@ -176,13 +176,13 @@ describe('Hydration', () => {
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.be.a('number');
     expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.equal(39.7);
   });
-  it('should obtain ounces for most recent day', () => {
+  it('should be able to obtain ounces for most recent day', () => {
     let ounces1 = hydration.obtainOuncesForMostRecentDay(waterData1);
     expect(ounces1).to.equal(63);
     let ounces2 = hydration.obtainOuncesForMostRecentDay(waterData2);
     expect(ounces2).to.equal(45);
   })
-  it('should obtain ounces for most recent week', () => {
+  it('should be able to obtain ounces for most recent week', () => {
     let ounces1 = hydration.obtainOuncesPerDayOverAWeek(waterData1);
     expect(ounces1).to.deep.equal([
       "2019/06/15:31",

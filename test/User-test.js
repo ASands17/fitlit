@@ -66,13 +66,13 @@ describe('User', () => {
     expect(user3).to.be.an.instanceof(User);
   });
 
-  it('should be able to return user\s first name', function () {
+  it('should be able to return user\'s first name', function () {
     expect(user1.returnUserFirstName()).to.equal('Luisa');
     expect(user2.returnUserFirstName()).to.equal('Jarvis');
     expect(user3.returnUserFirstName()).to.equal('Herminia');
   });
 
-  it('should store user\s id', () => {
+  it('should be able to store user\'s id', () => {
         expect(user1.id).to.be.a('number');
         expect(user1.id).to.equal(1);
 
@@ -83,7 +83,7 @@ describe('User', () => {
         expect(user3.id).to.equal(3);
     });
 
-  it('should store user\s name', () => {
+  it('should be able to store user\'s name', () => {
         expect(user1.name).to.be.a('string');
         expect(user1.name).to.equal('Luisa Hane');
 
@@ -94,7 +94,7 @@ describe('User', () => {
         expect(user3.name).to.equal('Herminia Witting');
     });
 
-  it('should store user\s address', () => {
+  it('should be able to store user\'s address', () => {
         expect(user1.address).to.be.a('string');
         expect(user1.address).to.equal("15195 Nakia Tunnel, Erdmanport VA 19901-1697");
 
@@ -105,7 +105,7 @@ describe('User', () => {
         expect(user3.address).to.equal("85823 Bosco Fork, East Oscarstad MI 85126-5660");
     });
 
-  it('should store user\s e-mail', () => {
+  it('should be able to store user\'s e-mail', () => {
     expect(user1.email).to.be.a('string');
     expect(user1.email).to.equal("Diana.Hayes1@hotmail.com");
 
@@ -116,7 +116,7 @@ describe('User', () => {
     expect(user3.email).to.equal("Elwin.Tromp@yahoo.com");
   });
 
-  it('should store user\s stride length', () => {
+  it('should be able to store user\'s stride length', () => {
         expect(user1.strideLength).to.be.a('number');
         expect(user1.strideLength).to.equal(4.3);
 
@@ -127,7 +127,7 @@ describe('User', () => {
         expect(user3.strideLength).to.equal(4.4);
     });
 
-  it('should store user\s id', () => {
+  it('should be able to store user\'s daily step goal', () => {
         expect(user1.dailyStepGoal).to.be.a('number');
         expect(user1.dailyStepGoal).to.equal(10000);
 
@@ -138,7 +138,7 @@ describe('User', () => {
         expect(user3.dailyStepGoal).to.equal(5000);
     });
 
-  it('should store user\s id', () => {
+  it('should be able to store user\'s friends', () => {
         expect(user1.friends).to.be.a('array');
         expect(user1.friends).to.deep.equal([
           16,
