@@ -171,9 +171,30 @@ function displayHydrationInfo(newUser) {
   console.log(hydrationDaily)
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
   todaysHydration.innerText += ` ${hydrationDaily} ounces`;
-  hydrationWeekly.forEach((d) => {
-    weeklyHydration.innerHTML += `<br>${d} ounces`
-  })
+
+  var hydrationObjectsDom = hydrationWeekly.map(oneDate => {
+
+    let myArray = oneDate.split(":");
+    let interp;
+    // console.log("Example display:", interp);
+    let date = myArray[0];
+    let [year, month, day] = date.split('/');
+    let result = [month, day, year].join('/');
+
+    // console.log("New Date:", result)
+    // return interp = `Date: ${result}Quality: ${myArray[1]}`
+    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Ounces:  " + myArray[1]
+    return interp;
+    // console.log("Final Display:", interp);
+  });
+
+  let noCommas3 = hydrationObjectsDom.join("<br />");
+  weeklyHydration.innerHTML += `<br>${noCommas3}`
+// })
+// console.log(noCommas2)
+  // hydrationWeekly.forEach((d) => {
+  //   weeklyHydration.innerHTML += `<br>${d} ounces`
+  // })
 }
 
 function displayIdCardInfo(newUser) {
