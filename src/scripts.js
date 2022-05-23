@@ -134,7 +134,7 @@ function displayHydrationInfo(newUser) {
   let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
   console.log(hydrationDaily)
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
-  todaysHydration.innerText += ` ${hydrationDaily}`;
+  todaysHydration.innerText += ` ${hydrationDaily} ounces`;
   hydrationWeekly.forEach((d) => {
     weeklyHydration.innerHTML += `<br>${d} ounces`
   })
