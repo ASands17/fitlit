@@ -45,6 +45,17 @@ class Hydration {
     let final = wholeWeek.map(day => {
       return {[day.date]: day.numOunces}
     });
+
+    var final2 = final.map(ele => {
+      return JSON.stringify(ele)
+    })
+    var final3 = final2.map(ele => {
+      return ele.replace(/[{}]/g,'')
+    })
+    var final4 = final3.map(ele => {
+      return ele.replace(/['"]/g,'')
+    })
+    return final4;
     // console.log('array of ozs', final)
     return final;
   }
