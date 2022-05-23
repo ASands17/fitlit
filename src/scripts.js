@@ -116,9 +116,29 @@ function displaySleepInfo(newUser) {
   console.log(todaysQualityDom)
 
   let lastWeekHoursDom = globalSleep.acquireHoursSleptEachDayForAWeek(sleepId, finalIndexDate);
-  lastWeekHoursDom.forEach((d) => {
-    lastWeeksHours.innerHTML += `<br>${d}`
-  })
+
+  // lastWeekHoursDom.forEach((d) => {
+
+  var allFixedDisplayObjects = lastWeekHoursDom.map(oneDate => {
+
+    let myArray = oneDate.split(":");
+    let interp;
+    // console.log("Example display:", interp);
+    let date = myArray[0];
+    let [year, month, day] = date.split('/');
+    let result = [month, day, year].join('/');
+    // console.log("New Date:", result)
+
+    return interp = `Date: ${result} Hours: ${myArray[1]}`
+
+    // console.log("Final Display:", interp);
+});
+
+    let noCommas = allFixedDisplayObjects.join("<br />");
+
+    lastWeeksHours.innerHTML += `<br> ${noCommas}`
+  // })
+
   console.log(lastWeekHoursDom)
 
   let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
