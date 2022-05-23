@@ -1,4 +1,3 @@
-
 class Sleep {
   constructor(sleepData) {
     this.data = sleepData;
@@ -33,8 +32,6 @@ class Sleep {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
-    // console.log('81', sleepData)
-    // console.log('61', sleepData[0].hoursSlept)
     return sleepData[0].hoursSlept;
   }
 
@@ -42,54 +39,47 @@ class Sleep {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
-    // console.log('81', sleepData)
-    // console.log('61', sleepData[0].sleepQuality)
     return sleepData[0].sleepQuality;
   }
 
   acquireHoursSleptEachDayForAWeek(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
-    // console.log('dateIndex', dateIndex)
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
-    // console.log('68', wholeWeek)
-    // console.log('week', wholeWeek)
     let final = wholeWeek.map(day => {
-      return {[day.date]: day.hoursSlept}
+      return {
+        [day.date]: day.hoursSlept
+      }
     });
-
     var final2 = final.map(ele => {
       return JSON.stringify(ele)
-    })
+    });
     var final3 = final2.map(ele => {
       return ele.replace(/[{}]/g,'')
-    })
+    });
     var final4 = final3.map(ele => {
       return ele.replace(/['"]/g,'')
-    })
+    });
     return final4;
-    // console.log('hoursleptfinal', final)
-    return final;
   }
 
   acquireSleepQualityEachDayForAWeek(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
-    // console.log('week', wholeWeek)
     let final = wholeWeek.map(day => {
       return {[day.date]: day.sleepQuality}
     });
 
     var final2 = final.map(ele => {
       return JSON.stringify(ele)
-    })
+    });
     var final3 = final2.map(ele => {
       return ele.replace(/[{}]/g,'')
-    })
+    });
     var final4 = final3.map(ele => {
       return ele.replace(/['"]/g,'')
-    })
+    });
     return final4;
   }
 
