@@ -17,7 +17,7 @@ class Sleep{
      return total;
    }, 0);
    let aveHours = totalHours / sleepData.length;
-   return Number(aveHours.toFixed(2));
+   return Number(aveHours.toFixed(1));
   }
 
   acquireAvgSleepQualityPerDay(sleepData) {
@@ -26,7 +26,7 @@ class Sleep{
       return total;
     }, 0);
     let aveQuality = totalQuality / sleepData.length;
-    return Number(aveQuality.toFixed(2));
+    return Number(aveQuality.toFixed(1));
   }
 
   acquireHoursSleptForASpecificDay(data, date) {
@@ -57,7 +57,7 @@ class Sleep{
     let final = wholeWeek.map(day => {
       return {[day.date]: day.hoursSlept}
     });
-    
+
     var final2 = final.map(ele => {
       return JSON.stringify(ele)
     })
@@ -99,7 +99,7 @@ class Sleep{
       return totalQuality;
     }, 0);
     let averageSleepQuality = totalSleepQuality / this.data.length;
-    return Number(averageSleepQuality.toFixed(2));
+    return Number(averageSleepQuality.toFixed(1));
   }
 
   acquireUserAvgSleepQuality(data) {
@@ -108,7 +108,7 @@ class Sleep{
       return totalQuality;
     }, 0);
     let averageSleepQuality = totalSleepQuality / data.length;
-    return Number(averageSleepQuality.toFixed(2));
+    return Number(averageSleepQuality.toFixed(1));
   }
 
   acquireUserAvgSleepHours(data) {
@@ -117,7 +117,7 @@ class Sleep{
       return totalHours;
     }, 0);
     let averageSleepHours = totalSleepHours / data.length;
-    return Number(averageSleepHours.toFixed(2));
+    return Number(averageSleepHours.toFixed(1));
   }
 }
 

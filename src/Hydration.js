@@ -20,7 +20,7 @@ class Hydration {
     }, 0);
     let aveOunces = totalOunces / waterData.length;
     // console.log("aveOunces", aveOunces)
-    return Number(aveOunces.toFixed(2));
+    return Number(aveOunces.toFixed(1));
   }
 
   obtainOuncesForMostRecentDay(waterData) {
