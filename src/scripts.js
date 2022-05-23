@@ -51,13 +51,13 @@ function getAllHydrationData(data) {
   globalHydrationData = data;
   // console.log(globalHydrationData)
   globalHydration = new Hydration(data);
-  getUserName();
 }
 
 function getAllSleepData(data) {
   globalSleepData = data;
   // console.log(globalSleepData);
   globalSleep = new Sleep(data);
+  getUserName();
 }
 
 function fetchAllData() {
@@ -129,10 +129,11 @@ function displaySleepInfo(newUser) {
 
 function displayHydrationInfo(newUser) {
   let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
+  console.log(hydrationId)
   let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
   console.log(hydrationDaily)
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
-  todaysHydration.innerText += ` ${hydrationDaily.numOunces}`;
+  todaysHydration.innerText += ` ${hydrationDaily}`;
   weeklyHydration.innerText += ` ${hydrationWeekly}`;
 }
 

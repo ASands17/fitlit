@@ -24,40 +24,29 @@ class Hydration {
   }
 
   obtainOuncesForMostRecentDay(waterData) {
-    let parsedDates = waterData.map(user => {
-      user.date = Date.parse([user.date]);
-      return user;
-    });
-
-    let mostRecentDayData = parsedDates.reduce((highestNum, user) => {
-      if (highestNum.date > user.date) {
-        return highestNum;
-      }
-      return user;
-    });
-    // console.log('numOZ', mostRecentDayData.numOunces);
-    return mostRecentDayData;
+    let lastIndexNum = [waterData.length - 1]
+    let indexOfBigData = (waterData[lastIndexNum]);
+    // console.log(indexOfBigData.numOunces);
+    return indexOfBigData.numOunces;
   }
 
   obtainOuncesPerDayOverAWeek(waterData) {
-    // console.log('fn', waterData)
-    let parsedDates = waterData.map(user => {
-      user.date = Date.parse([user.date]);
-      return user;
-    });
+    let indexNum = [waterData.length - 1]
+    let objectAtIndex = (waterData[indexNum]);
+    // console.log('31', objectAtIndex.date);
+    let recentDate = objectAtIndex.date;
+    // console.log('recent date', recentDate)
 
-    let weeklyOunces = parsedDates.sort((firstDate, secondDate) => {
-      return firstDate.date - secondDate.date;
+    let allDates = waterData.map(obj => obj.date);
+    let dateIndex = allDates.indexOf(recentDate);
+    // console.log(dateIndex)
+    let wholeWeek = waterData.slice([dateIndex - 6], [dateIndex +1]);
+    // console.log('week', wholeWeek)
+    let final = wholeWeek.map(day => {
+      return {[day.date]: day.numOunces}
     });
-    // console.log(weeklyOunces)
-
-    const slicedArray = weeklyOunces.slice(-7);
-    // console.log(slicedArray)
-    var actualOunces = slicedArray.map(dayObj => {
-      return dayObj.numOunces;
-    });
-    // console.log('finalOZ', actualOunces)
-    return actualOunces;
+    // console.log('array of ozs', final)
+    return final;
   }
 }
 
