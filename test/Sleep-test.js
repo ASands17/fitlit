@@ -249,7 +249,6 @@ describe('Sleep', () => {
     expect(sleep.acquireSleepDataBasedOnId()).to.be.an('array');
   });
   it('should be able to acquire average daily hours of sleep', () => {
-    console.log('250', sleep.acquireAvgHoursSleptPerDay(sleepData1))
     expect(sleep.acquireAvgHoursSleptPerDay(sleepData1)).to.be.a('number');
     expect(sleep.acquireAvgHoursSleptPerDay(sleepData1)).to.equal(7.3);
     expect(sleep.acquireAvgHoursSleptPerDay(sleepData2)).to.be.a('number');
