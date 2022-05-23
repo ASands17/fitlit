@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import UserRepository from '../src/UserRepository';
 import User from '../src/User';
 
-
 describe('User Repository', () => {
   let testUserData;
   let userRepository1;
@@ -93,5 +92,4 @@ describe('User Repository', () => {
     expect(userRepository1.getAveStepGoalOfAllUsers()).to.equal(6667);
     expect(userRepository1.getAveStepGoalOfAllUsers()).to.be.a('number');
   });
-
 });
