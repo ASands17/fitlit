@@ -6,7 +6,7 @@ import Sleep from './Sleep';
 // An example of how you tell webpack to use a CSS file
 import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png';
+import './images/profile-icon.png';
 
 //GLOBAL VARIABLES
 let globalUserRepository;
@@ -79,7 +79,6 @@ function fetchAllData() {
   });
 }
 
-
 //FUNCTIONS
 function getUserName() {
   let newId = getRandomUserId(globalUserData);
@@ -117,11 +116,15 @@ function displaySleepInfo(newUser) {
   console.log(todaysQualityDom)
 
   let lastWeekHoursDom = globalSleep.acquireHoursSleptEachDayForAWeek(sleepId, finalIndexDate);
-  lastWeeksHours.innerText += ` ${lastWeekHoursDom}`;
+  lastWeekHoursDom.forEach((d) => {
+    lastWeeksHours.innerHTML += `<br>${d}`
+  })
   console.log(lastWeekHoursDom)
 
   let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
-  lastWeeksQuality.innerText += ` ${lastWeekQualityDom}`;
+  lastWeekQualityDom.forEach((d) => {
+    lastWeeksQuality.innerHTML += `<br>${d}`
+  })
   console.log(lastWeekQualityDom)
 }
 
@@ -132,7 +135,9 @@ function displayHydrationInfo(newUser) {
   console.log(hydrationDaily)
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
   todaysHydration.innerText += ` ${hydrationDaily}`;
-  weeklyHydration.innerText += ` ${hydrationWeekly}`;
+  hydrationWeekly.forEach((d) => {
+    weeklyHydration.innerHTML += `<br>${d} ounces`
+  })
 }
 
 function displayIdCardInfo(newUser) {
