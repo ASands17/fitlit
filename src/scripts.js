@@ -93,13 +93,6 @@ function getUserName() {
 }
 
 function displaySleepInfo(newUser) {
-  // var averageHours = document.querySelector('#averageHours');
-  // var averageQuality = document.querySelector('#averageQuality');
-  // var todaysHours = document.querySelector('#todaysHours');
-  // var todaysQuality = document.querySelector('#todaysQuality');
-  // var lastWeeksHours = document.querySelector('#lastWeeksHours');
-  // var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
-  // todaysHours.innerText += "hello"
   console.log(newUser)
   let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
   let averageHoursDom = globalSleep.acquireAvgHoursSleptPerDay(sleepId);
@@ -149,7 +142,18 @@ function displayIdCardInfo(newUser) {
   emailText.innerText += ` ${newUser.email}`;
   strideLengthText.innerText += ` ${newUser.strideLength}`;
   dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
-  friendsText.innerText += ` ${newUser.friends}`;
+
+  var userFriend = newUser.friends.map(friend => {
+  return friend = globalUserRepository.getUserDataBasedOnId(friend)
+})
+  let userFriendNames = userFriend.map(friend => {
+    return friend.returnUserFirstName()
+    // console.log('106', friend)
+  })
+  console.log(userFriend)
+  console.log(userFriendNames)
+
+  friendsText.innerText += ` ${userFriendNames}`;
 }
 
 function displayStepsInfo(newUser) {
