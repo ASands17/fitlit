@@ -128,24 +128,40 @@ function displaySleepInfo(newUser) {
     let [year, month, day] = date.split('/');
     let result = [month, day, year].join('/');
     // console.log("New Date:", result)
-
-    return interp = `Date: ${result} Hours: ${myArray[1]}`
-
+    interp = "Date:" + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Hours:" + myArray[1]
+    return interp;
     // console.log("Final Display:", interp);
-});
+  });
 
     let noCommas = allFixedDisplayObjects.join("<br />");
-
     lastWeeksHours.innerHTML += `<br> ${noCommas}`
   // })
 
   console.log(lastWeekHoursDom)
 
   let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
-  lastWeekQualityDom.forEach((d) => {
-    lastWeeksQuality.innerHTML += `<br>${d}`
-  })
-  console.log(lastWeekQualityDom)
+  // lastWeekQualityDom.forEach((d) => {
+    // lastWeeksQuality.innerHTML += `<br>${d}`
+    var sleepObjectsDom = lastWeekQualityDom.map(oneDate => {
+
+      let myArray = oneDate.split(":");
+      let interp;
+      // console.log("Example display:", interp);
+      let date = myArray[0];
+      let [year, month, day] = date.split('/');
+      let result = [month, day, year].join('/');
+
+      // console.log("New Date:", result)
+      // return interp = `Date: ${result}Quality: ${myArray[1]}`
+      interp = "Date:" + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Quality:" + myArray[1]
+      return interp;
+      // console.log("Final Display:", interp);
+    });
+
+    let noCommas2 = sleepObjectsDom.join("<br />");
+    lastWeeksQuality.innerHTML += `<br>${noCommas2}`
+  // })
+  console.log(noCommas2)
 }
 
 function displayHydrationInfo(newUser) {
