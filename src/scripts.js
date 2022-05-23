@@ -92,39 +92,44 @@ function getUserName() {
   displaySleepInfo(newUser);
 }
 
-
-
-function getTodaysDate() {
-
-}
-
-function unparse() {
-  let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
-  var date = new Date(hydrationDaily.date);
-  console.log(date)
-  var year = date.getFullYear();
-  var month = ("0" + (date.getMonth() + 1)).slice(-2);
-  var day = ("0" + date.getDate()).slice(-2);
-
-  console.log(`${year}/${month}/${day}`); // 2011-05-09
-}
-
-unparse();
-
-//get unparsed date from unparse() -- in scope of hydration
-//
-//return a full obj with unparsed date
-
 function displaySleepInfo(newUser) {
+  // var averageHours = document.querySelector('#averageHours');
+  // var averageQuality = document.querySelector('#averageQuality');
+  // var todaysHours = document.querySelector('#todaysHours');
+  // var todaysQuality = document.querySelector('#todaysQuality');
+  // var lastWeeksHours = document.querySelector('#lastWeeksHours');
+  // var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
   // todaysHours.innerText += "hello"
   console.log(newUser)
   let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
   let averageHoursDom = globalSleep.acquireAvgHoursSleptPerDay(sleepId);
+  averageHours.innerText += ` ${averageHoursDom}`;
+
   let averageQualityDom = globalSleep.acquireAvgSleepQualityPerDay(sleepId);
-  let todaysHoursDom = globalSleep.acquireHoursSleptForASpecificDay(sleepId, date);
-  //capture dates currently being displayed on page load (most recent date)
-  // date must be non-parsed
-  //then we can plug it in to 101 and other fns
+  averageQuality.innerText += ` ${averageQualityDom}`;
+
+  let lastIndexNum = [sleepId.length - 1];
+  let indexOfBigData = (sleepId[lastIndexNum]);
+  // console.log(indexOfBigData.numOunces);
+  let finalIndexDate = indexOfBigData.date;
+  console.log(finalIndexDate)
+
+
+  let todaysHoursDom = globalSleep.acquireHoursSleptForASpecificDay(sleepId, finalIndexDate);
+  todaysHours.innerText += ` ${todaysHoursDom}`;
+  console.log(todaysHoursDom)
+
+  let todaysQualityDom = globalSleep.acquireSleepQualityForASpecificDay(sleepId, finalIndexDate);
+  todaysQuality.innerText += ` ${todaysQualityDom}`;
+  console.log(todaysQualityDom)
+
+  let lastWeekHoursDom = globalSleep.acquireHoursSleptEachDayForAWeek(sleepId, finalIndexDate);
+  lastWeeksHours.innerText += ` ${lastWeekHoursDom}`;
+  console.log(lastWeekHoursDom)
+
+  let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
+  lastWeeksQuality.innerText += ` ${lastWeekQualityDom}`;
+  console.log(lastWeekQualityDom)
 }
 
 function displayHydrationInfo(newUser) {
