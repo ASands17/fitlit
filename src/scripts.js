@@ -215,7 +215,10 @@ function displayIdCardInfo(newUser) {
   console.log(userFriend)
   console.log(userFriendNames)
 
-  friendsText.innerText += ` ${userFriendNames}`;
+  // friendsText.innerText += ` ${userFriendNames}`;
+  // let friendsSpaceFixer = '\xa0\xa0' + userFriendNames + '\xa0\xa0';
+  let friendsSpace = userFriendNames.join(", ");
+  friendsText.innerText += '\xa0' + friendsSpace;
 }
 
 function displayStepsInfo(newUser) {
