@@ -128,7 +128,7 @@ function displaySleepInfo(newUser) {
     let [year, month, day] = date.split('/');
     let result = [month, day, year].join('/');
     // console.log("New Date:", result)
-    interp = "Date:" + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Hours:" + myArray[1]
+    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Hours:  " + myArray[1]
     return interp;
     // console.log("Final Display:", interp);
   });
@@ -153,7 +153,7 @@ function displaySleepInfo(newUser) {
 
       // console.log("New Date:", result)
       // return interp = `Date: ${result}Quality: ${myArray[1]}`
-      interp = "Date:" + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Quality:" + myArray[1]
+      interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Quality:  " + myArray[1]
       return interp;
       // console.log("Final Display:", interp);
     });
