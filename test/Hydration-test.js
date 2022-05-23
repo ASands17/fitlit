@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Sleep from '../src/Sleep';
+
 describe('Sleep', () => {
   let sleep;
   let testUserData;
@@ -299,17 +299,3 @@ describe('Sleep', () => {
     expect(sleep.acquireUserAvgSleepHours(sleepData2)).to.equal(7.39);
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-

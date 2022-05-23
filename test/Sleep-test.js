@@ -1,9 +1,11 @@
 import { expect } from 'chai';
 import Sleep from '../src/Sleep';
+
 describe('Sleep', () => {
   let sleep;
   let testUserData;
   let sleepData1, sleepData2;
+
   beforeEach(() => {
     testUserData = [
       {
@@ -247,16 +249,17 @@ describe('Sleep', () => {
     expect(sleep.acquireSleepDataBasedOnId()).to.be.an('array');
   });
   it('should be able to acquire average daily hours of sleep', () => {
+    console.log('250', sleep.acquireAvgHoursSleptPerDay(sleepData1))
     expect(sleep.acquireAvgHoursSleptPerDay(sleepData1)).to.be.a('number');
-    expect(sleep.acquireAvgHoursSleptPerDay(sleepData1)).to.equal(7.33);
+    expect(sleep.acquireAvgHoursSleptPerDay(sleepData1)).to.equal(7.3);
     expect(sleep.acquireAvgHoursSleptPerDay(sleepData2)).to.be.a('number');
-    expect(sleep.acquireAvgHoursSleptPerDay(sleepData2)).to.equal(7.39);
+    expect(sleep.acquireAvgHoursSleptPerDay(sleepData2)).to.equal(7.4);
   });
   it('should be able to acquire average daily sleep quality', () => {
     expect(sleep.acquireAvgSleepQualityPerDay(sleepData1)).to.be.a('number');
-    expect(sleep.acquireAvgSleepQualityPerDay(sleepData1)).to.equal(2.30);
+    expect(sleep.acquireAvgSleepQualityPerDay(sleepData1)).to.equal(2.3);
     expect(sleep.acquireAvgSleepQualityPerDay(sleepData2)).to.be.a('number');
-    expect(sleep.acquireAvgSleepQualityPerDay(sleepData2)).to.equal(3.01);
+    expect(sleep.acquireAvgSleepQualityPerDay(sleepData2)).to.equal(3.0);
   });
   it('should be able to acquire hours slept for a specific date for a specific user', () => {
     expect(sleep.acquireHoursSleptForASpecificDay(sleepData1, "2019/06/15")).to.be.a('number');
@@ -284,32 +287,18 @@ describe('Sleep', () => {
   });
   it('should be able to calculate average sleep quality of all users', () => {
     expect(sleep.acquireAvgSleepQualityAllUsers()).to.be.a('number');
-    expect(sleep.acquireAvgSleepQualityAllUsers()).to.equal(2.66);
+    expect(sleep.acquireAvgSleepQualityAllUsers()).to.equal(2.7);
   });
   it('should be able to calculate average sleep quality of one user', () => {
     expect(sleep.acquireUserAvgSleepQuality(sleepData1)).to.be.a('number');
-    expect(sleep.acquireUserAvgSleepQuality(sleepData1)).to.equal(2.30);
+    expect(sleep.acquireUserAvgSleepQuality(sleepData1)).to.equal(2.3);
     expect(sleep.acquireUserAvgSleepQuality(sleepData2)).to.be.a('number');
-    expect(sleep.acquireUserAvgSleepQuality(sleepData2)).to.equal(3.01);
+    expect(sleep.acquireUserAvgSleepQuality(sleepData2)).to.equal(3.0);
   });
   it('should be able to calculate average sleep hours of one user', () => {
     expect(sleep.acquireUserAvgSleepHours(sleepData1)).to.be.a('number');
-    expect(sleep.acquireUserAvgSleepHours(sleepData1)).to.equal(7.33);
+    expect(sleep.acquireUserAvgSleepHours(sleepData1)).to.equal(7.3);
     expect(sleep.acquireUserAvgSleepHours(sleepData2)).to.be.a('number');
-    expect(sleep.acquireUserAvgSleepHours(sleepData2)).to.equal(7.39);
+    expect(sleep.acquireUserAvgSleepHours(sleepData2)).to.equal(7.4);
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,5 @@
 
-class Sleep{
+class Sleep {
   constructor(sleepData) {
     this.data = sleepData;
   }
