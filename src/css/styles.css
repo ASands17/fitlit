@@ -1,15 +1,14 @@
 * {
-  border: 2px red solid;
+  font-family: 'Patrick Hand', cursive;
 }
 
 body, html {
   height: 100vh;
   width: 100vw;
-  /* display: flex; */
   margin: 0;
   border: 0;
   padding: 0;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 h1 {
@@ -21,8 +20,8 @@ h2 {
   font-size: 30px;
 }
 
-h3, h4, h5 {
-  font-size: 20px;
+h5 {
+  margin: 0;
 }
 
 main {
@@ -30,14 +29,9 @@ main {
   border: 0;
   padding: 0;
   display: flex;
-  /* flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	align-content: stretch; */
 }
 
-h1, .info-card, .steps-card, .sleep-card, .hydration-card {
+h1, h5, .info-card, .steps-card, .sleep-card, .hydration-card {
   text-align: center;
 }
 
@@ -53,28 +47,69 @@ h1, .info-card, .steps-card, .sleep-card, .hydration-card {
 }
 
 .bottom-side {
-  width: 100%;
-  height: 50vh;
+  width: 95%;
+  height: 250px;
   position: relative;
   display: flex;
+  border: solid black 1px;
 }
 
 .right-and-bottom {
   width: 60%;
 }
 
-
 .steps-card {
-  width: 40%;
+  width: 50%;
   margin: 40px;
   text-align: center;
+  border: solid black 1px;
 }
 
 .hydration-card {
-  width: 60%;
+  width: 50%;
   margin: 40px;
+  border: solid black 1px;
 }
 
 .sleep-card {
   width: 100%;
+  display: flex;
+}
+
+.hydration-block {
+  height: 100px;
+  width: 350px;
+  overflow-wrap: break-word;
+}
+
+.general-metrics {
+  width: 20%;
+}
+
+.weeks-hours-metrics, .weeks-quality-metrics {
+  width: 35%;
+}
+
+.general-metrics {
+  height: 80%;
+}
+
+.sleep-heading {
+  width: 95%;
+  margin: 0px;
+  border: solid black 1px;
+  border-bottom: white;
+}
+
+h3, h4, h5 {
+  font-size: 25px;
+}
+
+h3, h4 {
+  margin: 0px;
+  border-bottom: black 1px solid;
+}
+
+p {
+  font-size: 18px;
 }

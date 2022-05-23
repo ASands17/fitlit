@@ -2,6 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet"> 
     <title>FitLit</title>
   </head>
   <body>
@@ -10,6 +13,7 @@
       <div class="left-side">
         <section class="info-card">
           <h2 class="welcome-text" id="welcomeText">Welcome, name!</h2>
+          <img class="profile-icon" src="./images/profile-icon.png" alt="profile icon">
           <p class="user-data" id="id">ID:</p>
           <p class="user-data" id="name">Name:</p>
           <p class="user-data" id="address">Address:</p>
@@ -29,23 +33,31 @@
           <section class="hydration-card">
             <h4>Hydration</h4>
             <p class="hydration-data" id="todaysHydration">Today's Consumption:</p>
-            <p class="hydration-data" id="weeklyHydration">Weekly Consumption:</p>
+            <div class="hydration-block">
+              <p class="hydration-data" id="weeklyHydration">Weekly Consumption:</p>
+            </div>
           </section>
         </div>
+        <h5 class="sleep-heading">Sleep</h5>
         <div class="bottom-side">
           <section class="sleep-card">
-            <h5>Sleep</h5>
-            <p id="averageHours">Average Hours:</p>
-            <p id="averageQuality">Average Quality:</p>
-            <p id="todaysHours">Today's Hours: </p>
-            <p id="todaysQuality">Today's Quality:</p>
-            <p id="lastWeeksHours">Last Week's Hours:</p>
-            <p id="lastWeeksQuality">Last Week's Quality:</p>
+            <div class="general-metrics">
+              <p id="averageHours">Average Hours:</p>
+              <p id="averageQuality">Average Quality:</p>
+              <br>
+              <p id="todaysHours">Today's Hours: </p>
+              <p id="todaysQuality">Today's Quality:</p>
+            </div>
+            <div class="weeks-hours-metrics">
+              <p id="lastWeeksHours">Last Week's Hours:</p>
+            </div>
+            <div class="weeks-quality-metrics">
+              <p id="lastWeeksQuality">Last Week's Quality:</p>
+            </div>
           </section>
         </div>
       </div>
     </main>
-<!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
   </body>
 </html>
