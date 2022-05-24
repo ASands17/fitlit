@@ -52,7 +52,7 @@ Have you ever wanted to track your sleep, activity, and hydration habits? Well y
 
 -We utilized many iterator methods in this project. It was fun to see the practical usages of these iterators in our webpage. Most notably, we decided to map through our API endpoints in our fetch call. We also used iterator methods to manipulate our DOM. We look forward to refining our iterator methods in future iterations of this project. 
 
-- This project taught us a lot about Git workflow and troubleshooting Git issues. We encountered errors that none of us had seen before, and we had to spend some time googling those error messages and attempting to solve the issues. We also learned that co-authoring commits is an option, and we intend to do more research on this to implement in the second half of our project.
+-This project taught us a lot about Git workflow and troubleshooting Git issues. We encountered errors that none of us had seen before, and we had to spend some time googling those error messages and attempting to solve the issues. We also learned that co-authoring commits is an option, and we intend to do more research on this to implement in the second half of our project.
 
 ### Contributors
 - [Irmak Erdem](https://www.linkedin.com/in/irmakerdem/)
