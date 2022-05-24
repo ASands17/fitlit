@@ -35,7 +35,7 @@ Have you ever wanted to track your sleep, activity, and hydration habits? Well y
 - User can view their daily and weekly sleep hours and sleep quality.
 
 
-![image](https://user-images.githubusercontent.com/93043035/169923693-0ca3c358-f3a1-4de3-aece-2908c68cd7be.png)
+![image](https://user-images.githubusercontent.com/93043035/169923910-ccf92de9-6f6f-4882-bac1-e877e8b3bc9d.png)
 
 
 ### Organizational Resources
