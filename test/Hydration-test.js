@@ -94,7 +94,8 @@ describe('Hydration', () => {
   });
 
   it('should be able to take in user hydration data', () => {
-    expect(hydration.data).to.equal(testUserData);
+    expect(hydration.data).to.be.an('array');
+    expect(hydration.data).to.deep.equal(testUserData);
   });
 
   it('should be able to obtain hydration data based on id', () => {
@@ -175,7 +176,7 @@ describe('Hydration', () => {
           "numOunces": 45
         }
       ]);
-    
+
   });
 
   it('should be able to obtain average daily ounces consumed', () => {
@@ -204,7 +205,7 @@ describe('Hydration', () => {
       "2019/06/20:89",
       "2019/06/21:63"
     ]);
-    
+
     let ounces2 = hydration.obtainOuncesPerDayOverAWeek(waterData2);
     expect(ounces2).to.deep.equal([
       "2019/06/16:55",
