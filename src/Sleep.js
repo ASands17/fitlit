@@ -60,16 +60,7 @@ class Sleep {
         [day.date]: day.hoursSlept
       }
     });
-    var final2 = final.map(ele => {
-      return JSON.stringify(ele)
-    });
-    var final3 = final2.map(ele => {
-      return ele.replace(/[{}]/g,'')
-    });
-    var final4 = final3.map(ele => {
-      return ele.replace(/['"]/g,'')
-    });
-    return final4;
+    return final;
   }
 
   acquireSleepQualityEachDayForAWeek(data, date) {
@@ -79,17 +70,7 @@ class Sleep {
     let final = wholeWeek.map(day => {
       return {[day.date]: day.sleepQuality}
     });
-
-    var final2 = final.map(ele => {
-      return JSON.stringify(ele)
-    });
-    var final3 = final2.map(ele => {
-      return ele.replace(/[{}]/g,'')
-    });
-    var final4 = final3.map(ele => {
-      return ele.replace(/['"]/g,'')
-    });
-    return final4;
+    return final;
   }
 
   acquireAvgSleepQualityAllUsers() {
