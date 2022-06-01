@@ -55,7 +55,7 @@ function getAllSleepData(data) {
 
 function fetchAllData() {
   let apis = [
-    'https://fitlit-api.herokuapp.com/api/v1/users', 
+    'https://fitlit-api.herokuapp.com/api/v1/users',
     'https://fitlit-api.herokuapp.com/api/v1/hydration',
     'https://fitlit-api.herokuapp.com/api/v1/activity',
     'https://fitlit-api.herokuapp.com/api/v1/sleep'
@@ -88,9 +88,19 @@ function getUserName() {
 
 function displaySleepInfo(newUser) {
   let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
-  let averageHoursDom = globalSleep.acquireAvgHoursSleptPerDay(sleepId);
+  let hoursArr = sleepId.map(daySleep => {
+    return daySleep.hoursSlept
+  })
+
+  let averageHoursDom = globalSleep.acquireAverageMetricPerDay(hoursArr);
   averageHours.innerText += ` ${averageHoursDom}`;
-  let averageQualityDom = globalSleep.acquireAvgSleepQualityPerDay(sleepId);
+
+  let qualityArr = sleepId.map(daySleep => {
+    return daySleep.sleepQuality
+  })
+
+  let averageQualityDom = globalSleep.acquireAverageMetricPerDay(qualityArr);
+  console.log('avgquality', averageQualityDom)
   averageQuality.innerText += ` ${averageQualityDom}`;
   let lastIndexNum = [sleepId.length - 1];
   let indexOfBigData = (sleepId[lastIndexNum]);

@@ -10,23 +10,32 @@ class Sleep {
     return sleepData;
   }
 
-  acquireAvgHoursSleptPerDay(sleepData) {
-   let totalHours = sleepData.reduce((total, day) => {
-     total += day.hoursSlept;
-     return total;
-   }, 0);
-   let aveHours = totalHours / sleepData.length;
-   return Number(aveHours.toFixed(1));
-  }
+  // acquireAvgHoursSleptPerDay(sleepData) {
+  //   console.log(sleepData[0].hoursSlept)
+  //  let totalHours = sleepData.reduce((total, day) => {
+  //    total += day.hoursSlept;
+  //    return total;
+  //  }, 0);
+  //  let aveHours = totalHours / sleepData.length;
+  //  return Number(aveHours.toFixed(1));
+  // }
 
-  acquireAvgSleepQualityPerDay(sleepData) {
-    let totalQuality = sleepData.reduce((total, day) => {
-      total += day.sleepQuality;
-      return total;
+  acquireAverageMetricPerDay(measurements) {
+    let sum = measurements.reduce((total, currentMetric) => {
+      return total += currentMetric
     }, 0);
-    let aveQuality = totalQuality / sleepData.length;
-    return Number(aveQuality.toFixed(1));
+    let averageMeasurement = sum / measurements.length;
+    return Number(averageMeasurement.toFixed(1));
   }
+  //
+  // acquireAvgSleepQualityPerDay(sleepData) {
+  //   let totalQuality = sleepData.reduce((total, day) => {
+  //     total += day.sleepQuality;
+  //     return total;
+  //   }, 0);
+  //   let aveQuality = totalQuality / sleepData.length;
+  //   return Number(aveQuality.toFixed(1));
+  // }
 
   acquireHoursSleptForASpecificDay(data, date) {
     let sleepData = data.filter((snooze) => {
