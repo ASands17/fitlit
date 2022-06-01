@@ -10,23 +10,32 @@ class Sleep {
     return sleepData;
   }
 
-  acquireAvgHoursSleptPerDay(sleepData) {
-   let totalHours = sleepData.reduce((total, day) => {
-     total += day.hoursSlept;
-     return total;
-   }, 0);
-   let aveHours = totalHours / sleepData.length;
-   return Number(aveHours.toFixed(1));
-  }
+  // acquireAvgHoursSleptPerDay(sleepData) {
+  //   console.log(sleepData[0].hoursSlept)
+  //  let totalHours = sleepData.reduce((total, day) => {
+  //    total += day.hoursSlept;
+  //    return total;
+  //  }, 0);
+  //  let aveHours = totalHours / sleepData.length;
+  //  return Number(aveHours.toFixed(1));
+  // }
 
-  acquireAvgSleepQualityPerDay(sleepData) {
-    let totalQuality = sleepData.reduce((total, day) => {
-      total += day.sleepQuality;
-      return total;
+  acquireAverageMetricPerDay(measurements) {
+    let sum = measurements.reduce((total, currentMetric) => {
+      return total += currentMetric
     }, 0);
-    let aveQuality = totalQuality / sleepData.length;
-    return Number(aveQuality.toFixed(1));
+    let averageMeasurement = sum / measurements.length;
+    return Number(averageMeasurement.toFixed(1));
   }
+  //
+  // acquireAvgSleepQualityPerDay(sleepData) {
+  //   let totalQuality = sleepData.reduce((total, day) => {
+  //     total += day.sleepQuality;
+  //     return total;
+  //   }, 0);
+  //   let aveQuality = totalQuality / sleepData.length;
+  //   return Number(aveQuality.toFixed(1));
+  // }
 
   acquireHoursSleptForASpecificDay(data, date) {
     let sleepData = data.filter((snooze) => {
@@ -51,16 +60,7 @@ class Sleep {
         [day.date]: day.hoursSlept
       }
     });
-    var final2 = final.map(ele => {
-      return JSON.stringify(ele)
-    });
-    var final3 = final2.map(ele => {
-      return ele.replace(/[{}]/g,'')
-    });
-    var final4 = final3.map(ele => {
-      return ele.replace(/['"]/g,'')
-    });
-    return final4;
+    return final;
   }
 
   acquireSleepQualityEachDayForAWeek(data, date) {
@@ -70,17 +70,7 @@ class Sleep {
     let final = wholeWeek.map(day => {
       return {[day.date]: day.sleepQuality}
     });
-
-    var final2 = final.map(ele => {
-      return JSON.stringify(ele)
-    });
-    var final3 = final2.map(ele => {
-      return ele.replace(/[{}]/g,'')
-    });
-    var final4 = final3.map(ele => {
-      return ele.replace(/['"]/g,'')
-    });
-    return final4;
+    return final;
   }
 
   acquireAvgSleepQualityAllUsers() {

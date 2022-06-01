@@ -55,7 +55,7 @@ function getAllSleepData(data) {
 
 function fetchAllData() {
   let apis = [
-    'https://fitlit-api.herokuapp.com/api/v1/users', 
+    'https://fitlit-api.herokuapp.com/api/v1/users',
     'https://fitlit-api.herokuapp.com/api/v1/hydration',
     'https://fitlit-api.herokuapp.com/api/v1/activity',
     'https://fitlit-api.herokuapp.com/api/v1/sleep'
@@ -88,9 +88,19 @@ function getUserName() {
 
 function displaySleepInfo(newUser) {
   let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
-  let averageHoursDom = globalSleep.acquireAvgHoursSleptPerDay(sleepId);
+  let hoursArr = sleepId.map(daySleep => {
+    return daySleep.hoursSlept
+  })
+
+  let averageHoursDom = globalSleep.acquireAverageMetricPerDay(hoursArr);
   averageHours.innerText += ` ${averageHoursDom}`;
-  let averageQualityDom = globalSleep.acquireAvgSleepQualityPerDay(sleepId);
+
+  let qualityArr = sleepId.map(daySleep => {
+    return daySleep.sleepQuality
+  })
+
+  let averageQualityDom = globalSleep.acquireAverageMetricPerDay(qualityArr);
+  console.log('avgquality', averageQualityDom)
   averageQuality.innerText += ` ${averageQualityDom}`;
   let lastIndexNum = [sleepId.length - 1];
   let indexOfBigData = (sleepId[lastIndexNum]);
@@ -99,46 +109,44 @@ function displaySleepInfo(newUser) {
   todaysHours.innerText += ` ${todaysHoursDom}`;
   let todaysQualityDom = globalSleep.acquireSleepQualityForASpecificDay(sleepId, finalIndexDate);
   todaysQuality.innerText += ` ${todaysQualityDom}`;
+
   let lastWeekHoursDom = globalSleep.acquireHoursSleptEachDayForAWeek(sleepId, finalIndexDate);
-  var allFixedDisplayObjects = lastWeekHoursDom.map(oneDate => {
-    let myArray = oneDate.split(":");
-    let interp;
-    let date = myArray[0];
-    let [year, month, day] = date.split('/');
-    let result = [month, day, year].join('/');
-    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Hours:  " + myArray[1];
-    return interp;
-  });
+  var allFixedDisplayObjects = good(lastWeekHoursDom, 'Hours: ')
   let noCommas = allFixedDisplayObjects.join("<br />");
   lastWeeksHours.innerHTML += `<br> ${noCommas}`
+
   let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
-  var sleepObjectsDom = lastWeekQualityDom.map(oneDate => {
-    let myArray = oneDate.split(":");
-    let interp;
-    let date = myArray[0];
-    let [year, month, day] = date.split('/');
-    let result = [month, day, year].join('/');
-    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Quality:  " + myArray[1];
-    return interp;
-  });
+  var sleepObjectsDom = good(lastWeekQualityDom, 'Quality: ')
   let noCommas2 = sleepObjectsDom.join("<br />");
   lastWeeksQuality.innerHTML += `<br>${noCommas2}`
 }
+
+function good(arr, dataType) {
+  var final2 = arr.map(ele => {
+    let strings = JSON.stringify(ele)
+    .replace(/[{}]/g,'')
+    .replace(/['"]/g,'')
+    return strings
+  });
+  let thing = final2.map(oneDate => {
+    let myArray = oneDate.split(":");
+    let interp;
+    let date = myArray[0];
+    let [year, month, day] = date.split('/');
+    let result = [month, day, year].join('/');
+    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + dataType + myArray[1];
+    return interp;
+  })
+  return thing
+}
+
 
 function displayHydrationInfo(newUser) {
   let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
   let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
   todaysHydration.innerText += ` ${hydrationDaily} ounces`;
-  var hydrationObjectsDom = hydrationWeekly.map(oneDate => {
-    let myArray = oneDate.split(":");
-    let interp;
-    let date = myArray[0];
-    let [year, month, day] = date.split('/');
-    let result = [month, day, year].join('/');
-    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + "Ounces:  " + myArray[1];
-    return interp;
-  });
+  var hydrationObjectsDom = good(hydrationWeekly, 'Ounces: ')
   let noCommas3 = hydrationObjectsDom.join("<br />");
   weeklyHydration.innerHTML += `<br>${noCommas3}`;
 }

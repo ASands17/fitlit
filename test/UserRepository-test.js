@@ -80,7 +80,8 @@ describe('User Repository', () => {
   });
 
   it('should be able to take in user data', () => {
-    expect(userRepository1.data).to.equal(testUserData);
+    expect(userRepository1.data).to.be.an('array');
+    expect(userRepository1.data).to.deep.equal(testUserData);
   });
 
   it('should be able to create a new user instance', () => {
