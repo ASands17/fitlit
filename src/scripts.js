@@ -103,17 +103,13 @@ function dateEdit(sleepId) {
 }
 
 function displayAveHours(sleepId) {
-  let hoursArr = sleepId.map(daySleep => {
-    return daySleep.hoursSlept;
-  })
+  let hoursArr = sleepId.map(daySleep => daySleep.hoursSlept);
   let averageHoursDom = globalSleep.acquireAverageMetricPerDay(hoursArr);
   averageHours.innerText += ` ${averageHoursDom}`;
 }
 
 function displayAveQuality(sleepId) {
-  let qualityArr = sleepId.map(daySleep => {
-    return daySleep.sleepQuality;
-  })
+  let qualityArr = sleepId.map(daySleep => daySleep.sleepQuality);
   let averageQualityDom = globalSleep.acquireAverageMetricPerDay(qualityArr);
   averageQuality.innerText += ` ${averageQualityDom}`;
 }
@@ -127,21 +123,21 @@ function specificDayStuff(sleepId, finalIndexDate) {
 
 function weekStuff(sleepId, finalIndexDate) {
   let lastWeekHoursDom = globalSleep.acquireHoursSleptEachDayForAWeek(sleepId, finalIndexDate);
-  var allFixedDisplayObjects = good(lastWeekHoursDom, 'Hours: ')
+  var allFixedDisplayObjects = good(lastWeekHoursDom, 'Hours: ');
   let noCommas = allFixedDisplayObjects.join("<br />");
-  lastWeeksHours.innerHTML += `<br> ${noCommas}`
+  lastWeeksHours.innerHTML += `<br> ${noCommas}`;
   let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
-  var sleepObjectsDom = good(lastWeekQualityDom, 'Quality: ')
+  var sleepObjectsDom = good(lastWeekQualityDom, 'Quality: ');
   let noCommas2 = sleepObjectsDom.join("<br />");
-  lastWeeksQuality.innerHTML += `<br>${noCommas2}`
+  lastWeeksQuality.innerHTML += `<br>${noCommas2}`;
 }
 
 function good(arr, dataType) {
   var final2 = arr.map(ele => {
     let strings = JSON.stringify(ele)
     .replace(/[{}]/g,'')
-    .replace(/['"]/g,'')
-    return strings
+    .replace(/['"]/g,'');
+    return strings;
   });
   let thing = final2.map(oneDate => {
     let myArray = oneDate.split(":");
@@ -152,9 +148,8 @@ function good(arr, dataType) {
     interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + dataType + myArray[1];
     return interp;
   })
-  return thing
+  return thing;
 }
-
 
 function displayHydrationInfo(newUser) {
   let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
