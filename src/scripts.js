@@ -151,6 +151,23 @@ function displayHydrationInfo(newUser) {
   weeklyHydration.innerHTML += `<br>${noCommas3}`;
 }
 
+// function displayIdCardInfo(newUser) {
+//   idText.innerText += ` ${newUser.id}`;
+//   nameText.innerText += ` ${newUser.name}`;
+//   addressText.innerText += ` ${newUser.address}`;
+//   emailText.innerText += ` ${newUser.email}`;
+//   strideLengthText.innerText += ` ${newUser.strideLength}`;
+//   dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
+//   var userFriend = newUser.friends.map(friend => {
+//     return friend = globalUserRepository.getUserDataBasedOnId(friend)
+//   });
+//   let userFriendNames = userFriend.map(friend => {
+//     return friend.returnUserFirstName()
+//   });
+//   let friendsSpace = userFriendNames.join(", ");
+//   friendsText.innerText += '\xa0' + friendsSpace;
+// }
+
 function displayIdCardInfo(newUser) {
   idText.innerText += ` ${newUser.id}`;
   nameText.innerText += ` ${newUser.name}`;
@@ -159,12 +176,11 @@ function displayIdCardInfo(newUser) {
   strideLengthText.innerText += ` ${newUser.strideLength}`;
   dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
   var userFriend = newUser.friends.map(friend => {
-    return friend = globalUserRepository.getUserDataBasedOnId(friend)
+    let foo = globalUserRepository.getUserDataBasedOnId(friend)
+    let bar = foo.returnUserFirstName()
+    return bar
   });
-  let userFriendNames = userFriend.map(friend => {
-    return friend.returnUserFirstName()
-  });
-  let friendsSpace = userFriendNames.join(", ");
+  let friendsSpace = userFriend.join(", ");
   friendsText.innerText += '\xa0' + friendsSpace;
 }
 
