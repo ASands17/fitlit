@@ -122,7 +122,6 @@ function displaySleepInfo(newUser) {
 }
 
 function good(arr, dataType) {
-  console.log(arr)
   var final2 = arr.map(ele => {
     let strings = JSON.stringify(ele)
     .replace(/[{}]/g,'')
@@ -136,8 +135,6 @@ function good(arr, dataType) {
     let [year, month, day] = date.split('/');
     let result = [month, day, year].join('/');
     interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + dataType + myArray[1];
-    console.log(interp)
-
     return interp;
   })
   return thing
