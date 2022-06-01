@@ -4,7 +4,6 @@ import hydrationData from '../test-data/Hydration-data'
 
 describe('Hydration', () => {
   let hydration;
-  let testUserData;
   let waterData1, waterData2;
 
   beforeEach(() => {
