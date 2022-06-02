@@ -64,7 +64,7 @@ function fetchAllData() {
   let endpoints = apis.map((url) => {
     return fetch(url)
     .then(res => res.json())
-    .catch(error => console.log("fetch error", error));
+    .catch(error => alert("🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 "));
   });
 
   Promise.all(endpoints).then((value) => {
