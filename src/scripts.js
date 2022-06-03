@@ -122,23 +122,23 @@ function displayWeeklySleepMetrics(sleepId, finalIndexDate) {
   lastWeeksQuality.innerHTML += `<br>${noCommas2}`;
 }
 
-function parseDate(arr, dataType) {
-  var final2 = arr.map(ele => {
-    let strings = JSON.stringify(ele)
+function parseDate(dates, metric) {
+  var dateStrings = dates.map(date => {
+    let strings = JSON.stringify(date)
     .replace(/[{}]/g,'')
     .replace(/['"]/g,'');
     return strings;
   });
-  let thing = final2.map(oneDate => {
-    let myArray = oneDate.split(":");
-    let interp;
-    let date = myArray[0];
+  let parsedDates = dateStrings.map(oneDate => {
+    let splitDates = oneDate.split(":");
+    let finalDate;
+    let date = splitDates[0];
     let [year, month, day] = date.split('/');
-    let result = [month, day, year].join('/');
-    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + dataType + myArray[1];
-    return interp;
+    let joinedDate = [month, day, year].join('/');
+    finalDate = "Date:  " + joinedDate + '\xa0\xa0\xa0\xa0\xa0\xa0' + metric + splitDates[1];
+    return finalDate;
   })
-  return thing;
+  return parsedDates;
 }
 
 function displayHydrationInfo(newUser) {
