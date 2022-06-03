@@ -3,14 +3,16 @@ class Sleep {
     this.data = sleepData;
   }
 
-  acquireSleepDataBasedOnId(id) {
+ //acquireSleepDataBasedOnId
+  acquireSleepDataById(id) {
     let sleepData = this.data.filter((snooze) => {
       return snooze.userID === id;
     });
     return sleepData;
   }
 
-  acquireAverageMetricPerDay(measurements) {
+//acquireAverageMetricPerDay
+  acquireAverageDailyMetric(measurements) {
     let sum = measurements.reduce((total, currentMetric) => {
       return total += currentMetric
     }, 0);
@@ -18,21 +20,24 @@ class Sleep {
     return Number(averageMeasurement.toFixed(1));
   }
 
-  acquireHoursSleptForASpecificDay(data, date) {
+//acquireHoursSleptForASpecificDay
+  acquireDailyHoursSlept(data, date) {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
     return sleepData[0].hoursSlept;
   }
 
-  acquireSleepQualityForASpecificDay(data, date) {
+  //acquireSleepQualityForASpecificDay
+  acquireDailySleepQuality(data, date) {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
     return sleepData[0].sleepQuality;
   }
 
-  acquireHoursSleptEachDayForAWeek(data, date) {
+//acquireHoursSleptEachDayForAWeek
+  acquireWeeklyHoursSlept(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
@@ -43,8 +48,8 @@ class Sleep {
     });
     return final;
   }
-
-  acquireSleepQualityEachDayForAWeek(data, date) {
+//acquireSleepQualityEachDayForAWeek
+  acquireWeeklySleepQuality(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
@@ -54,7 +59,8 @@ class Sleep {
     return final;
   }
 
-  acquireAvgSleepQualityAllUsers() {
+//acquireAvgSleepQualityAllUsers
+  acquireUniversalAveSleepQuality() {
     let totalSleepQuality = this.data.reduce((totalQuality, currentUser) => {
       totalQuality += currentUser.sleepQuality;
       return totalQuality;

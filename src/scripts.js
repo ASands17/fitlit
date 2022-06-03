@@ -66,7 +66,7 @@ function displayResolvedData() {
 //FUNCTIONS
 function getUserName() {
   let newId = getRandomUserId(globalUserData);
-  let newUser = globalUserRepository.getUserDataBasedOnId(newId);
+  let newUser = globalUserRepository.getDataById(newId);
   let newUserFirstName = newUser.returnUserFirstName();
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
   displayIdCardInfo(newUser);
@@ -76,77 +76,82 @@ function getUserName() {
 }
 
 function displaySleepInfo(newUser) {
-  let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
-  let finalIndexDate = dateEdit(sleepId);
-  displayAveHours(sleepId);
-  displayAveQuality(sleepId);
-  specificDayStuff(sleepId, finalIndexDate);
-  weekStuff(sleepId, finalIndexDate);
+  let userSleepData = globalSleep.acquireSleepDataById(newUser.id);
+  //todaysDate
+  let todaysDate = editDate(userSleepData);
+  displayAveHours(userSleepData);
+  displayAveQuality(userSleepData);
+  displayDailySleepMetrics(userSleepData, todaysDate);
+  displayWeeklySleepMetrics(userSleepData, todaysDate);
 }
 
-function dateEdit(sleepId) {
-  let lastIndexNum = [sleepId.length - 1];
-  let indexOfBigData = (sleepId[lastIndexNum]);
-  return indexOfBigData.date;
+//dateEdit
+//param is userSleepData
+function editDate(userSleepData) {
+  let lastIndex = [userSleepData.length - 1];
+  let todaysData = (userSleepData[lastIndex]);
+  return todaysData.date;
 }
 
-function displayAveHours(sleepId) {
-  let hoursArr = sleepId.map(daySleep => daySleep.hoursSlept);
-  let averageHoursDom = globalSleep.acquireAverageMetricPerDay(hoursArr);
+function displayAveHours(userSleepData) {
+  let hoursCollection = userSleepData.map(daySleep => daySleep.hoursSlept);
+  let averageHoursDom = globalSleep.acquireAverageDailyMetric(hoursCollection);
   averageHours.innerText += ` ${averageHoursDom}`;
 }
 
-function displayAveQuality(sleepId) {
-  let qualityArr = sleepId.map(daySleep => daySleep.sleepQuality);
-  let averageQualityDom = globalSleep.acquireAverageMetricPerDay(qualityArr);
+function displayAveQuality(userSleepData) {
+  let qualityCollection = userSleepData.map(daySleep => daySleep.sleepQuality);
+  let averageQualityDom = globalSleep.acquireAverageDailyMetric(qualityCollection);
   averageQuality.innerText += ` ${averageQualityDom}`;
 }
-
-function specificDayStuff(sleepId, finalIndexDate) {
-  let todaysHoursDom = globalSleep.acquireHoursSleptForASpecificDay(sleepId, finalIndexDate);
+//specificDayStuff
+function displayDailySleepMetrics(userSleepData, todaysDate) {
+  let todaysHoursDom = globalSleep.acquireDailyHoursSlept(userSleepData, todaysDate);
   todaysHours.innerText += ` ${todaysHoursDom}`;
-  let todaysQualityDom = globalSleep.acquireSleepQualityForASpecificDay(sleepId, finalIndexDate);
+  let todaysQualityDom = globalSleep.acquireDailySleepQuality(userSleepData, todaysDate);
   todaysQuality.innerText += ` ${todaysQualityDom}`;
 }
 
-function weekStuff(sleepId, finalIndexDate) {
-  let lastWeekHoursDom = globalSleep.acquireHoursSleptEachDayForAWeek(sleepId, finalIndexDate);
-  var allFixedDisplayObjects = good(lastWeekHoursDom, 'Hours: ');
-  let noCommas = allFixedDisplayObjects.join("<br />");
-  lastWeeksHours.innerHTML += `<br> ${noCommas}`;
-  let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
-  var sleepObjectsDom = good(lastWeekQualityDom, 'Quality: ');
-  let noCommas2 = sleepObjectsDom.join("<br />");
-  lastWeeksQuality.innerHTML += `<br>${noCommas2}`;
+//weekStuff
+function displayWeeklySleepMetrics(userSleepData, todaysDate) {
+  let lastWeekHoursDom = globalSleep.acquireWeeklyHoursSlept(userSleepData, todaysDate);
+  var hoursDisplay = parseDate(lastWeekHoursDom, 'Hours: ');
+  let replacedCommaHours = hoursDisplay.join("<br />");
+  lastWeeksHours.innerHTML += `<br> ${replacedCommaHours}`;
+  let lastWeekQualityDom = globalSleep.acquireWeeklySleepQuality(userSleepData, todaysDate);
+  var qualityDisplay = parseDate(lastWeekQualityDom, 'Quality: ');
+  let replacedCommaQuality = qualityDisplay.join("<br />");
+  lastWeeksQuality.innerHTML += `<br>${replacedCommaQuality}`;
 }
 
-function good(arr, dataType) {
-  var final2 = arr.map(ele => {
-    let strings = JSON.stringify(ele)
+function parseDate(dates, metric) {
+  var dateStrings = dates.map(date => {
+    let strings = JSON.stringify(date)
     .replace(/[{}]/g,'')
     .replace(/['"]/g,'');
     return strings;
   });
-  let thing = final2.map(oneDate => {
-    let myArray = oneDate.split(":");
-    let interp;
-    let date = myArray[0];
+  let parsedDates = dateStrings.map(oneDate => {
+    let splitDates = oneDate.split(":");
+    let finalDate;
+    let date = splitDates[0];
     let [year, month, day] = date.split('/');
-    let result = [month, day, year].join('/');
-    interp = "Date:  " + result + '\xa0\xa0\xa0\xa0\xa0\xa0' + dataType + myArray[1];
-    return interp;
+    let joinedDate = [month, day, year].join('/');
+    finalDate = "Date:  " + joinedDate + '\xa0\xa0\xa0\xa0\xa0\xa0' + metric + splitDates[1];
+    return finalDate;
   })
-  return thing;
+  return parsedDates;
 }
 
 function displayHydrationInfo(newUser) {
-  let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
-  let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
-  let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
+  //userHydrationData
+  let userHydrationData = globalHydration.obtainHydrationDataById(newUser.id);
+  let hydrationDaily = globalHydration.obtainTodaysOunces(userHydrationData);
+  let hydrationWeekly = globalHydration.obtainWeeklyOunces(userHydrationData);
   todaysHydration.innerText += ` ${hydrationDaily} ounces`;
-  var hydrationObjectsDom = good(hydrationWeekly, 'Ounces: ');
-  let noCommas3 = hydrationObjectsDom.join("<br />");
-  weeklyHydration.innerHTML += `<br>${noCommas3}`;
+  var hydrationObjectsDom = parseDate(hydrationWeekly, 'Ounces: ');
+  let replacedCommaOunces = hydrationObjectsDom.join("<br />");
+  weeklyHydration.innerHTML += `<br>${replacedCommaOunces}`;
 }
 
 function displayIdCardInfo(newUser) {
@@ -157,9 +162,9 @@ function displayIdCardInfo(newUser) {
   strideLengthText.innerText += ` ${newUser.strideLength}`;
   dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
   var userFriend = newUser.friends.map(friend => {
-    let foo = globalUserRepository.getUserDataBasedOnId(friend);
-    let bar = foo.returnUserFirstName();
-    return bar;
+    let friendData = globalUserRepository.getDataById(friend);
+    let friendName = friendData.returnUserFirstName();
+    return friendName;
   });
   let friendsSpace = userFriend.join(", ");
   friendsText.innerText += '\xa0' + friendsSpace;
