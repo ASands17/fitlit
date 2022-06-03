@@ -76,7 +76,7 @@ function getUserName() {
 }
 
 function displaySleepInfo(newUser) {
-  let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
+  let sleepId = globalSleep.acquireSleepDataById(newUser.id);
   let finalIndexDate = dateEdit(sleepId);
   displayAveHours(sleepId);
   displayAveQuality(sleepId);
@@ -92,29 +92,29 @@ function dateEdit(sleepId) {
 
 function displayAveHours(sleepId) {
   let hoursArr = sleepId.map(daySleep => daySleep.hoursSlept);
-  let averageHoursDom = globalSleep.acquireAverageMetricPerDay(hoursArr);
+  let averageHoursDom = globalSleep.acquireAverageDailyMetric(hoursArr);
   averageHours.innerText += ` ${averageHoursDom}`;
 }
 
 function displayAveQuality(sleepId) {
   let qualityArr = sleepId.map(daySleep => daySleep.sleepQuality);
-  let averageQualityDom = globalSleep.acquireAverageMetricPerDay(qualityArr);
+  let averageQualityDom = globalSleep.acquireAverageDailyMetric(qualityArr);
   averageQuality.innerText += ` ${averageQualityDom}`;
 }
 
 function specificDayStuff(sleepId, finalIndexDate) {
-  let todaysHoursDom = globalSleep.acquireHoursSleptForASpecificDay(sleepId, finalIndexDate);
+  let todaysHoursDom = globalSleep.acquireDailyHoursSlept(sleepId, finalIndexDate);
   todaysHours.innerText += ` ${todaysHoursDom}`;
-  let todaysQualityDom = globalSleep.acquireSleepQualityForASpecificDay(sleepId, finalIndexDate);
+  let todaysQualityDom = globalSleep.acquireDailySleepQuality(sleepId, finalIndexDate);
   todaysQuality.innerText += ` ${todaysQualityDom}`;
 }
 
 function weekStuff(sleepId, finalIndexDate) {
-  let lastWeekHoursDom = globalSleep.acquireHoursSleptEachDayForAWeek(sleepId, finalIndexDate);
+  let lastWeekHoursDom = globalSleep.acquireWeeklyHoursSlept(sleepId, finalIndexDate);
   var allFixedDisplayObjects = good(lastWeekHoursDom, 'Hours: ');
   let noCommas = allFixedDisplayObjects.join("<br />");
   lastWeeksHours.innerHTML += `<br> ${noCommas}`;
-  let lastWeekQualityDom = globalSleep.acquireSleepQualityEachDayForAWeek(sleepId, finalIndexDate);
+  let lastWeekQualityDom = globalSleep.acquireWeeklySleepQuality(sleepId, finalIndexDate);
   var sleepObjectsDom = good(lastWeekQualityDom, 'Quality: ');
   let noCommas2 = sleepObjectsDom.join("<br />");
   lastWeeksQuality.innerHTML += `<br>${noCommas2}`;

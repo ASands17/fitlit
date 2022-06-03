@@ -8,8 +8,8 @@ describe('Sleep', () => {
 
   beforeEach(() => {
     sleep = new Sleep(sleepData);
-    sleepData1 = sleep.acquireSleepDataBasedOnId(1);
-    sleepData2 = sleep.acquireSleepDataBasedOnId(2);
+    sleepData1 = sleep.acquireSleepDataById(1);
+    sleepData2 = sleep.acquireSleepDataById(2);
   });
 
   it('should be a function', () => {
@@ -27,8 +27,8 @@ describe('Sleep', () => {
   });
 
   it('should be able to acquire sleep data based on id', () => {
-    expect(sleep.acquireSleepDataBasedOnId()).to.be.an('array');
-    expect(sleep.acquireSleepDataBasedOnId(1)).to.deep.equal(
+    expect(sleep.acquireSleepDataById()).to.be.an('array');
+    expect(sleep.acquireSleepDataById(1)).to.deep.equal(
       [
         {
           "userID": 1,
@@ -85,7 +85,7 @@ describe('Sleep', () => {
           "sleepQuality": 1.2
         }
       ]);
-    expect(sleep.acquireSleepDataBasedOnId(2)).to.deep.equal(
+    expect(sleep.acquireSleepDataById(2)).to.deep.equal(
       [
         {
           "userID": 2,
@@ -159,22 +159,22 @@ describe('Sleep', () => {
   });
 
   it('should be able to acquire hours slept for a specific date for a specific user', () => {
-    expect(sleep.acquireHoursSleptForASpecificDay(sleepData1, "2019/06/15")).to.be.a('number');
-    expect(sleep.acquireHoursSleptForASpecificDay(sleepData1, "2019/06/15")).to.equal(6.1);
-    expect(sleep.acquireHoursSleptForASpecificDay(sleepData2, "2019/06/16")).to.be.a('number');
-    expect(sleep.acquireHoursSleptForASpecificDay(sleepData2, "2019/06/16")).to.equal(7.5);
+    expect(sleep.acquireDailyHoursSlept(sleepData1, "2019/06/15")).to.be.a('number');
+    expect(sleep.acquireDailyHoursSlept(sleepData1, "2019/06/15")).to.equal(6.1);
+    expect(sleep.acquireDailyHoursSlept(sleepData2, "2019/06/16")).to.be.a('number');
+    expect(sleep.acquireDailyHoursSlept(sleepData2, "2019/06/16")).to.equal(7.5);
   });
 
   it('should be able to acquire sleep quality for a specific date for a specific user', () => {
-    expect(sleep.acquireSleepQualityForASpecificDay(sleepData1, "2019/06/15")).to.be.a('number');
-    expect(sleep.acquireSleepQualityForASpecificDay(sleepData1, "2019/06/15")).to.equal(2.2);
-    expect(sleep.acquireSleepQualityForASpecificDay(sleepData2, "2019/06/16")).to.be.a('number');
-    expect(sleep.acquireSleepQualityForASpecificDay(sleepData2, "2019/06/16")).to.equal(3.5);
+    expect(sleep.acquireDailySleepQuality(sleepData1, "2019/06/15")).to.be.a('number');
+    expect(sleep.acquireDailySleepQuality(sleepData1, "2019/06/15")).to.equal(2.2);
+    expect(sleep.acquireDailySleepQuality(sleepData2, "2019/06/16")).to.be.a('number');
+    expect(sleep.acquireDailySleepQuality(sleepData2, "2019/06/16")).to.equal(3.5);
   });
 
   it('should be able to acquire hours slept over the course of a week', () => {
-    expect(sleep.acquireHoursSleptEachDayForAWeek(sleepData1, "2019/06/23")).to.be.an('array');
-    expect(sleep.acquireHoursSleptEachDayForAWeek(sleepData1, "2019/06/23")).to.deep.equal([
+    expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2019/06/23")).to.be.an('array');
+    expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2019/06/23")).to.deep.equal([
       "2019/06/17:8.4",
       "2019/06/18:6.1",
       "2019/06/19:7.5",
@@ -183,8 +183,8 @@ describe('Sleep', () => {
       "2019/06/22:7.5",
       "2019/06/23:8.4"
     ]);
-    expect(sleep.acquireHoursSleptEachDayForAWeek(sleepData2, "2019/06/23")).to.be.an('array');
-    expect(sleep.acquireHoursSleptEachDayForAWeek(sleepData2, "2019/06/23")).to.deep.equal([
+    expect(sleep.acquireWeeklyHoursSlept(sleepData2, "2019/06/23")).to.be.an('array');
+    expect(sleep.acquireWeeklyHoursSlept(sleepData2, "2019/06/23")).to.deep.equal([
       "2019/06/17:7.4",
       "2019/06/18:7.1",
       "2019/06/19:8.5",
@@ -196,8 +196,8 @@ describe('Sleep', () => {
   });
 
   it('should be able to acquire sleep quality over the course of a week', () => {
-    expect(sleep.acquireSleepQualityEachDayForAWeek(sleepData1, "2019/06/23")).to.be.an('array');
-    expect(sleep.acquireSleepQualityEachDayForAWeek(sleepData1, "2019/06/23")).to.deep.equal([
+    expect(sleep.acquireWeeklySleepQuality(sleepData1, "2019/06/23")).to.be.an('array');
+    expect(sleep.acquireWeeklySleepQuality(sleepData1, "2019/06/23")).to.deep.equal([
       "2019/06/17:1.2",
       "2019/06/18:2.2",
       "2019/06/19:3.5",
@@ -206,8 +206,8 @@ describe('Sleep', () => {
       "2019/06/22:3.5",
       "2019/06/23:1.2"
     ]);
-    expect(sleep.acquireSleepQualityEachDayForAWeek(sleepData2, "2019/06/23")).to.be.an('array');
-    expect(sleep.acquireSleepQualityEachDayForAWeek(sleepData2, "2019/06/23")).to.deep.equal([
+    expect(sleep.acquireWeeklySleepQuality(sleepData2, "2019/06/23")).to.be.an('array');
+    expect(sleep.acquireWeeklySleepQuality(sleepData2, "2019/06/23")).to.deep.equal([
       "2019/06/17:2.2",
       "2019/06/18:3.2",
       "2019/06/19:3.8",
@@ -219,8 +219,8 @@ describe('Sleep', () => {
   });
 
   it('should be able to calculate average sleep quality of all users', () => {
-    expect(sleep.acquireAvgSleepQualityAllUsers()).to.be.a('number');
-    expect(sleep.acquireAvgSleepQualityAllUsers()).to.equal(2.7);
+    expect(sleep.acquireUniversalAveSleepQuality()).to.be.a('number');
+    expect(sleep.acquireUniversalAveSleepQuality()).to.equal(2.7);
   });
 
   it('should be able to calculate average sleep quality of one user', () => {
