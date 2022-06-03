@@ -66,7 +66,7 @@ function displayResolvedData() {
 //FUNCTIONS
 function getUserName() {
   let newId = getRandomUserId(globalUserData);
-  let newUser = globalUserRepository.getUserDataBasedOnId(newId);
+  let newUser = globalUserRepository.getDataById(newId);
   let newUserFirstName = newUser.returnUserFirstName();
   welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
   displayIdCardInfo(newUser);
@@ -140,7 +140,7 @@ function good(arr, dataType) {
 }
 
 function displayHydrationInfo(newUser) {
-  let hydrationId = globalHydration.obtainHydrationDataBasedOnId(newUser.id);
+  let hydrationId = globalHydration.obtainHydrationDataById(newUser.id);
   let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
   let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
   todaysHydration.innerText += ` ${hydrationDaily} ounces`;
@@ -157,7 +157,7 @@ function displayIdCardInfo(newUser) {
   strideLengthText.innerText += ` ${newUser.strideLength}`;
   dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
   var userFriend = newUser.friends.map(friend => {
-    let foo = globalUserRepository.getUserDataBasedOnId(friend);
+    let foo = globalUserRepository.getDataById(friend);
     let bar = foo.returnUserFirstName();
     return bar;
   });

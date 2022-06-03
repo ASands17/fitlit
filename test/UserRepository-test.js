@@ -86,7 +86,7 @@ describe('User Repository', () => {
 
   it('should be able to create a new user instance', () => {
     expect(user3).to.be.an.instanceof(User);
-    expect(userRepository1.getUserDataBasedOnId(3)).to.deep.equal(user3);
+    expect(userRepository1.getDataById(3)).to.deep.equal(user3);
   });
 
   it('should be able to calculate average step goal of all users', () => {

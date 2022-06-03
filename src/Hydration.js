@@ -2,8 +2,8 @@ class Hydration {
   constructor(hydrationData) {
     this.data = hydrationData;
   }
-
-  obtainHydrationDataBasedOnId(id) {
+ //obtainHydrationDataBasedOnId
+  obtainHydrationDataById(id) {
     let waterData = this.data.filter((hydro) => {
       return hydro.userID === id;
     });

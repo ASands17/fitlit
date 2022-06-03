@@ -8,8 +8,8 @@ describe('Hydration', () => {
 
   beforeEach(() => {
     hydration = new Hydration(hydrationData);
-    waterData1 = hydration.obtainHydrationDataBasedOnId(1);
-    waterData2 = hydration.obtainHydrationDataBasedOnId(2);
+    waterData1 = hydration.obtainHydrationDataById(1);
+    waterData2 = hydration.obtainHydrationDataById(2);
   });
 
   it('should be a function', () => {
@@ -27,8 +27,8 @@ describe('Hydration', () => {
   });
 
   it('should be able to obtain hydration data based on id', () => {
-    expect(hydration.obtainHydrationDataBasedOnId()).to.be.an('array');
-    expect(hydration.obtainHydrationDataBasedOnId(1)).to.deep.equal(
+    expect(hydration.obtainHydrationDataById()).to.be.an('array');
+    expect(hydration.obtainHydrationDataById(1)).to.deep.equal(
       [
         {
           "userID": 1,
@@ -66,7 +66,7 @@ describe('Hydration', () => {
           "numOunces": 63
         },
       ]);
-    expect(hydration.obtainHydrationDataBasedOnId(2)).to.deep.equal(
+    expect(hydration.obtainHydrationDataById(2)).to.deep.equal(
       [
         {
           "userID": 2,
