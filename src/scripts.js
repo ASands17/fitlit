@@ -4,6 +4,7 @@ import Hydration from './Hydration';
 import Sleep from './Sleep';
 import './css/styles.css';
 import './images/profile-icon.png';
+import {fetchAllData} from './apiCalls';
 
 //GLOBAL VARIABLES
 let globalUserRepository;
@@ -34,7 +35,7 @@ var lastWeeksHours = document.querySelector('#lastWeeksHours');
 var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
 
 //EVENT LISTENERS
-window.addEventListener('load', fetchAllData);
+window.addEventListener('load', promise);
 
 //API FETCH
 function getAllUserData(data) {
@@ -52,27 +53,45 @@ function getAllSleepData(data) {
   globalSleep = new Sleep(data);
   getUserName();
 }
+//
+// function fetchAllData() {
+//   let apis = [
+//     'https://fitlit-api.herokuapp.com/api/v1/users',
+//     'https://fitlit-api.herokuapp.com/api/v1/hydration',
+//     'https://fitlit-api.herokuapp.com/api/v1/activity',
+//     'https://fitlit-api.herokuapp.com/api/v1/sleep'
+//   ];
+//
+//   let endpoints = apis.map((url) => {
+//     return fetch(url)
+//     .then(res => res.json())
+//     .catch(error => alert("🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 "));
+//   });
+//   console.log(endpoints.forEach(endpoint => {
+//     console.log(endpoint)
+//   }))
+//   console.log(typeof endpoints)
+//   console.log(endpoints[0])
+//
+//
+//   Promise.all(endpoints).then((value) => {
+//     getAllUserData(value[0].userData);
+//     getAllHydrationData(value[1].hydrationData);
+//     getAllSleepData(value[3].sleepData);
+//   });
+// }
 
-function fetchAllData() {
-  let apis = [
-    'https://fitlit-api.herokuapp.com/api/v1/users',
-    'https://fitlit-api.herokuapp.com/api/v1/hydration',
-    'https://fitlit-api.herokuapp.com/api/v1/activity',
-    'https://fitlit-api.herokuapp.com/api/v1/sleep'
-  ];
-
-  let endpoints = apis.map((url) => {
-    return fetch(url)
-    .then(res => res.json())
-    .catch(error => alert("🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 "));
-  });
-
-  Promise.all(endpoints).then((value) => {
+function promise() {
+  let promises = fetchAllData()
+  console.log(promises)
+  Promise.all(promises).then((value) => {
     getAllUserData(value[0].userData);
     getAllHydrationData(value[1].hydrationData);
     getAllSleepData(value[3].sleepData);
   });
+
 }
+
 
 //FUNCTIONS
 function getUserName() {
