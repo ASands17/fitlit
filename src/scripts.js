@@ -77,14 +77,15 @@ function getUserName() {
 
 function displaySleepInfo(newUser) {
   let sleepId = globalSleep.acquireSleepDataById(newUser.id);
-  let finalIndexDate = dateEdit(sleepId);
+  let finalIndexDate = editDate(sleepId);
   displayAveHours(sleepId);
   displayAveQuality(sleepId);
-  specificDayStuff(sleepId, finalIndexDate);
-  weekStuff(sleepId, finalIndexDate);
+  displayDailySleepMetrics(sleepId, finalIndexDate);
+  displayWeeklySleepMetrics(sleepId, finalIndexDate);
 }
 
-function dateEdit(sleepId) {
+//dateEdit
+function editDate(sleepId) {
   let lastIndexNum = [sleepId.length - 1];
   let indexOfBigData = (sleepId[lastIndexNum]);
   return indexOfBigData.date;
@@ -101,26 +102,27 @@ function displayAveQuality(sleepId) {
   let averageQualityDom = globalSleep.acquireAverageDailyMetric(qualityArr);
   averageQuality.innerText += ` ${averageQualityDom}`;
 }
-
-function specificDayStuff(sleepId, finalIndexDate) {
+//specificDayStuff
+function displayDailySleepMetrics(sleepId, finalIndexDate) {
   let todaysHoursDom = globalSleep.acquireDailyHoursSlept(sleepId, finalIndexDate);
   todaysHours.innerText += ` ${todaysHoursDom}`;
   let todaysQualityDom = globalSleep.acquireDailySleepQuality(sleepId, finalIndexDate);
   todaysQuality.innerText += ` ${todaysQualityDom}`;
 }
 
-function weekStuff(sleepId, finalIndexDate) {
+//weekStuff
+function displayWeeklySleepMetrics(sleepId, finalIndexDate) {
   let lastWeekHoursDom = globalSleep.acquireWeeklyHoursSlept(sleepId, finalIndexDate);
-  var allFixedDisplayObjects = good(lastWeekHoursDom, 'Hours: ');
+  var allFixedDisplayObjects = parseDate(lastWeekHoursDom, 'Hours: ');
   let noCommas = allFixedDisplayObjects.join("<br />");
   lastWeeksHours.innerHTML += `<br> ${noCommas}`;
   let lastWeekQualityDom = globalSleep.acquireWeeklySleepQuality(sleepId, finalIndexDate);
-  var sleepObjectsDom = good(lastWeekQualityDom, 'Quality: ');
+  var sleepObjectsDom = parseDate(lastWeekQualityDom, 'Quality: ');
   let noCommas2 = sleepObjectsDom.join("<br />");
   lastWeeksQuality.innerHTML += `<br>${noCommas2}`;
 }
 
-function good(arr, dataType) {
+function parseDate(arr, dataType) {
   var final2 = arr.map(ele => {
     let strings = JSON.stringify(ele)
     .replace(/[{}]/g,'')
@@ -144,7 +146,7 @@ function displayHydrationInfo(newUser) {
   let hydrationDaily = globalHydration.obtainTodaysOunces(hydrationId);
   let hydrationWeekly = globalHydration.obtainWeeklyOunces(hydrationId);
   todaysHydration.innerText += ` ${hydrationDaily} ounces`;
-  var hydrationObjectsDom = good(hydrationWeekly, 'Ounces: ');
+  var hydrationObjectsDom = parseDate(hydrationWeekly, 'Ounces: ');
   let noCommas3 = hydrationObjectsDom.join("<br />");
   weeklyHydration.innerHTML += `<br>${noCommas3}`;
 }
