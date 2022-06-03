@@ -141,8 +141,8 @@ function good(arr, dataType) {
 
 function displayHydrationInfo(newUser) {
   let hydrationId = globalHydration.obtainHydrationDataById(newUser.id);
-  let hydrationDaily = globalHydration.obtainOuncesForMostRecentDay(hydrationId);
-  let hydrationWeekly = globalHydration.obtainOuncesPerDayOverAWeek(hydrationId);
+  let hydrationDaily = globalHydration.obtainTodaysOunces(hydrationId);
+  let hydrationWeekly = globalHydration.obtainWeeklyOunces(hydrationId);
   todaysHydration.innerText += ` ${hydrationDaily} ounces`;
   var hydrationObjectsDom = good(hydrationWeekly, 'Ounces: ');
   let noCommas3 = hydrationObjectsDom.join("<br />");

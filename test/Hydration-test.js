@@ -108,22 +108,22 @@ describe('Hydration', () => {
   });
 
   it('should be able to obtain average daily ounces consumed', () => {
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.be.a('number');
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData1)).to.equal(60.1);
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.be.a('number');
-    expect(hydration.obtainAveOuncesConsumedPerDay(waterData2)).to.equal(39.7);
+    expect(hydration.obtainAverageDailyOunces(waterData1)).to.be.a('number');
+    expect(hydration.obtainAverageDailyOunces(waterData1)).to.equal(60.1);
+    expect(hydration.obtainAverageDailyOunces(waterData2)).to.be.a('number');
+    expect(hydration.obtainAverageDailyOunces(waterData2)).to.equal(39.7);
   });
 
   it('should be able to obtain ounces for most recent day', () => {
-    let ounces1 = hydration.obtainOuncesForMostRecentDay(waterData1);
+    let ounces1 = hydration.obtainTodaysOunces(waterData1);
     expect(ounces1).to.equal(63);
 
-    let ounces2 = hydration.obtainOuncesForMostRecentDay(waterData2);
+    let ounces2 = hydration.obtainTodaysOunces(waterData2);
     expect(ounces2).to.equal(45);
   });
 
   it('should be able to obtain ounces for most recent week', () => {
-    let ounces1 = hydration.obtainOuncesPerDayOverAWeek(waterData1);
+    let ounces1 = hydration.obtainWeeklyOunces(waterData1);
     expect(ounces1).to.deep.equal([
       "2019/06/15:31",
       "2019/06/16:68",
@@ -134,7 +134,7 @@ describe('Hydration', () => {
       "2019/06/21:63"
     ]);
 
-    let ounces2 = hydration.obtainOuncesPerDayOverAWeek(waterData2);
+    let ounces2 = hydration.obtainWeeklyOunces(waterData2);
     expect(ounces2).to.deep.equal([
       "2019/06/16:55",
       "2019/06/17:67",
