@@ -4,6 +4,7 @@ import Hydration from './Hydration';
 import Sleep from './Sleep';
 import './css/styles.css';
 import './images/profile-icon.png';
+import {fetchAllData} from './apiCalls';
 
 //GLOBAL VARIABLES
 let globalUserRepository;
@@ -34,7 +35,7 @@ var lastWeeksHours = document.querySelector('#lastWeeksHours');
 var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
 
 //EVENT LISTENERS
-window.addEventListener('load', fetchAllData);
+window.addEventListener('load', displayResolvedData);
 
 //API FETCH
 function getAllUserData(data) {
@@ -53,25 +54,13 @@ function getAllSleepData(data) {
   getUserName();
 }
 
-function fetchAllData() {
-  let apis = [
-    'https://fitlit-api.herokuapp.com/api/v1/users',
-    'https://fitlit-api.herokuapp.com/api/v1/hydration',
-    'https://fitlit-api.herokuapp.com/api/v1/activity',
-    'https://fitlit-api.herokuapp.com/api/v1/sleep'
-  ];
-
-  let endpoints = apis.map((url) => {
-    return fetch(url)
-    .then(res => res.json())
-    .catch(error => console.log("fetch error", error));
-  });
-
-  Promise.all(endpoints).then((value) => {
-    getAllUserData(value[0].userData);
-    getAllHydrationData(value[1].hydrationData);
-    getAllSleepData(value[3].sleepData);
-  });
+function displayResolvedData() {
+  fetchAllData()
+  .then((allData) => {
+    getAllUserData(allData[0].userData);
+    getAllHydrationData(allData[1].hydrationData);
+    getAllSleepData(allData[3].sleepData);
+  })
 }
 
 //FUNCTIONS
@@ -86,7 +75,6 @@ function getUserName() {
   displaySleepInfo(newUser);
 }
 
-///////////////////////////////////////////////////////////////////
 function displaySleepInfo(newUser) {
   let sleepId = globalSleep.acquireSleepDataBasedOnId(newUser.id);
   let finalIndexDate = dateEdit(sleepId);
