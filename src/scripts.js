@@ -76,50 +76,52 @@ function getUserName() {
 }
 
 function displaySleepInfo(newUser) {
-  let sleepId = globalSleep.acquireSleepDataById(newUser.id);
-  let finalIndexDate = editDate(sleepId);
-  displayAveHours(sleepId);
-  displayAveQuality(sleepId);
-  displayDailySleepMetrics(sleepId, finalIndexDate);
-  displayWeeklySleepMetrics(sleepId, finalIndexDate);
+  let userSleepData = globalSleep.acquireSleepDataById(newUser.id);
+  //todaysDate
+  let todaysDate = editDate(userSleepData);
+  displayAveHours(userSleepData);
+  displayAveQuality(userSleepData);
+  displayDailySleepMetrics(userSleepData, todaysDate);
+  displayWeeklySleepMetrics(userSleepData, todaysDate);
 }
 
 //dateEdit
-function editDate(sleepId) {
-  let lastIndexNum = [sleepId.length - 1];
-  let indexOfBigData = (sleepId[lastIndexNum]);
-  return indexOfBigData.date;
+//param is userSleepData
+function editDate(userSleepData) {
+  let lastIndex = [userSleepData.length - 1];
+  let todaysData = (userSleepData[lastIndex]);
+  return todaysData.date;
 }
 
-function displayAveHours(sleepId) {
-  let hoursArr = sleepId.map(daySleep => daySleep.hoursSlept);
-  let averageHoursDom = globalSleep.acquireAverageDailyMetric(hoursArr);
+function displayAveHours(userSleepData) {
+  let hoursCollection = userSleepData.map(daySleep => daySleep.hoursSlept);
+  let averageHoursDom = globalSleep.acquireAverageDailyMetric(hoursCollection);
   averageHours.innerText += ` ${averageHoursDom}`;
 }
 
-function displayAveQuality(sleepId) {
-  let qualityArr = sleepId.map(daySleep => daySleep.sleepQuality);
-  let averageQualityDom = globalSleep.acquireAverageDailyMetric(qualityArr);
+function displayAveQuality(userSleepData) {
+  let qualityCollection = userSleepData.map(daySleep => daySleep.sleepQuality);
+  let averageQualityDom = globalSleep.acquireAverageDailyMetric(qualityCollection);
   averageQuality.innerText += ` ${averageQualityDom}`;
 }
 //specificDayStuff
-function displayDailySleepMetrics(sleepId, finalIndexDate) {
-  let todaysHoursDom = globalSleep.acquireDailyHoursSlept(sleepId, finalIndexDate);
+function displayDailySleepMetrics(userSleepData, todaysDate) {
+  let todaysHoursDom = globalSleep.acquireDailyHoursSlept(userSleepData, todaysDate);
   todaysHours.innerText += ` ${todaysHoursDom}`;
-  let todaysQualityDom = globalSleep.acquireDailySleepQuality(sleepId, finalIndexDate);
+  let todaysQualityDom = globalSleep.acquireDailySleepQuality(userSleepData, todaysDate);
   todaysQuality.innerText += ` ${todaysQualityDom}`;
 }
 
 //weekStuff
-function displayWeeklySleepMetrics(sleepId, finalIndexDate) {
-  let lastWeekHoursDom = globalSleep.acquireWeeklyHoursSlept(sleepId, finalIndexDate);
-  var allFixedDisplayObjects = parseDate(lastWeekHoursDom, 'Hours: ');
-  let noCommas = allFixedDisplayObjects.join("<br />");
-  lastWeeksHours.innerHTML += `<br> ${noCommas}`;
-  let lastWeekQualityDom = globalSleep.acquireWeeklySleepQuality(sleepId, finalIndexDate);
-  var sleepObjectsDom = parseDate(lastWeekQualityDom, 'Quality: ');
-  let noCommas2 = sleepObjectsDom.join("<br />");
-  lastWeeksQuality.innerHTML += `<br>${noCommas2}`;
+function displayWeeklySleepMetrics(userSleepData, todaysDate) {
+  let lastWeekHoursDom = globalSleep.acquireWeeklyHoursSlept(userSleepData, todaysDate);
+  var hoursDisplay = parseDate(lastWeekHoursDom, 'Hours: ');
+  let replacedCommaHours = hoursDisplay.join("<br />");
+  lastWeeksHours.innerHTML += `<br> ${replacedCommaHours}`;
+  let lastWeekQualityDom = globalSleep.acquireWeeklySleepQuality(userSleepData, todaysDate);
+  var qualityDisplay = parseDate(lastWeekQualityDom, 'Quality: ');
+  let replacedCommaQuality = qualityDisplay.join("<br />");
+  lastWeeksQuality.innerHTML += `<br>${replacedCommaQuality}`;
 }
 
 function parseDate(dates, metric) {
@@ -142,13 +144,14 @@ function parseDate(dates, metric) {
 }
 
 function displayHydrationInfo(newUser) {
-  let hydrationId = globalHydration.obtainHydrationDataById(newUser.id);
-  let hydrationDaily = globalHydration.obtainTodaysOunces(hydrationId);
-  let hydrationWeekly = globalHydration.obtainWeeklyOunces(hydrationId);
+  //userHydrationData
+  let userHydrationData = globalHydration.obtainHydrationDataById(newUser.id);
+  let hydrationDaily = globalHydration.obtainTodaysOunces(userHydrationData);
+  let hydrationWeekly = globalHydration.obtainWeeklyOunces(userHydrationData);
   todaysHydration.innerText += ` ${hydrationDaily} ounces`;
   var hydrationObjectsDom = parseDate(hydrationWeekly, 'Ounces: ');
-  let noCommas3 = hydrationObjectsDom.join("<br />");
-  weeklyHydration.innerHTML += `<br>${noCommas3}`;
+  let replacedCommaOunces = hydrationObjectsDom.join("<br />");
+  weeklyHydration.innerHTML += `<br>${replacedCommaOunces}`;
 }
 
 function displayIdCardInfo(newUser) {
@@ -159,9 +162,9 @@ function displayIdCardInfo(newUser) {
   strideLengthText.innerText += ` ${newUser.strideLength}`;
   dailyStepGoalText.innerText += ` ${newUser.dailyStepGoal}`;
   var userFriend = newUser.friends.map(friend => {
-    let foo = globalUserRepository.getDataById(friend);
-    let bar = foo.returnUserFirstName();
-    return bar;
+    let friendData = globalUserRepository.getDataById(friend);
+    let friendName = friendData.returnUserFirstName();
+    return friendName;
   });
   let friendsSpace = userFriend.join(", ");
   friendsText.innerText += '\xa0' + friendsSpace;
