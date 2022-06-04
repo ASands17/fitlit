@@ -155,7 +155,7 @@ function displayHydrationInfo(newUser) {
 }
 
 function displayIdCardInfo(newUser) {
-  idText.innerText += ` ${newUser.id}`;
+  // idText.innerText += ` ${newUser.id}`;
   nameText.innerText += ` ${newUser.name}`;
   addressText.innerText += ` ${newUser.address}`;
   emailText.innerText += ` ${newUser.email}`;
