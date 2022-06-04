@@ -3,7 +3,6 @@ class Sleep {
     this.data = sleepData;
   }
 
- //acquireSleepDataBasedOnId
   acquireSleepDataById(id) {
       let sleepData = this.data.filter((snooze) => {
         return snooze.userID === id;
@@ -14,7 +13,6 @@ class Sleep {
       return sleepData;
   }
 
-//acquireAverageMetricPerDay
   acquireAverageDailyMetric(measurements) {
     let sum = measurements.reduce((total, currentMetric) => {
       return total += currentMetric
@@ -23,7 +21,6 @@ class Sleep {
     return Number(averageMeasurement.toFixed(1));
   }
 
-//acquireHoursSleptForASpecificDay
   acquireDailyHoursSlept(data, date) {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
@@ -31,7 +28,6 @@ class Sleep {
     return sleepData[0].hoursSlept;
   }
 
-  //acquireSleepQualityForASpecificDay
   acquireDailySleepQuality(data, date) {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
@@ -39,7 +35,6 @@ class Sleep {
     return sleepData[0].sleepQuality;
   }
 
-//acquireHoursSleptEachDayForAWeek
   acquireWeeklyHoursSlept(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
@@ -51,7 +46,7 @@ class Sleep {
     });
     return final;
   }
-//acquireSleepQualityEachDayForAWeek
+
   acquireWeeklySleepQuality(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
@@ -62,7 +57,6 @@ class Sleep {
     return final;
   }
 
-//acquireAvgSleepQualityAllUsers
   acquireUniversalAveSleepQuality() {
     let totalSleepQuality = this.data.reduce((totalQuality, currentUser) => {
       totalQuality += currentUser.sleepQuality;
