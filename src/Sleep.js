@@ -25,6 +25,9 @@ class Sleep {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
+    if (sleepData.length === 0) {
+      return 'Invalid date!'
+    }
     return sleepData[0].hoursSlept;
   }
 
@@ -32,6 +35,9 @@ class Sleep {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
+    if (sleepData.length === 0) {
+      return 'Invalid date!'
+    }
     return sleepData[0].sleepQuality;
   }
 

@@ -26,8 +26,12 @@ describe('Hydration', () => {
     expect(hydration.data).to.deep.equal(hydrationData);
   });
 
+  it('should be able to test whether the id is valid and also return a message if it not', () => {
+    expect(hydration.obtainHydrationDataById(77)).to.equal('Invalid ID!')
+  });
+
   it('should be able to obtain hydration data based on id', () => {
-    expect(hydration.obtainHydrationDataById()).to.be.an('array');
+    expect(hydration.obtainHydrationDataById(1)).to.be.an('array');
     expect(hydration.obtainHydrationDataById(1)).to.deep.equal(
       [
         {

@@ -179,11 +179,21 @@ describe('Sleep', () => {
     expect(sleep.acquireDailyHoursSlept(sleepData2, "2019/06/16")).to.equal(7.5);
   });
 
+  it('should be able to notify user if date is invalid', () => {
+    expect(sleep.acquireDailyHoursSlept(sleepData1, "2022/06/15")).to.be.a('string');
+    expect(sleep.acquireDailyHoursSlept(sleepData1, "2022/06/15")).to.equal('Invalid date!');
+  });
+
   it('should be able to acquire sleep quality for a specific date for a specific user', () => {
     expect(sleep.acquireDailySleepQuality(sleepData1, "2019/06/15")).to.be.a('number');
     expect(sleep.acquireDailySleepQuality(sleepData1, "2019/06/15")).to.equal(2.2);
     expect(sleep.acquireDailySleepQuality(sleepData2, "2019/06/16")).to.be.a('number');
     expect(sleep.acquireDailySleepQuality(sleepData2, "2019/06/16")).to.equal(3.5);
+  });
+
+  it('should be able to notify user if date is invalid', () => {
+    expect(sleep.acquireDailySleepQuality(sleepData1, "2022/06/15")).to.be.a('string');
+    expect(sleep.acquireDailySleepQuality(sleepData1, "2022/06/15")).to.equal('Invalid date!');
   });
 
   it('should be able to test whether the date is valid and also return a message if it not', () => {

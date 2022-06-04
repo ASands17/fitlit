@@ -7,6 +7,9 @@ class Hydration {
     let waterData = this.data.filter((hydro) => {
       return hydro.userID === id;
     });
+    if (waterData.length === 0) {
+      return 'Invalid ID!'
+    }
     return waterData;
   }
 
@@ -40,8 +43,6 @@ class Hydration {
         [day.date]: day.numOunces
       }
     });
-    // if day === underfined, as in it's not in our allData/
-    // 'please choose a different day!'
     return final;
   }
 }
