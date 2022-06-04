@@ -181,6 +181,16 @@ describe('Sleep', () => {
     expect(sleep.acquireDailySleepQuality(sleepData2, "2019/06/16")).to.equal(3.5);
   });
 
+  it('should be able to test whether the date is valid and also return a message if it not', () => {
+    expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2022/06/04")).to.be.a('string');
+    expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2022/06/04")).to.equal('Invalid date!')
+  })
+
+  it('should be able to test whether the date is valid and also return a message if it not', () => {
+    expect(sleep.acquireWeeklySleepQuality(sleepData1, "2022/06/04")).to.be.a('string');
+    expect(sleep.acquireWeeklySleepQuality(sleepData1, "2022/06/04")).to.equal('Invalid date!')
+  })
+
   it('should be able to acquire hours slept over the course of a week', () => {
     expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2019/06/23")).to.be.an('array');
     expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2019/06/23")).to.deep.equal([

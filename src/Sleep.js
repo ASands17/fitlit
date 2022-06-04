@@ -39,22 +39,28 @@ class Sleep {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
-    let final = wholeWeek.map(day => {
+    let finalDates = wholeWeek.map(day => {
       return {
         [day.date]: day.hoursSlept
       }
     });
-    return final;
+    if (finalDates.length === 0) {
+      return 'Invalid date!'
+    }
+    return finalDates;
   }
 
   acquireWeeklySleepQuality(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
-    let final = wholeWeek.map(day => {
+    let finalDates = wholeWeek.map(day => {
       return {[day.date]: day.sleepQuality}
     });
-    return final;
+    if (finalDates.length === 0) {
+      return 'Invalid date!'
+    }
+    return finalDates;
   }
 
   acquireUniversalAveSleepQuality() {
