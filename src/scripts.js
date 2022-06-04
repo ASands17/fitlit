@@ -68,7 +68,7 @@ function getUserName() {
   let newId = getRandomUserId(globalUserData);
   let newUser = globalUserRepository.getDataById(newId);
   let newUserFirstName = newUser.returnUserFirstName();
-  welcomeText.innerText = `Welcome, ${newUserFirstName}!`;
+  welcomeText.innerText = `Welcome, ${newUserFirstName}! 🤗`;
   displayIdCardInfo(newUser);
   displayStepsInfo(newUser);
   displayHydrationInfo(newUser);
