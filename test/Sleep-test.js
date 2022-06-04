@@ -4,12 +4,17 @@ import sleepData from '../test-data/Sleep-data';
 
 describe('Sleep', () => {
   let sleep;
-  let sleepData1, sleepData2, sleepData3;
+  let sleepData1, sleepData2;
 
   beforeEach(() => {
     sleep = new Sleep(sleepData);
     sleepData1 = sleep.acquireSleepDataById(1);
     sleepData2 = sleep.acquireSleepDataById(2);
+    // they are a user, with a valid id, but they are missing sleep data.
+    // do we want to say "data is missing for this user!" ?
+    // where do we test if these values are null?
+    // is this something that needs to be done when we check their id?
+    // or invoking other methods
   });
 
   it('should be a function', () => {
@@ -27,7 +32,7 @@ describe('Sleep', () => {
   });
 
   it('should be able to test whether the id is valid and also return a message if it not', () => {
-    sleepData3 = sleep.acquireSleepDataById(77);
+    let sleepData3 = sleep.acquireSleepDataById(77);
     expect(sleep.acquireSleepDataById(77)).to.equal('Invalid ID!')
   });
 
@@ -184,12 +189,12 @@ describe('Sleep', () => {
   it('should be able to test whether the date is valid and also return a message if it not', () => {
     expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2022/06/04")).to.be.a('string');
     expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2022/06/04")).to.equal('Invalid date!')
-  })
+  });
 
   it('should be able to test whether the date is valid and also return a message if it not', () => {
     expect(sleep.acquireWeeklySleepQuality(sleepData1, "2022/06/04")).to.be.a('string');
     expect(sleep.acquireWeeklySleepQuality(sleepData1, "2022/06/04")).to.equal('Invalid date!')
-  })
+  });
 
   it('should be able to acquire hours slept over the course of a week', () => {
     expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2019/06/23")).to.be.an('array');
@@ -303,6 +308,42 @@ describe('Sleep', () => {
     expect(sleep.acquireUserAvgSleepQuality(sleepData1)).to.equal(2.3);
     expect(sleep.acquireUserAvgSleepQuality(sleepData2)).to.be.a('number');
     expect(sleep.acquireUserAvgSleepQuality(sleepData2)).to.equal(3.0);
+  });
+
+  it('should be able to check if user data is null', () => {
+    let user10Data = [{
+      "userID": 10,
+      "date": null,
+      "hoursSlept": null,
+      "sleepQuality": null
+    },
+    {
+      "userID": 10,
+      "date": null,
+      "hoursSlept": null,
+      "sleepQuality": null
+    }
+  ]
+    expect(sleep.acquireUserAvgSleepHours(user10Data)).to.be.a('string');
+    expect(sleep.acquireUserAvgSleepHours(user10Data)).to.equal('User is missing this data!');
+  });
+
+  it('should be able to check if user data is null', () => {
+    let user10Data = [{
+      "userID": 10,
+      "date": null,
+      "hoursSlept": null,
+      "sleepQuality": null
+    },
+    {
+      "userID": 10,
+      "date": null,
+      "hoursSlept": null,
+      "sleepQuality": null
+    }
+  ]
+    expect(sleep.acquireUserAvgSleepQuality(user10Data)).to.be.a('string');
+    expect(sleep.acquireUserAvgSleepQuality(user10Data)).to.equal('User is missing this data!');
   });
 
   it('should be able to calculate average sleep hours of one user', () => {

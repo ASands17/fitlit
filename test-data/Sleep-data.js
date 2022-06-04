@@ -106,7 +106,7 @@
       "date": "2019/06/23",
       "hoursSlept": 8.0,
       "sleepQuality": 1.6
-    }
+    },
   ];
 
 

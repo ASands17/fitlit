@@ -77,6 +77,9 @@ class Sleep {
       totalQuality += currentUser.sleepQuality;
       return totalQuality;
     }, 0);
+    if (totalSleepQuality === 0) {
+      return 'User is missing this data!'
+    }
     let averageSleepQuality = totalSleepQuality / data.length;
     return Number(averageSleepQuality.toFixed(1));
   }
@@ -86,6 +89,9 @@ class Sleep {
       totalHours += currentUser.hoursSlept;
       return totalHours;
     }, 0);
+    if (totalSleepHours === 0) {
+      return 'User is missing this data!'
+    }
     let averageSleepHours = totalSleepHours / data.length;
     return Number(averageSleepHours.toFixed(1));
   }
