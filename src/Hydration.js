@@ -40,6 +40,8 @@ class Hydration {
         [day.date]: day.numOunces
       }
     });
+    // if day === underfined, as in it's not in our allData/
+    // 'please choose a different day!'
     return final;
   }
 }

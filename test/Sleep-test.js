@@ -4,7 +4,7 @@ import sleepData from '../test-data/Sleep-data';
 
 describe('Sleep', () => {
   let sleep;
-  let sleepData1, sleepData2;
+  let sleepData1, sleepData2, sleepData3;
 
   beforeEach(() => {
     sleep = new Sleep(sleepData);
@@ -26,8 +26,13 @@ describe('Sleep', () => {
     expect(sleep.data).to.deep.equal(sleepData);
   });
 
+  it('should be able to test whether the id is valid and also return a message if it not', () => {
+    sleepData3 = sleep.acquireSleepDataById(77);
+    expect(sleep.acquireSleepDataById(77)).to.equal('Invalid ID!')
+  });
+
   it('should be able to acquire sleep data based on id', () => {
-    expect(sleep.acquireSleepDataById()).to.be.an('array');
+    expect(sleep.acquireSleepDataById(1)).to.be.an('array');
     expect(sleep.acquireSleepDataById(1)).to.deep.equal(
       [
         {

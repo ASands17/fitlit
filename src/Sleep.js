@@ -5,10 +5,13 @@ class Sleep {
 
  //acquireSleepDataBasedOnId
   acquireSleepDataById(id) {
-    let sleepData = this.data.filter((snooze) => {
-      return snooze.userID === id;
-    });
-    return sleepData;
+      let sleepData = this.data.filter((snooze) => {
+        return snooze.userID === id;
+      });
+      if (sleepData.length === 0) {
+        return 'Invalid ID!'
+      }
+      return sleepData;
   }
 
 //acquireAverageMetricPerDay
