@@ -3,15 +3,16 @@ class Sleep {
     this.data = sleepData;
   }
 
- //acquireSleepDataBasedOnId
   acquireSleepDataById(id) {
-    let sleepData = this.data.filter((snooze) => {
-      return snooze.userID === id;
-    });
-    return sleepData;
+      let sleepData = this.data.filter((snooze) => {
+        return snooze.userID === id;
+      });
+      if (sleepData.length === 0) {
+        return 'Invalid ID!'
+      }
+      return sleepData;
   }
 
-//acquireAverageMetricPerDay
   acquireAverageDailyMetric(measurements) {
     let sum = measurements.reduce((total, currentMetric) => {
       return total += currentMetric
@@ -20,46 +21,54 @@ class Sleep {
     return Number(averageMeasurement.toFixed(1));
   }
 
-//acquireHoursSleptForASpecificDay
   acquireDailyHoursSlept(data, date) {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
+    if (sleepData.length === 0) {
+      return 'Invalid date!'
+    }
     return sleepData[0].hoursSlept;
   }
 
-  //acquireSleepQualityForASpecificDay
   acquireDailySleepQuality(data, date) {
     let sleepData = data.filter((snooze) => {
       return snooze.date === date;
     });
+    if (sleepData.length === 0) {
+      return 'Invalid date!'
+    }
     return sleepData[0].sleepQuality;
   }
 
-//acquireHoursSleptEachDayForAWeek
   acquireWeeklyHoursSlept(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
-    let final = wholeWeek.map(day => {
+    let finalDates = wholeWeek.map(day => {
       return {
         [day.date]: day.hoursSlept
       }
     });
-    return final;
+    if (finalDates.length === 0) {
+      return 'Invalid date!'
+    }
+    return finalDates;
   }
-//acquireSleepQualityEachDayForAWeek
+
   acquireWeeklySleepQuality(data, date) {
     let allDates = data.map(obj => obj.date);
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
-    let final = wholeWeek.map(day => {
+    let finalDates = wholeWeek.map(day => {
       return {[day.date]: day.sleepQuality}
     });
-    return final;
+    if (finalDates.length === 0) {
+      return 'Invalid date!'
+    }
+    return finalDates;
   }
 
-//acquireAvgSleepQualityAllUsers
   acquireUniversalAveSleepQuality() {
     let totalSleepQuality = this.data.reduce((totalQuality, currentUser) => {
       totalQuality += currentUser.sleepQuality;
@@ -74,6 +83,9 @@ class Sleep {
       totalQuality += currentUser.sleepQuality;
       return totalQuality;
     }, 0);
+    if (totalSleepQuality === 0) {
+      return 'User is missing this data!'
+    }
     let averageSleepQuality = totalSleepQuality / data.length;
     return Number(averageSleepQuality.toFixed(1));
   }
@@ -83,6 +95,9 @@ class Sleep {
       totalHours += currentUser.hoursSlept;
       return totalHours;
     }, 0);
+    if (totalSleepHours === 0) {
+      return 'User is missing this data!'
+    }
     let averageSleepHours = totalSleepHours / data.length;
     return Number(averageSleepHours.toFixed(1));
   }

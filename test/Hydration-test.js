@@ -26,8 +26,12 @@ describe('Hydration', () => {
     expect(hydration.data).to.deep.equal(hydrationData);
   });
 
+  it('should be able to test whether the id is valid and also return a message if it not', () => {
+    expect(hydration.obtainHydrationDataById(77)).to.equal('Invalid ID!')
+  });
+
   it('should be able to obtain hydration data based on id', () => {
-    expect(hydration.obtainHydrationDataById()).to.be.an('array');
+    expect(hydration.obtainHydrationDataById(1)).to.be.an('array');
     expect(hydration.obtainHydrationDataById(1)).to.deep.equal(
       [
         {
@@ -124,25 +128,53 @@ describe('Hydration', () => {
 
   it('should be able to obtain ounces for most recent week', () => {
     let ounces1 = hydration.obtainWeeklyOunces(waterData1);
-    expect(ounces1).to.deep.equal([
-      "2019/06/15:31",
-      "2019/06/16:68",
-      "2019/06/17:92",
-      "2019/06/18:45",
-      "2019/06/19:33",
-      "2019/06/20:89",
-      "2019/06/21:63"
+    expect(ounces1).to.deep.equal( [
+      {
+        "2019/06/15": 31
+      },
+      {
+        "2019/06/16": 68
+      },
+      {
+        "2019/06/17": 92
+      },
+      {
+        "2019/06/18": 45
+      },
+      {
+        "2019/06/19": 33
+      },
+      {
+        "2019/06/20": 89
+      },
+      {
+        "2019/06/21": 63
+      }
     ]);
 
     let ounces2 = hydration.obtainWeeklyOunces(waterData2);
     expect(ounces2).to.deep.equal([
-      "2019/06/16:55",
-      "2019/06/17:67",
-      "2019/07/18:47",
-      "2019/08/19:21",
-      "2019/09/20:29",
-      "2019/10/21:14",
-      "2020/06/15:45"
+      {
+        "2019/06/16": 55
+      },
+      {
+        "2019/06/17": 67
+      },
+      {
+        "2019/07/18": 47
+      },
+      {
+        "2019/08/19": 21
+      },
+      {
+        "2019/09/20": 29
+      },
+      {
+        "2019/10/21": 14
+      },
+      {
+        "2020/06/15": 45
+      }
     ]);
   });
 });

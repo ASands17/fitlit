@@ -11,7 +11,7 @@ export function fetchAllData() {
     .then(response => response.json())
     .catch(error => alert("🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 "));
   })
-  
+
   const allData = Promise.all(endpoints).then((value) => {
     return value
   });

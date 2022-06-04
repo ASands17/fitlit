@@ -68,6 +68,11 @@ const hydrationData = [
     "userID": 2,
     "date": "2020/06/15",
     "numOunces": 45
+  },
+  {
+    "userID": 10,
+    "date": null,
+    "numOunces": null
   }
 ];
 

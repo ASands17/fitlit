@@ -7,6 +7,9 @@ class Hydration {
     let waterData = this.data.filter((hydro) => {
       return hydro.userID === id;
     });
+    if (waterData.length === 0) {
+      return 'Invalid ID!'
+    }
     return waterData;
   }
 
