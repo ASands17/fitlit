@@ -2,6 +2,7 @@
 import UserRepository from './UserRepository';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
+import Activity from './Activity';
 import './css/styles.css';
 import './images/profile-icon.png';
 import {fetchAllData, addUserSleepData, addUserActivityData, addUserHydrationData, getSleepData, getHydrationData, getActivityData} from './apiCalls';
@@ -12,7 +13,9 @@ let globalUserData;
 let globalHydrationData;
 let globalHydration;
 let globalSleepData;
+let globalActivityData;
 let globalSleep;
+let globalActivity;
 let selectedUser;
 
 //QUERY SELECTORS
@@ -34,6 +37,8 @@ var todaysHours = document.querySelector('#todaysHours');
 var todaysQuality = document.querySelector('#todaysQuality');
 var lastWeeksHours = document.querySelector('#lastWeeksHours');
 var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
+var dailyMinutes = document.querySelector('#userMinutesActive');
+var dailyMiles = document.querySelector('#userMilesWalked');
 var submitSleepButton = document.getElementById('submitSleep');
 var submitHydrationButtion = document.getElementById('submitHydration');
 var submitActivityButtion = document.getElementById('submitActivity');
@@ -61,11 +66,18 @@ function getAllSleepData(data) {
   getUserName();
 }
 
+function getAllActivityData(data) {
+  globalActivityData = data;
+  globalActivity = new Activity(data, globalUserData);
+}
+
+// console.log(globalActivityData)
 function displayResolvedData() {
   fetchAllData()
   .then((allData) => {
     getAllUserData(allData[0].userData);
     getAllHydrationData(allData[1].hydrationData);
+    getAllActivityData(allData[2].activityData);
     getAllSleepData(allData[3].sleepData);
   })
 }
@@ -176,6 +188,16 @@ function displayStepsInfo(newUser) {
   yourStepGoal.innerHTML += `<i style='font-weight: 300'> ${newUser.dailyStepGoal}</i>`;
   let aveStepGoal = globalUserRepository.getAveStepGoalOfAllUsers();
   averageUsersStepGoal.innerHTML += `<i style='font-weight: 300'> ${aveStepGoal}</i>`;
+  displayActivityData();
+}
+
+
+function displayActivityData(){
+  let todaysDate = editDate(globalActivityData);
+  let minutes = globalActivity.getDailyMinutesActive(todaysDate, selectedUser.id);
+  dailyMinutes.innerHTML += `<i style='font-weight: 300'> ${minutes}</i>`;
+  let miles = globalActivity.getDailyMilesWalked(todaysDate, selectedUser.id);
+  dailyMiles.innerHTML += `<i style='font-weight: 300'> ${miles}</i>`;
 }
 
 function getRandomUserId(anyUserData) {
