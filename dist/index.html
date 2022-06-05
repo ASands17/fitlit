@@ -15,9 +15,9 @@
   <body>
     <h1>FitLit</h1>
     <main>
-      <div class="left-side">
+      <div class="left-side" tabindex='0'>
         <section class="info-card">
-          <h2 class="welcome-text" id="welcomeText">Welcome, name!</h2>
+          <h2 role='presentation'class="welcome-text" id="welcomeText">Welcome, name!</h2>
           <img class="profile-icon" src="./images/profile-icon.png" alt="profile icon">
           <p class="user-data" id="name">Name:</p>
           <p class="user-data" id="address">Address:</p>
@@ -26,7 +26,7 @@
           <p class="user-data" id="dailyStepGoal">Daily Step Goal:</p>
           <p class="user-data" id="friends">Friends:</p>
         </section>
-        <div class="bottom-left">
+        <div class="bottom-left" tabindex='0'>
           <section class="input-card">
             <fieldset>
               <legend>Sleep:</legend>
@@ -67,8 +67,8 @@
 
       </div>
 
-      <div class="right-and-bottom">
-        <div class="right-side">
+      <div class="right-and-bottom" tabindex='0'>
+        <div class="right-side" tabindex='0'>
           <section class="steps-card">
             <h3>👟 Activity 🥾</h3>
             <p class="step-data" id="yourStepGoal">Your Step Goal:<span> </span></p>
@@ -79,25 +79,25 @@
           <section class="hydration-card">
             <h4>🚰 Hydration 💧</h4>
             <p class="hydration-data" id="todaysHydration"><b>Today's Consumption:</b></p>
-            <div class="hydration-block">
+            <div class="hydration-block" tabindex='0'>
               <p class="hydration-data" id="weeklyHydration"><b>Weekly Consumption:</b></p>
             </div>
           </section>
         </div>
         <h5 class="sleep-heading">🥱 Sleep 💤</h5>
-        <div class="bottom-side">
+        <div class="bottom-side" tabindex='0'>
           <section class="sleep-card">
-            <div class="general-metrics">
+            <div class="general-metrics" tabindex='0'>
               <p id="averageHours">Average Hours:</p>
               <p id="averageQuality">Average Quality Out of 5:</p>
               <br>
               <p id="todaysHours">Today's Hours:</p>
               <p id="todaysQuality">Today's Quality Out of 5:</p>
             </div>
-            <div class="weeks-hours-metrics">
+            <div class="weeks-hours-metrics" tabindex='0'>
               <p id="lastWeeksHours"><b>Last Week's Hours:</b></p>
             </div>
-            <div class="weeks-quality-metrics">
+            <div class="weeks-quality-metrics" tabindex='0'>
               <p id="lastWeeksQuality"><b>Last Week's Quality Out of 5:</b></p>
             </div>
           </section>
