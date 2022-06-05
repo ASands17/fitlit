@@ -1,5 +1,11 @@
 * {
-  font-family: 'Patrick Hand', cursive;
+  /* font-family: 'Patrick Hand', cursive; */
+  font-family: 'Roboto', sans-serif;
+  background-color: #fde9c3;
+}
+
+span {
+  font-weight: 700;
 }
 
 body, html {
@@ -38,6 +44,18 @@ p {
 
 h1, h5, .info-card, .steps-card, .sleep-card, .hydration-card {
   text-align: center;
+}
+
+h3 {
+  background-color: #FB8500
+}
+
+h4 {
+  background-color: #219EBC;
+}
+
+h5 {
+  background-color: #FFB703;
 }
 
 .left-side {
@@ -84,6 +102,7 @@ h1, h5, .info-card, .steps-card, .sleep-card, .hydration-card {
 }
 
 .general-metrics {
+  font-weight: 700;
   width: 33%;
 }
 
@@ -96,4 +115,12 @@ h1, h5, .info-card, .steps-card, .sleep-card, .hydration-card {
   margin: 0px;
   border: solid black 1px;
   border-bottom: white;
+}
+
+.step-data, #todaysHydration {
+  font-weight: 700;
+}
+
+.info-card {
+  font-weight: 700;
 }
