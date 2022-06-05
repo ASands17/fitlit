@@ -4,7 +4,7 @@ import Hydration from './Hydration';
 import Sleep from './Sleep';
 import './css/styles.css';
 import './images/profile-icon.png';
-import {fetchAllData} from './apiCalls';
+import {fetchAllData, addUserSleepData, addUserActivityData, addUserHydrationData, getSleepData, getHydrationData, getActivityData} from './apiCalls';
 
 //GLOBAL VARIABLES
 let globalUserRepository;
@@ -13,6 +13,7 @@ let globalHydrationData;
 let globalHydration;
 let globalSleepData;
 let globalSleep;
+let selectedUser;
 
 //QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
@@ -33,9 +34,15 @@ var todaysHours = document.querySelector('#todaysHours');
 var todaysQuality = document.querySelector('#todaysQuality');
 var lastWeeksHours = document.querySelector('#lastWeeksHours');
 var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
+var submitSleepButton = document.getElementById('submitSleep');
+var submitHydrationButtion = document.getElementById('submitHydration');
+var submitActivityButtion = document.getElementById('submitActivity');
 
 //EVENT LISTENERS
 window.addEventListener('load', displayResolvedData);
+submitSleepButton.addEventListener('click', addUserSleepDataFromUserInput);
+submitHydrationButtion.addEventListener('click', addUserHydrationDataFromUserInput);
+submitActivityButtion.addEventListener('click', addUserActivityDataFromUserInput);
 
 //API FETCH
 function getAllUserData(data) {
@@ -68,6 +75,7 @@ function getUserName() {
   let newId = getRandomUserId(globalUserData);
   let newUser = globalUserRepository.getDataById(newId);
   let newUserFirstName = newUser.returnUserFirstName();
+  selectedUser = newUser;
   welcomeText.innerText = `Welcome, ${newUserFirstName}! 🤗`;
   displayIdCardInfo(newUser);
   displayStepsInfo(newUser);
@@ -172,4 +180,34 @@ function displayStepsInfo(newUser) {
 
 function getRandomUserId(anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
+}
+
+//POST REQUEST FUNCTIONS
+
+function addUserSleepDataFromUserInput() {
+  const sleepDate = document.getElementById('sleepDateInput').value;
+  const sleepAmount = document.getElementById('sleepHoursInput').value;
+  const sleepQuality = document.getElementById('sleepQualityInput').value;
+  const formattedDate = new Date(sleepDate).toLocaleDateString();
+  let dataToTransmit = { userID: selectedUser.id, date: formattedDate , hoursSlept: sleepAmount , sleepQuality: sleepQuality };
+  //body for post assigned to variable so we get the info from the input
+  var response = addUserSleepData(dataToTransmit).then((res) => getSleepData().then(sleepDataFromApi => console.log(sleepDataFromApi)));;
+}
+
+function addUserHydrationDataFromUserInput() {
+  const hydrationDate = document.getElementById('hydrationDateInput').value;
+  const numberOfOunces = document.getElementById('hydrationOuncesInput').value;
+  const formattedDate = new Date(hydrationDate).toLocaleDateString();
+  let dataToTransmit = { userID: selectedUser.id, date: formattedDate, numOunces: numberOfOunces };
+  var response = addUserHydrationData(dataToTransmit).then((res) => getHydrationData().then(hydration => console.log(hydration)));
+}
+
+function addUserActivityDataFromUserInput() {
+  const activityDate = document.getElementById('activityDateInput').value;
+  const numSteps = document.getElementById('activityStepsInput').value;
+  const minutesActive = document.getElementById('activityTimeInput').value;
+  const flightsOfStairs = document.getElementById('activityFlightsInput').value;
+  const formattedDate = new Date(activityDate).toLocaleDateString();
+  let dataToTransmit = { userID: selectedUser.id, date: formattedDate, flightsOfStairs: flightsOfStairs, minutesActive: minutesActive, numSteps: numSteps};
+  var response = addUserActivityData(dataToTransmit).then((res) => getActivityData().then(activity => console.log(activity)));
 }

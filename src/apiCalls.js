@@ -18,3 +18,65 @@ export function fetchAllData() {
 
   return allData
 }
+
+//post request
+export function addUserSleepData(dataToTransmit) {
+  var response = fetch('http://localhost:3001/api/v1/sleep', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(dataToTransmit)
+}).then(res => {return res.json()})
+// .then(res => {return res})
+.catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
+
+  return response;
+  //response is just promise with data we sent
+}
+
+export function addUserActivityData(dataToTransmit) {
+  var response = fetch('http://localhost:3001/api/v1/activity', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(dataToTransmit)
+}).then(res => {return res.json()})
+.then(res => {return res})
+.catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
+
+  return response;
+}
+
+export function addUserHydrationData(dataToTransmit) {
+  var response = fetch('http://localhost:3001/api/v1/hydration', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(dataToTransmit)
+}).then(res => {return res.json()})
+.then(res => {return res})
+.catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
+
+  return response;
+}
+
+export function getHydrationData() {
+  return fetch('http://localhost:3001/api/v1/hydration').then(res => res.json())
+  .catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
+}
+
+export function getActivityData() {
+  return fetch('http://localhost:3001/api/v1/activity').then(res => res.json())
+  .catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
+}
+
+export function getSleepData() {
+  return fetch('http://localhost:3001/api/v1/sleep').then(res => res.json())
+  .catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
+}
