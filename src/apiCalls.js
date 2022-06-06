@@ -19,7 +19,7 @@ export function fetchAllData() {
   return allData
 }
 
-//post request
+//POST REQUESTS
 export function addUserSleepData(dataToTransmit) {
   var response = fetch('http://localhost:3001/api/v1/sleep', {
   method: 'POST',
@@ -29,11 +29,9 @@ export function addUserSleepData(dataToTransmit) {
   },
   body: JSON.stringify(dataToTransmit)
 }).then(res => {return res.json()})
-// .then(res => {return res})
 .catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
 
   return response;
-  //response is just promise with data we sent
 }
 
 export function addUserActivityData(dataToTransmit) {
@@ -45,7 +43,6 @@ export function addUserActivityData(dataToTransmit) {
   },
   body: JSON.stringify(dataToTransmit)
 }).then(res => {return res.json()})
-.then(res => {return res})
 .catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
 
   return response;
@@ -60,7 +57,6 @@ export function addUserHydrationData(dataToTransmit) {
   },
   body: JSON.stringify(dataToTransmit)
 }).then(res => {return res.json()})
-.then(res => {return res})
 .catch(error => alert('🤡 OOOPSIES! 🤨 There was an error. Please try again. 🤡 '));
 
   return response;

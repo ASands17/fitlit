@@ -40,14 +40,14 @@ var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
 var dailyMinutes = document.querySelector('#userMinutesActive');
 var dailyMiles = document.querySelector('#userMilesWalked');
 var submitSleepButton = document.getElementById('submitSleep');
-var submitHydrationButtion = document.getElementById('submitHydration');
-var submitActivityButtion = document.getElementById('submitActivity');
+var submitHydrationButton = document.getElementById('submitHydration');
+var submitActivityButton = document.getElementById('submitActivity');
 
 //EVENT LISTENERS
 window.addEventListener('load', displayResolvedData);
 submitSleepButton.addEventListener('click', addUserSleepDataFromUserInput);
-submitHydrationButtion.addEventListener('click', addUserHydrationDataFromUserInput);
-submitActivityButtion.addEventListener('click', addUserActivityDataFromUserInput);
+submitHydrationButton.addEventListener('click', addUserHydrationDataFromUserInput);
+submitActivityButton.addEventListener('click', addUserActivityDataFromUserInput);
 
 //API FETCH
 function getAllUserData(data) {
@@ -71,7 +71,6 @@ function getAllActivityData(data) {
   globalActivity = new Activity(data, globalUserData);
 }
 
-// console.log(globalActivityData)
 function displayResolvedData() {
   fetchAllData()
   .then((allData) => {
@@ -204,15 +203,13 @@ function getRandomUserId(anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }
 
-//POST REQUEST FUNCTIONS
-
+//API POST
 function addUserSleepDataFromUserInput() {
   const sleepDate = document.getElementById('sleepDateInput').value;
   const sleepAmount = document.getElementById('sleepHoursInput').value;
   const sleepQuality = document.getElementById('sleepQualityInput').value;
   const formattedDate = new Date(sleepDate).toLocaleDateString();
   let dataToTransmit = { userID: selectedUser.id, date: formattedDate , hoursSlept: sleepAmount , sleepQuality: sleepQuality };
-  //body for post assigned to variable so we get the info from the input
   var response = addUserSleepData(dataToTransmit).then((res) => getSleepData().then(sleepDataFromApi => console.log(sleepDataFromApi)));;
 }
 
