@@ -1,11 +1,6 @@
 * {
-  /* font-family: 'Patrick Hand', cursive; */
   font-family: 'Roboto', sans-serif;
   background-color: #fde9c3;
-}
-
-span {
-  font-weight: 700;
 }
 
 body, html {
@@ -117,11 +112,7 @@ h5 {
   border-bottom: white;
 }
 
-.step-data, #todaysHydration {
-  font-weight: 700;
-}
-
-.info-card {
+.step-data, #todaysHydration, .info-card {
   font-weight: 700;
 }
 
