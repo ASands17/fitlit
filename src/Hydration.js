@@ -2,7 +2,7 @@ class Hydration {
   constructor(hydrationData) {
     this.data = hydrationData;
   }
- //obtainHydrationDataBasedOnId
+
   obtainHydrationDataById(id) {
     let waterData = this.data.filter((hydro) => {
       return hydro.userID === id;
@@ -13,7 +13,6 @@ class Hydration {
     return waterData;
   }
 
-//obtainAveOuncesConsumedPerDay(
   obtainAverageDailyOunces(waterData) {
     let totalOunces = waterData.reduce((total, day) => {
       total += day.numOunces;
@@ -23,14 +22,12 @@ class Hydration {
     return Number(aveOunces.toFixed(1));
   }
 
-//obtainOuncesForMostRecentDay
   obtainTodaysOunces(waterData) {
     let lastIndexNum = [waterData.length - 1]
     let indexOfBigData = (waterData[lastIndexNum]);
     return indexOfBigData.numOunces;
   }
 
-//obtainOuncesPerDayOverAWeek
   obtainWeeklyOunces(waterData) {
     let indexNum = [waterData.length - 1]
     let objectAtIndex = (waterData[indexNum]);

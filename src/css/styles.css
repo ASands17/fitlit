@@ -124,3 +124,13 @@ h5 {
 .info-card {
   font-weight: 700;
 }
+
+.input-card {
+  width: 32%;
+}
+
+.bottom-left {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+}

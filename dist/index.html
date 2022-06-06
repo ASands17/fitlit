@@ -15,9 +15,9 @@
   <body>
     <h1>FitLit</h1>
     <main>
-      <div class="left-side">
+      <div class="left-side" tabindex='0'>
         <section class="info-card">
-          <h2 class="welcome-text" id="welcomeText">Welcome, name!</h2>
+          <h2 role='presentation'class="welcome-text" id="welcomeText">Welcome, name!</h2>
           <img class="profile-icon" src="./images/profile-icon.png" alt="profile icon">
           <p class="user-data" id="name">Name:</p>
           <p class="user-data" id="address">Address:</p>
@@ -26,36 +26,76 @@
           <p class="user-data" id="dailyStepGoal">Daily Step Goal:</p>
           <p class="user-data" id="friends">Friends:</p>
         </section>
+        <div class="bottom-left" tabindex='0'>
+          <section class="input-card">
+            <fieldset>
+              <legend>Sleep:</legend>
+              <label class="sleep-date" id="sleepDate">Add Date:</label><br />
+              <input class="sleep-date-input" id="sleepDateInput" type="text" placeholder="dd/mm/yyyy" /><br />
+              <label class="sleep-hours" id="sleepHours">Add Sleep Hours:</label><br />
+              <input class="sleep-hours-input" id="sleepHoursInput" type="text" placeholder="Number of Hours" /><br />
+              <label class="sleep-quality" id="sleepQuality">Add Sleep Quality:</label><br />
+              <input class="sleep-quality-input" id="sleepQualityInput" type="text" placeholder="Sleep Quality" /><br /><br />
+              <input class="submit-sleep" id="submitSleep" type="submit" value="Submit" />
+            </fieldset>
+          </section>
+          <section  class="input-card">
+            <fieldset>
+              <legend>Hydration:</legend>
+              <label class="hydration-date" id="hydrationDate">Add Date:</label><br />
+              <input class="hydration-date-input" id="hydrationDateInput" type="text" placeholder="dd/mm/yyyy" /><br />
+              <label class="hydration-ounces" id="hydrationOunces" >Add Ounces:</label><br />
+              <input class="hydration-ounces-input" id="hydrationOuncesInput" type="text" placeholder="Number of Oz" /><br /><br />
+              <input class="submit-hydration" id="submitHydration" type="submit" value="Submit" />
+            </fieldset>
+          </section>
+          <section  class="input-card">
+            <fieldset>
+              <legend>Activity:</legend>
+              <label class="activity-date" id="activityDate" for="date">Add Date:</label><br />
+              <input class="activity-date-input" id="activityDateInput" type="text" placeholder="dd/mm/yyyy" /><br />
+              <label class="activity-steps" id="activitySteps" for="steps">Add Steps:</label><br />
+              <input class="activity-steps-input" id="activityStepsInput" type="text" placeholder="Number of Steps" /><br />
+              <label class="activity-goal" id="activityGoal" for="stepGoal">Add Minutes Active:</label><br />
+              <input class="activity-goal-input" id="activityTimeInput" type="number" placeholder="60" /><br />
+              <label class="activity-flights" id="activityFlights">Add Flights of Stairs:</label><br />
+              <input class="activity-goal-input" id="activityFlightsInput" type="number" placeholder="5" /><br /><br />
+              <input class="submit-activity" id="submitActivity" type="submit" value="Submit" />
+            </fieldset>
+          </section>
+        </div>
       </div>
-      <div class="right-and-bottom">
-        <div class="right-side">
+      <div class="right-and-bottom" tabindex='0'>
+        <div class="right-side" tabindex='0'>
           <section class="steps-card">
-            <h3>👟 Steps 🥾</h3>
+            <h3>👟 Activity 🥾</h3>
             <p class="step-data" id="yourStepGoal">Your Step Goal:<span> </span></p>
             <p class="step-data" id="averageUsersStepGoal">Average Users Step Goal:</p>
+            <p class="step-data" id="userMinutesActive">Daily Minutes Active:</p>
+            <p class="step-data" id="userMilesWalked">Daily Miles Walked:</p>
           </section>
           <section class="hydration-card">
             <h4>🚰 Hydration 💧</h4>
             <p class="hydration-data" id="todaysHydration"><b>Today's Consumption:</b></p>
-            <div class="hydration-block">
+            <div class="hydration-block" tabindex='0'>
               <p class="hydration-data" id="weeklyHydration"><b>Weekly Consumption:</b></p>
             </div>
           </section>
         </div>
         <h5 class="sleep-heading">🥱 Sleep 💤</h5>
-        <div class="bottom-side">
+        <div class="bottom-side" tabindex='0'>
           <section class="sleep-card">
-            <div class="general-metrics">
+            <div class="general-metrics" tabindex='0'>
               <p id="averageHours">Average Hours:</p>
               <p id="averageQuality">Average Quality Out of 5:</p>
               <br>
               <p id="todaysHours">Today's Hours:</p>
               <p id="todaysQuality">Today's Quality Out of 5:</p>
             </div>
-            <div class="weeks-hours-metrics">
+            <div class="weeks-hours-metrics" tabindex='0'>
               <p id="lastWeeksHours"><b>Last Week's Hours:</b></p>
             </div>
-            <div class="weeks-quality-metrics">
+            <div class="weeks-quality-metrics" tabindex='0'>
               <p id="lastWeeksQuality"><b>Last Week's Quality Out of 5:</b></p>
             </div>
           </section>

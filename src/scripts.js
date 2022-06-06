@@ -2,9 +2,10 @@
 import UserRepository from './UserRepository';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
+import Activity from './Activity';
 import './css/styles.css';
 import './images/profile-icon.png';
-import {fetchAllData} from './apiCalls';
+import {fetchAllData, addUserSleepData, addUserActivityData, addUserHydrationData, getSleepData, getHydrationData, getActivityData} from './apiCalls';
 
 //GLOBAL VARIABLES
 let globalUserRepository;
@@ -12,7 +13,10 @@ let globalUserData;
 let globalHydrationData;
 let globalHydration;
 let globalSleepData;
+let globalActivityData;
 let globalSleep;
+let globalActivity;
+let selectedUser;
 
 //QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
@@ -33,9 +37,17 @@ var todaysHours = document.querySelector('#todaysHours');
 var todaysQuality = document.querySelector('#todaysQuality');
 var lastWeeksHours = document.querySelector('#lastWeeksHours');
 var lastWeeksQuality = document.querySelector('#lastWeeksQuality');
+var dailyMinutes = document.querySelector('#userMinutesActive');
+var dailyMiles = document.querySelector('#userMilesWalked');
+var submitSleepButton = document.getElementById('submitSleep');
+var submitHydrationButton = document.getElementById('submitHydration');
+var submitActivityButton = document.getElementById('submitActivity');
 
 //EVENT LISTENERS
 window.addEventListener('load', displayResolvedData);
+submitSleepButton.addEventListener('click', addUserSleepDataFromUserInput);
+submitHydrationButton.addEventListener('click', addUserHydrationDataFromUserInput);
+submitActivityButton.addEventListener('click', addUserActivityDataFromUserInput);
 
 //API FETCH
 function getAllUserData(data) {
@@ -54,11 +66,17 @@ function getAllSleepData(data) {
   getUserName();
 }
 
+function getAllActivityData(data) {
+  globalActivityData = data;
+  globalActivity = new Activity(data, globalUserData);
+}
+
 function displayResolvedData() {
   fetchAllData()
   .then((allData) => {
     getAllUserData(allData[0].userData);
     getAllHydrationData(allData[1].hydrationData);
+    getAllActivityData(allData[2].activityData);
     getAllSleepData(allData[3].sleepData);
   })
 }
@@ -68,6 +86,7 @@ function getUserName() {
   let newId = getRandomUserId(globalUserData);
   let newUser = globalUserRepository.getDataById(newId);
   let newUserFirstName = newUser.returnUserFirstName();
+  selectedUser = newUser;
   welcomeText.innerText = `Welcome, ${newUserFirstName}! 🤗`;
   displayIdCardInfo(newUser);
   displayStepsInfo(newUser);
@@ -168,8 +187,46 @@ function displayStepsInfo(newUser) {
   yourStepGoal.innerHTML += `<i style='font-weight: 300'> ${newUser.dailyStepGoal}</i>`;
   let aveStepGoal = globalUserRepository.getAveStepGoalOfAllUsers();
   averageUsersStepGoal.innerHTML += `<i style='font-weight: 300'> ${aveStepGoal}</i>`;
+  displayActivityData();
+}
+
+
+function displayActivityData(){
+  let todaysDate = editDate(globalActivityData);
+  let minutes = globalActivity.getDailyMinutesActive(todaysDate, selectedUser.id);
+  dailyMinutes.innerHTML += `<i style='font-weight: 300'> ${minutes}</i>`;
+  let miles = globalActivity.getDailyMilesWalked(todaysDate, selectedUser.id);
+  dailyMiles.innerHTML += `<i style='font-weight: 300'> ${miles}</i>`;
 }
 
 function getRandomUserId(anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
+}
+
+//API POST FUNCTIONS
+function addUserSleepDataFromUserInput() {
+  const sleepDate = document.getElementById('sleepDateInput').value;
+  const sleepAmount = document.getElementById('sleepHoursInput').value;
+  const sleepQuality = document.getElementById('sleepQualityInput').value;
+  const formattedDate = new Date(sleepDate).toLocaleDateString();
+  let dataToTransmit = { userID: selectedUser.id, date: formattedDate , hoursSlept: sleepAmount , sleepQuality: sleepQuality };
+  var response = addUserSleepData(dataToTransmit).then((res) => getSleepData().then(sleepDataFromApi => console.log(sleepDataFromApi)));;
+}
+
+function addUserHydrationDataFromUserInput() {
+  const hydrationDate = document.getElementById('hydrationDateInput').value;
+  const numberOfOunces = document.getElementById('hydrationOuncesInput').value;
+  const formattedDate = new Date(hydrationDate).toLocaleDateString();
+  let dataToTransmit = { userID: selectedUser.id, date: formattedDate, numOunces: numberOfOunces };
+  var response = addUserHydrationData(dataToTransmit).then((res) => getHydrationData().then(hydration => console.log(hydration)));
+}
+
+function addUserActivityDataFromUserInput() {
+  const activityDate = document.getElementById('activityDateInput').value;
+  const numSteps = document.getElementById('activityStepsInput').value;
+  const minutesActive = document.getElementById('activityTimeInput').value;
+  const flightsOfStairs = document.getElementById('activityFlightsInput').value;
+  const formattedDate = new Date(activityDate).toLocaleDateString();
+  let dataToTransmit = { userID: selectedUser.id, date: formattedDate, flightsOfStairs: flightsOfStairs, minutesActive: minutesActive, numSteps: numSteps};
+  var response = addUserActivityData(dataToTransmit).then((res) => getActivityData().then(activity => console.log(activity)));
 }
