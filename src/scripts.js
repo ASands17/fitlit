@@ -203,7 +203,7 @@ function getRandomUserId(anyUserData) {
   return anyUserData[Math.floor(Math.random()*anyUserData.length)].id;
 }
 
-//API POST
+//API POST FUNCTIONS
 function addUserSleepDataFromUserInput() {
   const sleepDate = document.getElementById('sleepDateInput').value;
   const sleepAmount = document.getElementById('sleepHoursInput').value;
