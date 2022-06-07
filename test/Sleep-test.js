@@ -10,11 +10,6 @@ describe('Sleep', () => {
     sleep = new Sleep(sleepData);
     sleepData1 = sleep.acquireSleepDataById(1);
     sleepData2 = sleep.acquireSleepDataById(2);
-    // they are a user, with a valid id, but they are missing sleep data.
-    // do we want to say "data is missing for this user!" ?
-    // where do we test if these values are null?
-    // is this something that needs to be done when we check their id?
-    // or invoking other methods
   });
 
   it('should be a function', () => {
@@ -196,12 +191,12 @@ describe('Sleep', () => {
     expect(sleep.acquireDailySleepQuality(sleepData1, "2022/06/15")).to.equal('Invalid date!');
   });
 
-  it('should be able to test whether the date is valid and also return a message if it not', () => {
+  it('should be able to test whether the date is valid for hours slept and also return a message if it not', () => {
     expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2022/06/04")).to.be.a('string');
     expect(sleep.acquireWeeklyHoursSlept(sleepData1, "2022/06/04")).to.equal('Invalid date!')
   });
 
-  it('should be able to test whether the date is valid and also return a message if it not', () => {
+  it('should be able to test whether the date is valid for sleep quality and also return a message if it not', () => {
     expect(sleep.acquireWeeklySleepQuality(sleepData1, "2022/06/04")).to.be.a('string');
     expect(sleep.acquireWeeklySleepQuality(sleepData1, "2022/06/04")).to.equal('Invalid date!')
   });
@@ -320,7 +315,7 @@ describe('Sleep', () => {
     expect(sleep.acquireUserAvgSleepQuality(sleepData2)).to.equal(3.0);
   });
 
-  it('should be able to check if user data is null', () => {
+  it('should be able give a notification message when sleep hours is unavailable', () => {
     let user10Data = [{
       "userID": 10,
       "date": null,
@@ -338,7 +333,7 @@ describe('Sleep', () => {
     expect(sleep.acquireUserAvgSleepHours(user10Data)).to.equal('User is missing this data!');
   });
 
-  it('should be able to check if user data is null', () => {
+  it('should be able to give a notification message when sleep quality is unavailable', () => {
     let user10Data = [{
       "userID": 10,
       "date": null,

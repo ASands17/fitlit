@@ -4,16 +4,15 @@ class UserRepository {
   constructor(allUserData) {
     this.data = allUserData;
   }
- //getUserDataBasedOnId
+
   getDataById(id) {
-    const singleUser = this.data.find(wholeUser =>
-      wholeUser.id === id
-    );
+    const singleUser = this.data.find(wholeUser => {
+      return wholeUser.id === id;
+    });
     const user = new User(singleUser);
     return user;
   }
 
-  //getAveStepGoalOfAllUsers
   getAveStepGoalOfAllUsers() {
     let totalStepGoal = this.data.reduce((totalSteps, currentUser) => {
       totalSteps += currentUser.dailyStepGoal;

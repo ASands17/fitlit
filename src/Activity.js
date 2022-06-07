@@ -1,5 +1,5 @@
 class Activity {
-  constructor(activityDataAll, userData){
+  constructor(activityDataAll, userData) {
     this.userData = userData;
     this.activityData = activityDataAll;
   }
@@ -24,7 +24,7 @@ class Activity {
     let strideLength = this.getStrideLengthById(id);
     let distanceWalkedInFeet = userActivityDay.numSteps * strideLength;
     let dailyMiles = distanceWalkedInFeet / 5280;
-    return dailyMiles.toFixed(2);
+    return dailyMiles.toFixed(1);
   }
 
   getDailyMinutesActive(date, id) {
