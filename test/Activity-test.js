@@ -123,7 +123,7 @@ describe('Activity', () => {
     expect(activity.userData).to.deep.equal(userData);
   });
 
-  it('should be able to get activity data based on id', () => {
+  it('should be able to get user\'s activity data based on id', () => {
     expect(activity.getActivityDataById(1)).to.be.an('array');
     expect(activity.getActivityDataById(1)).to.deep.equal([
       {
@@ -177,17 +177,17 @@ describe('Activity', () => {
       }]);
   });
 
-  it('should be able to get stride length of a user by id', () => {
+  it('should be able to get user\'s stride length based on id', () => {
     expect(activity.getStrideLengthById(1)).to.be.a('number');
     expect(activity.getStrideLengthById(1)).to.be.equal(4.3);
   });
 
-  it('should be able to get the daily miles walked of a user', () => {
+  it('should be able to get user\'s daily miles walked', () => {
     expect(activity.getDailyMilesWalked("2022/01/18", 1)).to.be.a('string');
     expect(activity.getDailyMilesWalked("2022/01/18", 1)).to.equal('5.4');
   });
 
-  it('should be able to get the daily minutes active of a user', () => {
+  it('should be able to get user\'s daily minutes active', () => {
     expect(activity.getDailyMinutesActive("2022/01/22", 1)).to.be.a('number');
     expect(activity.getDailyMinutesActive("2022/01/22", 1)).to.equal(96);
   });
