@@ -20,7 +20,6 @@ let selectedUser;
 
 //QUERY SELECTORS
 var welcomeText = document.querySelector('#welcomeText');
-var idText = document.querySelector('#id');
 var nameText = document.querySelector('#name');
 var addressText = document.querySelector('#address');
 var emailText = document.querySelector('#email');
@@ -49,7 +48,7 @@ submitSleepButton.addEventListener('click', addUserSleepDataFromUserInput);
 submitHydrationButton.addEventListener('click', addUserHydrationDataFromUserInput);
 submitActivityButton.addEventListener('click', addUserActivityDataFromUserInput);
 
-//API FETCH
+//API FETCH FUNCTIONS
 function getAllUserData(data) {
   globalUserData = data;
   globalUserRepository = new UserRepository(data);
@@ -112,20 +111,20 @@ function editDate(userSleepData) {
 function displayAveHours(userSleepData) {
   let hoursCollection = userSleepData.map(daySleep => daySleep.hoursSlept);
   let averageHoursDom = globalSleep.acquireAverageDailyMetric(hoursCollection);
-  averageHours.innerHTML += ` <i style='font-weight: 300'>${averageHoursDom}<i>`;
+  averageHours.innerHTML += ` <i style='font-weight: 300'>${averageHoursDom}</i>`;
 }
 
 function displayAveQuality(userSleepData) {
   let qualityCollection = userSleepData.map(daySleep => daySleep.sleepQuality);
   let averageQualityDom = globalSleep.acquireAverageDailyMetric(qualityCollection);
-  averageQuality.innerHTML += ` <i style='font-weight: 300'>${averageQualityDom}<i>`;
+  averageQuality.innerHTML += ` <i style='font-weight: 300'>${averageQualityDom}</i>`;
 }
 
 function displayDailySleepMetrics(userSleepData, todaysDate) {
   let todaysHoursDom = globalSleep.acquireDailyHoursSlept(userSleepData, todaysDate);
-  todaysHours.innerHTML += ` <i style='font-weight: 300'>${todaysHoursDom}<i>`;
+  todaysHours.innerHTML += ` <i style='font-weight: 300'>${todaysHoursDom}</i>`;
   let todaysQualityDom = globalSleep.acquireDailySleepQuality(userSleepData, todaysDate);
-  todaysQuality.innerHTML += ` <i style='font-weight: 300'>${todaysQualityDom}<i>`;
+  todaysQuality.innerHTML += ` <i style='font-weight: 300'>${todaysQualityDom}</i>`;
 }
 
 function displayWeeklySleepMetrics(userSleepData, todaysDate) {
@@ -162,25 +161,25 @@ function displayHydrationInfo(newUser) {
   let userHydrationData = globalHydration.obtainHydrationDataById(newUser.id);
   let hydrationDaily = globalHydration.obtainTodaysOunces(userHydrationData);
   let hydrationWeekly = globalHydration.obtainWeeklyOunces(userHydrationData);
-  todaysHydration.innerHTML += `<i style='font-weight: 300'> ${hydrationDaily} ounces<i>`;
+  todaysHydration.innerHTML += `<i style='font-weight: 300'> ${hydrationDaily} ounces</i>`;
   var hydrationObjectsDom = parseDate(hydrationWeekly, 'Ounces: ');
   let replacedCommaOunces = hydrationObjectsDom.join("<br />");
   weeklyHydration.innerHTML += `<br>${replacedCommaOunces}`;
 }
 
 function displayIdCardInfo(newUser) {
-  nameText.innerHTML += ` <i style='font-weight: 300'>${newUser.name}<i>`;
-  addressText.innerHTML += ` <i style='font-weight: 300'>${newUser.address}<i>`;
-  emailText.innerHTML += ` <i style='font-weight: 300'>${newUser.email}<i>`;
-  strideLengthText.innerHTML += ` <i style='font-weight: 300'>${newUser.strideLength}<i>`;
-  dailyStepGoalText.innerHTML += ` <i style='font-weight: 300'>${newUser.dailyStepGoal}<i>`;
+  nameText.innerHTML += ` <i style='font-weight: 300'>${newUser.name}</i>`;
+  addressText.innerHTML += ` <i style='font-weight: 300'>${newUser.address}</i>`;
+  emailText.innerHTML += ` <i style='font-weight: 300'>${newUser.email}</i>`;
+  strideLengthText.innerHTML += ` <i style='font-weight: 300'>${newUser.strideLength}</i>`;
+  dailyStepGoalText.innerHTML += ` <i style='font-weight: 300'>${newUser.dailyStepGoal}</i>`;
   var userFriend = newUser.friends.map(friend => {
     let friendData = globalUserRepository.getDataById(friend);
     let friendName = friendData.returnUserFirstName();
     return friendName;
   });
   let friendsSpace = userFriend.join(", ");
-  friendsText.innerHTML += `<i style='font-weight: 300'> ${friendsSpace}<i>`;
+  friendsText.innerHTML += `<i style='font-weight: 300'> ${friendsSpace}</i>`;
 }
 
 function displayStepsInfo(newUser) {
@@ -191,7 +190,7 @@ function displayStepsInfo(newUser) {
 }
 
 
-function displayActivityData(){
+function displayActivityData() {
   let todaysDate = editDate(globalActivityData);
   let minutes = globalActivity.getDailyMinutesActive(todaysDate, selectedUser.id);
   dailyMinutes.innerHTML += `<i style='font-weight: 300'> ${minutes}</i>`;
@@ -210,7 +209,7 @@ function addUserSleepDataFromUserInput() {
   const sleepQuality = document.getElementById('sleepQualityInput').value;
   const formattedDate = new Date(sleepDate).toLocaleDateString();
   let dataToTransmit = { userID: selectedUser.id, date: formattedDate , hoursSlept: sleepAmount , sleepQuality: sleepQuality };
-  var response = addUserSleepData(dataToTransmit).then((res) => getSleepData().then(sleepDataFromApi => console.log(sleepDataFromApi)));;
+  var response = addUserSleepData(dataToTransmit).then((res) => getSleepData().then(sleepDataFromApi => console.log(sleepDataFromApi)));
 }
 
 function addUserHydrationDataFromUserInput() {

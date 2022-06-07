@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Hydration from '../src/Hydration';
-import hydrationData from '../test-data/Hydration-data'
+import hydrationData from '../test-data/Hydration-data';
 
 describe('Hydration', () => {
   let hydration;
@@ -27,7 +27,7 @@ describe('Hydration', () => {
   });
 
   it('should be able to test whether the id is valid and also return a message if it not', () => {
-    expect(hydration.obtainHydrationDataById(77)).to.equal('Invalid ID!')
+    expect(hydration.obtainHydrationDataById(77)).to.equal('Invalid ID!');
   });
 
   it('should be able to obtain hydration data based on id', () => {
@@ -128,7 +128,7 @@ describe('Hydration', () => {
 
   it('should be able to obtain ounces for most recent week', () => {
     let ounces1 = hydration.obtainWeeklyOunces(waterData1);
-    expect(ounces1).to.deep.equal( [
+    expect(ounces1).to.deep.equal([
       {
         "2019/06/15": 31
       },

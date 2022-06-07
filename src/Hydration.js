@@ -8,7 +8,7 @@ class Hydration {
       return hydro.userID === id;
     });
     if (waterData.length === 0) {
-      return 'Invalid ID!'
+      return 'Invalid ID!';
     }
     return waterData;
   }

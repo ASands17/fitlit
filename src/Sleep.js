@@ -8,14 +8,14 @@ class Sleep {
         return snooze.userID === id;
       });
       if (sleepData.length === 0) {
-        return 'Invalid ID!'
+        return 'Invalid ID!';
       }
       return sleepData;
   }
 
   acquireAverageDailyMetric(measurements) {
     let sum = measurements.reduce((total, currentMetric) => {
-      return total += currentMetric
+      return total += currentMetric;
     }, 0);
     let averageMeasurement = sum / measurements.length;
     return Number(averageMeasurement.toFixed(1));
@@ -26,7 +26,7 @@ class Sleep {
       return snooze.date === date;
     });
     if (sleepData.length === 0) {
-      return 'Invalid date!'
+      return 'Invalid date!';
     }
     return sleepData[0].hoursSlept;
   }
@@ -36,7 +36,7 @@ class Sleep {
       return snooze.date === date;
     });
     if (sleepData.length === 0) {
-      return 'Invalid date!'
+      return 'Invalid date!';
     }
     return sleepData[0].sleepQuality;
   }
@@ -51,7 +51,7 @@ class Sleep {
       }
     });
     if (finalDates.length === 0) {
-      return 'Invalid date!'
+      return 'Invalid date!';
     }
     return finalDates;
   }
@@ -61,10 +61,12 @@ class Sleep {
     let dateIndex = allDates.indexOf(date);
     let wholeWeek = data.slice([dateIndex - 6], [dateIndex +1]);
     let finalDates = wholeWeek.map(day => {
-      return {[day.date]: day.sleepQuality}
+      return {
+        [day.date]: day.sleepQuality
+      }
     });
     if (finalDates.length === 0) {
-      return 'Invalid date!'
+      return 'Invalid date!';
     }
     return finalDates;
   }
@@ -84,7 +86,7 @@ class Sleep {
       return totalQuality;
     }, 0);
     if (totalSleepQuality === 0) {
-      return 'User is missing this data!'
+      return 'User is missing this data!';
     }
     let averageSleepQuality = totalSleepQuality / data.length;
     return Number(averageSleepQuality.toFixed(1));
@@ -96,7 +98,7 @@ class Sleep {
       return totalHours;
     }, 0);
     if (totalSleepHours === 0) {
-      return 'User is missing this data!'
+      return 'User is missing this data!';
     }
     let averageSleepHours = totalSleepHours / data.length;
     return Number(averageSleepHours.toFixed(1));
